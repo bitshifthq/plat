@@ -1,0 +1,9 @@
+pre-commit:
+  parallel: true
+  commands:
+    dart-format:
+      glob: "*.dart"
+      run: dart format --set-exit-if-changed --output=none {staged_files}
+    flutter-analyze:
+      glob: "*.dart"
+      run: flutter analyze --fatal-infos --fatal-warnings
