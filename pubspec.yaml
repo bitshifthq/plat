@@ -1,0 +1,26 @@
+name: plat
+description: Composable pane layouts for Flutter.
+version: 0.0.1
+homepage: https://github.com/bitshifthq/plat
+repository: https://github.com/bitshifthq/plat
+issue_tracker: https://github.com/bitshifthq/plat/issues
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=3.41.0"
+
+topics:
+  - layout
+  - plat
+  - splitter
+  - resizable
+  - dock
+
+dependencies:
+  flutter:
+    sdk: flutter
+  meta: ^1.18.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
