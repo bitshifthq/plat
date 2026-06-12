@@ -1,3 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MaterialApp(home: SizedBox.shrink()));
+import 'src/example_app.dart';
+
+void main() => runApp(const PlatExampleApp());
