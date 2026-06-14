@@ -1,0 +1,86 @@
+name: release
+run-name: release ${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - "v[0-9]*.[0-9]*.[0-9]*"
+
+concurrency:
+  group: release-plat
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: checks
+    uses: ./.github/workflows/checks.yml
+    permissions:
+      contents: read
+
+  validate-release:
+    name: validate release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: validate tag
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          pubspec_version="$(grep '^version:' pubspec.yaml | awk '{print $2}')"
+
+          if [ "$tag_version" != "$pubspec_version" ]; then
+            echo "::error::pubspec version ($pubspec_version) does not match tag ($tag_version)."
+            exit 1
+          fi
+      - name: validate changelog
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          ./.github/scripts/extract-changelog.sh --skip-header CHANGELOG.md "$tag_version" > release-notes.md
+
+          if [ ! -s release-notes.md ]; then
+            echo "::error::CHANGELOG.md has no release notes for $tag_version."
+            exit 1
+          fi
+
+          cat release-notes.md
+
+  github-release:
+    name: github release
+    needs: [checks, validate-release]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: extract release notes
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          ./.github/scripts/extract-changelog.sh --skip-header CHANGELOG.md "$tag_version" > release-notes.md
+          cat release-notes.md
+      - name: create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          prerelease_args=()
+
+          if [[ "$tag_version" == *-* ]]; then
+            prerelease_args+=(--prerelease)
+          fi
+
+          gh release create "${{ github.ref_name }}" \
+            --title "plat v${tag_version}" \
+            --notes-file release-notes.md \
+            "${prerelease_args[@]}"
+
+  publish:
+    name: publish
+    needs: github-release
+    permissions:
+      contents: read
+      id-token: write
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with:
+      environment: pub.dev
