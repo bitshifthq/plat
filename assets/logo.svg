@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Plat logo</title>
+  <desc id="desc">A dark rounded-square mark containing three colorful resizable panes.</desc>
+  <defs>
+    <linearGradient id="shell" x1="88" y1="38" x2="430" y2="498" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" style="stop-color:#0b1730"/>
+      <stop offset="46%" style="stop-color:#0d1830"/>
+      <stop offset="100%" style="stop-color:#151f33"/>
+    </linearGradient>
+    <linearGradient id="shellBorder" x1="53" y1="36" x2="459" y2="478" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" style="stop-color:#5eead4"/>
+      <stop offset="48%" style="stop-color:#60a5fa"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="paneTeal" x1="92" y1="78" x2="215" y2="436" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" style="stop-color:#29f3e2"/>
+      <stop offset="50%" style="stop-color:#16d2d0"/>
+      <stop offset="100%" style="stop-color:#0ea9ba"/>
+    </linearGradient>
+    <linearGradient id="panePurple" x1="262" y1="78" x2="422" y2="237" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" style="stop-color:#a574ff"/>
+      <stop offset="56%" style="stop-color:#8759f8"/>
+      <stop offset="100%" style="stop-color:#7448ee"/>
+    </linearGradient>
+    <linearGradient id="paneBlue" x1="260" y1="288" x2="425" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" style="stop-color:#2d96ff"/>
+      <stop offset="52%" style="stop-color:#1672ff"/>
+      <stop offset="100%" style="stop-color:#0b4fff"/>
+    </linearGradient>
+  </defs>
+
+  <rect
+    x="22"
+    y="15"
+    width="468"
+    height="483"
+    rx="104"
+    fill="url(#shell)"
+    stroke="url(#shellBorder)"
+    stroke-width="5"
+    stroke-opacity=".48"
+  />
+  <rect x="74" y="65" width="150" height="383" rx="34" fill="url(#paneTeal)"/>
+  <rect x="244" y="65" width="196" height="185" rx="34" fill="url(#panePurple)"/>
+  <rect x="244" y="273" width="196" height="175" rx="34" fill="url(#paneBlue)"/>
+</svg>

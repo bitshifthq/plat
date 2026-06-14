@@ -1,20 +1,20 @@
 name: plat
-description: Composable pane layouts for Flutter.
-version: 0.0.1
+description: Composable split panes, tab groups, and controller-driven drag-and-drop workspaces for Flutter.
+version: 0.1.0
 homepage: https://github.com/bitshifthq/plat
 repository: https://github.com/bitshifthq/plat
 issue_tracker: https://github.com/bitshifthq/plat/issues
 
 environment:
-  sdk: ^3.11.0
-  flutter: ">=3.41.0"
+  sdk: ^3.12.0
+  flutter: ">=3.44.0"
 
 topics:
   - layout
-  - plat
+  - workspace
   - splitter
   - resizable
-  - dock
+  - tabs
 
 dependencies:
   flutter:
