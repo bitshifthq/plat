@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' show ThemeData;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:plat/plat.dart';
@@ -8,6 +9,8 @@ import 'ui_test_helpers.dart';
 void main() {
   group('PlatView', () {
     group('goldens', () {
+      setUpAll(loadTestFonts);
+
       group('tabs', () {
         testWidgets('renders a single tab group', (tester) async {
           final controller = controllerFromLeaves([
@@ -139,7 +142,11 @@ Future<void> _pumpGolden(
       child: Center(
         child: Text(
           leaf.title,
-          style: const TextStyle(color: Color(0xFFEAEAEA), fontSize: 14),
+          style: const TextStyle(
+            color: Color(0xFFEAEAEA),
+            fontFamily: 'Roboto',
+            fontSize: 14,
+          ),
         ),
       ),
     ),
@@ -149,7 +156,10 @@ Future<void> _pumpGolden(
   }
 
   await tester.pumpWidget(
-    testHost(ColoredBox(color: const Color(0xFF101010), child: child)),
+    testHost(
+      ColoredBox(color: const Color(0xFF101010), child: child),
+      theme: ThemeData(fontFamily: 'Roboto'),
+    ),
   );
   await tester.pump();
 }

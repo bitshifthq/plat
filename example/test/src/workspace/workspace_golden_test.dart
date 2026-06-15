@@ -3,8 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:plat_example/src/workspace/presets.dart';
 import 'package:plat_example/src/workspace/workspace.dart';
 
+import '../test_fonts.dart';
+
 void main() {
   group('WorkspaceExample', () {
+    setUpAll(loadTestFonts);
+
     const goldenKey = Key('workspace-golden');
 
     Future<void> pumpWorkspace(
@@ -23,6 +27,7 @@ void main() {
           key: goldenKey,
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
+            theme: ThemeData(fontFamily: 'Roboto'),
             home: Scaffold(body: WorkspaceExample(initialPreset: preset)),
           ),
         ),
