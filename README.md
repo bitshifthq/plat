@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="assets/logo.svg" alt="Plat logo" width="128">
+  <img src="https://raw.githubusercontent.com/bitshifthq/plat/main/assets/logo.svg" alt="Plat logo" width="128">
   <br>
   Plat
 </h1>
@@ -8,6 +8,15 @@
   Composable pane layouts for Flutter.
   <br>
   Split panes, tab groups, drag-and-drop, and controller-driven workspaces.
+</p>
+
+<p align="center">
+  <a href="https://pub.dev/packages/plat">
+    <img alt="pub package" src="https://img.shields.io/pub/v/plat">
+  </a>
+  <a href="https://github.com/bitshifthq/plat/actions">
+    <img alt="ci" src="https://github.com/bitshifthq/plat/actions/workflows/checks.yml/badge.svg">
+  </a>
 </p>
 
 <p align="center">
