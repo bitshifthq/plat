@@ -2,6 +2,7 @@ name: checks
 run-name: checks
 
 on:
+  workflow_call:
   pull_request:
     branches: [ main ]
   push:
