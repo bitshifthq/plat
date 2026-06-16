@@ -1,12 +1,12 @@
 {
-    "name": "plat_example",
-    "short_name": "plat_example",
+    "name": "Plat Demo",
+    "short_name": "Plat",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#0B1730",
+    "theme_color": "#0B1730",
+    "description": "Composable workspace layout demo for the plat Flutter package.",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {
