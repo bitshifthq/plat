@@ -30,26 +30,25 @@
 ## About
 
 Plat is a highly customizable and flexible package for building workspace
-layouts, from simple split panes to complex IDE-style editors. It manages tab
-groups, resizable splits, drag-and-drop, focus, immutable snapshots, and
-undoable structural changes while leaving pane content and styling to the
-application.
+layouts, from simple split panes to complex IDE-style editors. It provides tab
+groups, resizable splits, drag-and-drop, snapshots, undoable commands, content
+builders, and themeable chrome.
 
 ## Features
 
 - **Split workspaces**: Compose rows, columns, slots, leaves, and tab groups.
 - **Tab workflows**: Reorder, drag, pin, lock, preview, close, and move tabs.
 - **Drag-and-drop layouts**: Move tabs or panes within one view or across views.
-- **Resizable panes**: Mix fixed, fractional, auto, minimum, and maximum extents.
+- **Resizable panes**: Combine fixed, fractional, auto, minimum, and maximum extents.
 - **Controller commands**: Focus, close, insert, split, hide, maximize, undo, and redo.
-- **Stable snapshots**: Read immutable layout state from ids without owning the tree.
+- **Stable snapshots**: Read layout state by id for rendering and commands.
 - **Drop policies**: Accept or reject drops by source controller, target, and zone.
 - **Composable styling**: Theme dividers, drop hints, tab bars, and tab chips.
-- **Keyboard actions**: Built-in shortcuts for common focus and layout operations.
+- **Keyboard actions**: Built-in shortcuts for focus and layout operations.
 
 ## Getting started
 
-Add `plat` to your Flutter app:
+Add `plat` to your app:
 
 ```sh
 flutter pub add plat
@@ -70,15 +69,14 @@ import 'package:plat/plat.dart';
 
 ## Layout
 
-A `Plat` tree describes the shape of the workspace. Most layouts are built
-from a small set of public values:
+A `Plat` tree describes the workspace shape:
 
 - `Plat`: a row, column, tab group, slot, or leaf.
 - `Plat.row` / `Plat.column`: split children horizontally or vertically.
 - `Plat.tabs`: group tabs and render the active tab's child.
 - `PlatTab`: tab metadata such as title, pinned, locked, and preview state.
 - `Plat.leaf`: a content endpoint rendered by your `leafBuilder`.
-- `Plat.slot`: an optional shell region that can stay empty or bound maximize.
+- `Plat.slot`: a region for empty states, stable ids, and scoped maximize.
 - `id`: stable string identity for builders, focus, drops, and commands.
 - `PlatSize` / `PlatExtent`: fixed, fractional, auto, and resizable space.
 
@@ -105,10 +103,9 @@ final controller = PlatController(
 
 ## Rendering
 
-`PlatView` renders the controller tree. Your app provides the leaf content;
-Plat handles pane chrome, tab interactions, dividers, drops, shortcuts, and
-focus state. Switch on `leaf.id`, `leaf.title`, or `leaf.data` when different
-panes need different widgets.
+`PlatView` renders the controller tree. Build each leaf with your widgets;
+Plat renders chrome, tabs, dividers, drops, shortcuts, and focus state. Switch
+on `leaf.id`, `leaf.title`, or `leaf.data` when panes need different content.
 
 ```dart
 PlatView(
@@ -122,8 +119,8 @@ PlatView(
 
 ## Controller
 
-Use `PlatController` for commands that change the workspace. Most structural
-changes are recorded for undo and redo.
+Use `PlatController` to change the workspace. Structural changes support undo
+and redo.
 
 ```dart
 controller.insertTab(
@@ -147,12 +144,8 @@ controller.undo();
 
 ### Theme
 
-Plat works without theme configuration. When a matching Plat tab field is not
-set, the default chrome reads from `ThemeData.tabBarTheme` for tab colors, text
-styles, overlays, dividers, and cursors before falling back to Plat defaults.
-
-Use `PlatTheme` for package-wide visual changes. It covers tab bars, tab chips,
-split dividers, drop hints, and animation timing.
+`PlatTheme` styles the layout chrome for the `PlatView`s below it. Use it for
+dividers, drop feedback, tabs, and animation timing.
 
 ```dart
 PlatTheme(
@@ -179,9 +172,8 @@ PlatTheme(
 
 ### Tab chrome
 
-When one tab group needs custom chrome, return a `PlatTabBar` from
-`PlatView.tabBar`. For custom tab contents, reuse the default chip and replace
-only the slots your app needs.
+For a custom tab group, return a `PlatTabBar` from `PlatView.tabBar`. Reuse the
+default chip and replace the slots that need custom content.
 
 ```dart
 PlatView(
@@ -202,10 +194,9 @@ PlatView(
 
 ## Multiple views
 
-Start with one `PlatView` for most workspaces. Rows, columns, tab groups, and
-slots can model deeply nested layouts inside one controller. Use multiple
-`PlatView`s when separate app regions or controllers should still exchange
-tabs, filter cross-view drops, or preserve leaf widget state during handoff.
+One `PlatView` can render deeply nested workspaces. Use multiple views when
+separate regions or controllers need to exchange tabs, filter drops, or
+preserve leaf state during handoff.
 
 ```dart
 Widget buildPane(BuildContext context, LeafSnapshot leaf) {
