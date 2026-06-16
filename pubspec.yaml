@@ -1,6 +1,6 @@
 name: plat
 description: Composable split panes, tab groups, and controller-driven drag-and-drop workspaces for Flutter.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/bitshifthq/plat
 repository: https://github.com/bitshifthq/plat
 issue_tracker: https://github.com/bitshifthq/plat/issues
