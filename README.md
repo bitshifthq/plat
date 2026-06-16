@@ -58,7 +58,7 @@ Or add it manually:
 
 ```yaml
 dependencies:
-  plat: ^0.1.0
+  plat: ^0.1.1
 ```
 
 Then import the package:
