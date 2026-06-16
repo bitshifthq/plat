@@ -33,5 +33,8 @@ jobs:
       - name: example test
         working-directory: example
         run: flutter test
+      - name: example web build
+        working-directory: example
+        run: flutter build web --release --base-href /plat/
       - name: publish dry run
         run: flutter pub publish --dry-run

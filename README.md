@@ -17,6 +17,9 @@
   <a href="https://github.com/bitshifthq/plat/actions">
     <img alt="ci" src="https://github.com/bitshifthq/plat/actions/workflows/checks.yml/badge.svg">
   </a>
+  <a href="https://bitshifthq.github.io/plat/">
+    <img alt="demo" src="https://img.shields.io/badge/demo-live-2ea043">
+  </a>
 </p>
 
 <p align="center">
