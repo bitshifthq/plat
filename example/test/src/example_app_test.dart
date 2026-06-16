@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:plat_example/src/branding.dart';
 import 'package:plat_example/src/example_app.dart';
 
 void main() {
@@ -23,9 +24,13 @@ void main() {
     }
 
     group('workspace shell', () {
-      testWidgets('shows the theme selector title', (tester) async {
+      testWidgets('shows the app title and theme selector title', (
+        tester,
+      ) async {
         await pumpExampleApp(tester);
 
+        expect(find.text(platDemoTitle), findsOneWidget);
+        expect(find.bySemanticsLabel('Plat logo'), findsOneWidget);
         expect(find.text('Workspace themes'), findsOneWidget);
       });
 

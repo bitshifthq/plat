@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../branding.dart';
 import 'preset_card.dart';
 import 'presets.dart';
 
@@ -57,11 +58,38 @@ final class _Header extends StatelessWidget {
       child: Column(
         crossAxisAlignment: .start,
         children: [
-          Text(
-            'Workspace themes',
-            style: Theme.of(context).textTheme.titleMedium,
+          Row(
+            children: [
+              Image.asset(
+                platDemoLogoAsset,
+                width: 36,
+                height: 36,
+                semanticLabel: 'Plat logo',
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text(
+                      platDemoTitle,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: colors.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Workspace themes',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: colors.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 12),
           Text(
             preset.description,
             style: Theme.of(
@@ -70,7 +98,7 @@ final class _Header extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Colors, density, shape, dividers, and tab bars.',
+            'Switch themes, resize panes, drag tabs, and toggle panels.',
             style: Theme.of(
               context,
             ).textTheme.bodySmall?.copyWith(color: colors.onSurfaceVariant),

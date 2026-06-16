@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'branding.dart';
 import 'workspace/workspace.dart';
 
 final class PlatExampleApp extends StatelessWidget {
@@ -8,7 +9,7 @@ final class PlatExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Plat workspace',
+      title: platDemoTitle,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),

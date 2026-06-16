@@ -1,5 +1,5 @@
 name: plat_example
-description: Example app for the plat package.
+description: Interactive demo for the plat Flutter package.
 publish_to: 'none'
 version: 0.1.0+1
 
@@ -19,3 +19,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/logo.png

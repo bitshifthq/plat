@@ -1,3 +1,3 @@
-# plat_example
+# Plat Demo
 
-A new Flutter project.
+Interactive demo for the `plat` Flutter package.

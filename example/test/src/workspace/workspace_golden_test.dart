@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:plat_example/src/branding.dart';
 import 'package:plat_example/src/workspace/presets.dart';
 import 'package:plat_example/src/workspace/workspace.dart';
 
@@ -30,6 +31,12 @@ void main() {
             theme: ThemeData(fontFamily: 'Roboto'),
             home: Scaffold(body: WorkspaceExample(initialPreset: preset)),
           ),
+        ),
+      );
+      await tester.runAsync(
+        () => precacheImage(
+          const AssetImage(platDemoLogoAsset),
+          tester.element(find.byType(WorkspaceExample)),
         ),
       );
       await tester.pumpAndSettle();

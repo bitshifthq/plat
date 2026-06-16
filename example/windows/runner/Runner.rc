@@ -89,14 +89,14 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "Bitshift" "\0"
-            VALUE "FileDescription", "plat_example" "\0"
+            VALUE "CompanyName", "BitShift" "\0"
+            VALUE "FileDescription", "Plat Demo" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "plat_example" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 Bitshift, LLC. All
+            VALUE "LegalCopyright", "Copyright (C) 2026 BitShift, LLC. All
             rights reserved." "\0"
             VALUE "OriginalFilename", "plat_example.exe" "\0"
-            VALUE "ProductName", "plat_example" "\0"
+            VALUE "ProductName", "Plat Demo" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
