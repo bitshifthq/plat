@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/rendering.dart' show RenderBox, RenderClipRRect;
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' show Theme;
 import 'package:meta/meta.dart' show internal;
 
 import '../../controller/controller.dart';
