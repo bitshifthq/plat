@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart'
+import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart'
     show
         ColorScheme,
         Icons,
@@ -7,7 +8,6 @@ import 'package:flutter/material.dart'
         TabBarThemeData,
         Theme,
         Tooltip;
-import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart' show internal;
 
 import '../../core/foundation/foundation.dart' show TabBarSide;

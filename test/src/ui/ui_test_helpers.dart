@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart' show Theme, ThemeData;
 import 'package:flutter/services.dart' show FontLoader;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart' show Theme, ThemeData;
 import 'package:plat/plat.dart';
 
 Future<void> pumpPlatView(

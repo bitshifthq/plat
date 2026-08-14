@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:plat_example/src/branding.dart';
 import 'package:plat_example/src/workspace/presets.dart';
 import 'package:plat_example/src/workspace/workspace.dart';

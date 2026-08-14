@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const ideaCloseHoverFill = Color(0xFF444A52);
 const ideaDropHintFill = Color(0x1479B8FF);

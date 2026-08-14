@@ -19,6 +19,7 @@ topics:
 dependencies:
   flutter:
     sdk: flutter
+  material_ui: ^1.0.0
   meta: ^1.18.0
 
 dev_dependencies:

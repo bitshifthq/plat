@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart' show TabBarTheme;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' show TabBarTheme;
 import 'package:meta/meta.dart' show internal;
 
 import '../../controller/controller.dart';

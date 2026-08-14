@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart' show TabBarTheme, TabBarThemeData, Theme;
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart'
+    show TabBarTheme, TabBarThemeData, Theme;
 import 'package:meta/meta.dart' show internal;
 
 import '../../model/plat_snapshot.dart';

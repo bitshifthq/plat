@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_constructors_over_static_methods
 import 'dart:ui' show lerpDouble;
 
-import 'package:flutter/material.dart'
-    show TabBarThemeData, Theme, ThemeData, ThemeExtension;
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart'
+    show TabBarThemeData, Theme, ThemeData, ThemeExtension;
 
 /// Default tab chip cursor resolver. Resolves to
 /// [SystemMouseCursors.click] for normal/hovered/selected/focused,

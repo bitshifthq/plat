@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart' show ColorScheme, ThemeData;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart' show ColorScheme, ThemeData;
 import 'package:plat/plat.dart';
 
 import 'ui_test_helpers.dart';

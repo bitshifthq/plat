@@ -1,9 +1,9 @@
 import 'dart:ui' show PointerDeviceKind;
 
-import 'package:flutter/material.dart'
-    show ColorScheme, Icons, MaterialApp, TabBarThemeData, ThemeData;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart'
+    show ColorScheme, Icons, MaterialApp, TabBarThemeData, ThemeData;
 import 'package:plat/plat.dart';
 
 import '../../../helpers.dart';
