@@ -1342,8 +1342,9 @@ PlatSide? _sideFromZone(DropZone zone) => switch (zone) {
   DropZone.bottom => .bottom,
 };
 
-TabNode _treeTabFromLeaf(LeafNode leaf) =>
-    TabNode(child: leaf, title: leaf.title, locked: leaf.locked);
+TabNode _treeTabFromLeaf(LeafNode leaf) {
+  return TabNode(child: leaf, title: leaf.title, locked: leaf.locked);
+}
 
 extension _PaneNodeTestCompat on PlatNode {
   PlatNode addLeafTo(
@@ -1484,6 +1485,7 @@ extension _PaneNodeTestCompat on PlatNode {
 
   PlatNode? removeLeaf(String leafId) => remove(leafId);
 
-  PlatNode reorderLeaf(String tabGroupId, int from, int to) =>
-      reorderTab(tabGroupId, from, to);
+  PlatNode reorderLeaf(String tabGroupId, int from, int to) {
+    return reorderTab(tabGroupId, from, to);
+  }
 }

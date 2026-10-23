@@ -58,16 +58,14 @@ import '../core/foundation/foundation.dart';
 ///
 /// Every `Plat` constructor and factory is `const`. Prefer const layout values
 /// when the shape is static.
-sealed class Plat {
+sealed class const Plat({
   /// Stable identity for the node this `Plat` describes, or `null` when
   /// lowering should generate one.
-  final String? id;
+  final String? id,
 
   /// Allocation hint applied when this node sits inside a parent split.
-  final PlatSize size;
-
-  const new({this.id, this.size = const .auto()});
-
+  final PlatSize size = const .auto(),
+}) {
   /// A vertical split over [children]. Shorthand for [PlatSplit.column].
   const factory column({
     String? id,
@@ -120,32 +118,27 @@ sealed class Plat {
 /// Tabs are wrappers around a single root [child] pane. The wrapped pane may
 /// be a [PlatLeaf], a [PlatSplit], a [PlatSlot], or another [PlatTabGroup],
 /// which is what enables nested tabbed layouts.
-final class PlatTab {
+final class const PlatTab({
   /// Root pane rendered when this tab is active.
-  final Plat child;
+  required final Plat child,
 
   /// Display label shown in chrome.
-  final String title;
+  final String title = '',
 
   /// When true, the tab is presented as pinned.
-  final bool pinned;
+  final bool pinned = false,
 
   /// When true, the tab refuses to be closed or dragged.
-  final bool locked;
+  final bool locked = false,
 
   /// When true, the tab is the preview tab for its containing tab group.
-  final bool preview;
-
-  const new({
-    required this.child,
-    this.title = '',
-    this.pinned = false,
-    this.locked = false,
-    this.preview = false,
-  }) : assert(
-         !preview || (!pinned && !locked),
-         'preview tabs cannot be pinned or locked',
-       );
+  final bool preview = false,
+}) {
+  this
+    : assert(
+        !preview || (!pinned && !locked),
+        'preview tabs cannot be pinned or locked',
+      );
 
   /// Convenience constructor for a tab backed by a single [PlatLeaf].
   factory leaf({
@@ -176,29 +169,23 @@ final class PlatTab {
 ///
 /// `PlatLeaf` carries no `focused` field; focus is runtime state owned by the
 /// controller. Seed it after construction with [PlatController.focus].
-final class PlatLeaf extends Plat {
+final class const PlatLeaf({
+  super.id,
+  super.size,
+
   /// Opaque host payload. The host's leaf builder dispatches on this
   /// to render the leaf's content.
-  final Object? data;
+  final Object? data,
 
   /// Display label shown in chrome.
-  final String title;
+  final String title = '',
 
   /// When true, the leaf refuses close and drag operations.
-  final bool locked;
+  final bool locked = false,
 
   /// When true, the default UI may expose a handle for dragging this leaf.
-  final bool draggable;
-
-  const new({
-    super.id,
-    super.size,
-    this.data,
-    this.title = '',
-    this.locked = false,
-    this.draggable = false,
-  });
-}
+  final bool draggable = false,
+}) extends Plat;
 
 /// A structural wrapper around a single, optional [child].
 ///
@@ -206,26 +193,21 @@ final class PlatLeaf extends Plat {
 /// a subtree ([boundsMaximize]), and let chrome paint around the child. A bare
 /// slot with no flags is decorative and disappears with its child; a
 /// [persistent] slot stays in the tree as an empty stub.
-final class PlatSlot extends Plat {
+final class const PlatSlot({
+  super.id,
+  super.size,
+
   /// The wrapped pane, or `null` for an empty slot.
-  final Plat? child;
+  final Plat? child,
 
   /// When true, the slot survives losing its child and stays in the
   /// tree as an empty stub.
-  final bool persistent;
+  final bool persistent = false,
 
   /// When true, a maximize triggered inside this slot expands to
   /// fill the slot's bounds rather than the whole tree.
-  final bool boundsMaximize;
-
-  const new({
-    super.id,
-    super.size,
-    this.child,
-    this.persistent = false,
-    this.boundsMaximize = false,
-  });
-}
+  final bool boundsMaximize = false,
+}) extends Plat;
 
 /// A split over [children] along [axis].
 ///
@@ -287,27 +269,20 @@ final class PlatSplit extends Plat {
 ///
 /// The active tab's child subtree is rendered; the rest are available through
 /// the tab bar.
-final class PlatTabGroup extends Plat {
-  /// Edge of the body where the tab bar sits.
-  final TabBarSide side;
+final class const PlatTabGroup(
+  /// The tabs in this group, in display order.
+  final List<PlatTab> tabs, {
+  super.id,
+  super.size,
 
   /// Index of the tab that starts active. In `[0, tabs.length)`,
   /// or `0` when [tabs] is empty.
-  final int activeIndex;
+  final int activeIndex = 0,
 
   /// When true, this group's body accepts tab drops from other groups or views.
   /// Tab-strip reordering still works when false.
-  final bool acceptsDrops;
+  final bool acceptsDrops = true,
 
-  /// The tabs in this group, in display order.
-  final List<PlatTab> tabs;
-
-  const new(
-    this.tabs, {
-    super.id,
-    super.size,
-    this.activeIndex = 0,
-    this.acceptsDrops = true,
-    this.side = .top,
-  });
-}
+  /// Edge of the body where the tab bar sits.
+  final TabBarSide side = .top,
+}) extends Plat;

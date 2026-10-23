@@ -2,12 +2,11 @@ import 'package:material_ui/material_ui.dart';
 
 import 'presets.dart';
 
-final class ThemeEditorActions extends StatelessWidget {
-  final ThemePreset preset;
-  final ValueChanged<ThemeEditorTabKind> onOpenTab;
-
-  const new({super.key, required this.preset, required this.onOpenTab});
-
+final class const ThemeEditorActions({
+  super.key,
+  required final ThemePreset preset,
+  required final ValueChanged<ThemeEditorTabKind> onOpenTab,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,11 +26,10 @@ final class ThemeEditorActions extends StatelessWidget {
   }
 }
 
-final class ThemeEditorPlaceholder extends StatelessWidget {
-  final ThemePreset preset;
-
-  const new({super.key, required this.preset});
-
+final class const ThemeEditorPlaceholder({
+  super.key,
+  required final ThemePreset preset,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -73,29 +71,18 @@ final class ThemeEditorPlaceholder extends StatelessWidget {
   }
 }
 
-enum ThemeEditorTabKind {
+enum ThemeEditorTabKind(final String label, final IconData icon) {
   normal('Document', Icons.article_outlined),
   pinned('Pinned', Icons.push_pin_outlined),
   locked('Locked', Icons.lock_outline),
-  preview('Preview', Icons.visibility_outlined);
-
-  final String label;
-  final IconData icon;
-
-  new(this.label, this.icon);
+  preview('Preview', Icons.visibility_outlined),
 }
 
-final class _EditorActionButton extends StatelessWidget {
-  final ThemePreset preset;
-  final ThemeEditorTabKind kind;
-  final VoidCallback onPressed;
-
-  const new({
-    required this.preset,
-    required this.kind,
-    required this.onPressed,
-  });
-
+final class const _EditorActionButton({
+  required final ThemePreset preset,
+  required final ThemeEditorTabKind kind,
+  required final VoidCallback onPressed,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final action = preset.chrome.editorAction;

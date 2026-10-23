@@ -11,24 +11,19 @@ import 'theme.dart';
 /// Renders a [SplitSnapshot] via [PlatSplit]. Owns the per-split
 /// [DividerInteraction] and forwards drag-end commits to the controller.
 @internal
-class SplitRender extends StatefulWidget {
+class const SplitRender({
+  super.key,
+
   /// Snapshot of the split node.
-  final SplitSnapshot view;
-  final PlatController controller;
-  final Widget Function(BuildContext, PlatSnapshot) childBuilder;
-
-  const new({
-    super.key,
-    required this.view,
-    required this.controller,
-    required this.childBuilder,
-  });
-
+  required final SplitSnapshot view,
+  required final PlatController controller,
+  required final Widget Function(BuildContext, PlatSnapshot) childBuilder,
+}) extends StatefulWidget {
   @override
   State<SplitRender> createState() => _SplitRenderState();
 }
 
-class _SplitRenderState extends State<SplitRender> {
+class _SplitRenderState() extends State<SplitRender> {
   final _interaction = DividerInteraction();
 
   @override

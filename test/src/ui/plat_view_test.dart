@@ -895,8 +895,9 @@ Finder _leafHostFinder(String id) => find
     )
     .first;
 
-Widget _centered(Widget child) =>
-    Center(child: SizedBox(width: 600, height: 200, child: child));
+Widget _centered(Widget child) {
+  return Center(child: SizedBox(width: 600, height: 200, child: child));
+}
 
 PlatController _dividerController() => controllerFromTree(
   SplitNode(
@@ -911,8 +912,9 @@ PlatController _dividerController() => controllerFromTree(
 
 Finder _dividerFinder() => find.byType(PlatView);
 
-Widget _slotLabel(BuildContext context, SlotSnapshot slot, Widget? child) =>
-    child ?? Text('empty:${slot.id}');
+Widget _slotLabel(BuildContext context, SlotSnapshot slot, Widget? child) {
+  return child ?? Text('empty:${slot.id}');
+}
 
 Widget _counterApp(PlatController c) => testHost(
   PlatView(
@@ -961,31 +963,32 @@ Widget _bareCounterApp(PlatController c) => testHost(
   overlay: false,
 );
 
-Widget _splitScopeCounterApp(PlatController left, PlatController right) =>
-    testHost(
-      SizedBox(
-        width: 600,
-        height: 240,
-        child: Row(
-          children: [
-            Expanded(
-              child: PlatView(
-                controller: left,
-                autofocus: false,
-                leafBuilder: (_, p) => _Counter(label: p.title),
-              ),
+Widget _splitScopeCounterApp(PlatController left, PlatController right) {
+  return testHost(
+    SizedBox(
+      width: 600,
+      height: 240,
+      child: Row(
+        children: [
+          Expanded(
+            child: PlatView(
+              controller: left,
+              autofocus: false,
+              leafBuilder: (_, p) => _Counter(label: p.title),
             ),
-            Expanded(
-              child: PlatView(
-                controller: right,
-                autofocus: false,
-                leafBuilder: (_, p) => _Counter(label: p.title),
-              ),
+          ),
+          Expanded(
+            child: PlatView(
+              controller: right,
+              autofocus: false,
+              leafBuilder: (_, p) => _Counter(label: p.title),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
+    ),
+  );
+}
 
 int _counterValue(WidgetTester tester, String label) => tester
     .state<_CounterState>(
@@ -995,35 +998,32 @@ int _counterValue(WidgetTester tester, String label) => tester
     )
     .count;
 
-PlatController _twoSidedController({bool persistentLeft = false}) =>
-    controllerFromTree(
-      SplitNode(
-        id: 's',
-        axis: .horizontal,
-        children: [
-          if (persistentLeft)
-            SlotNode(
-              id: 'left-slot',
-              persistent: true,
-              child: TabGroupNode(id: 'left', tabs: treeTabs([tab('a')])),
-            )
-          else
-            TabGroupNode(id: 'left', tabs: treeTabs([tab('a')])),
-          TabGroupNode(id: 'right', tabs: treeTabs([tab('b')])),
-        ],
-      ),
-    );
+PlatController _twoSidedController({bool persistentLeft = false}) {
+  return controllerFromTree(
+    SplitNode(
+      id: 's',
+      axis: .horizontal,
+      children: [
+        if (persistentLeft)
+          SlotNode(
+            id: 'left-slot',
+            persistent: true,
+            child: TabGroupNode(id: 'left', tabs: treeTabs([tab('a')])),
+          )
+        else
+          TabGroupNode(id: 'left', tabs: treeTabs([tab('a')])),
+        TabGroupNode(id: 'right', tabs: treeTabs([tab('b')])),
+      ],
+    ),
+  );
+}
 
-class _Counter extends StatefulWidget {
-  final String label;
-
-  const new({required this.label});
-
+class const _Counter({required final String label}) extends StatefulWidget {
   @override
   State<_Counter> createState() => _CounterState();
 }
 
-class _CounterState extends State<_Counter> {
+class _CounterState() extends State<_Counter> {
   var count = 0;
 
   @override

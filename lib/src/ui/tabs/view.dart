@@ -31,22 +31,14 @@ Widget _defaultTabFeedback({
 
 /// Internal coordinator for a single [TabGroupSnapshot] group.
 @internal
-final class PlatTabGroupView extends StatelessWidget {
-  final TabGroupSnapshot view;
-  final PlatTabBarBuilder? tabBar;
-  final PlatController controller;
-  final Widget Function(String id) platBuilder;
-  final DropPolicy? dropPolicy;
-
-  const new({
-    super.key,
-    required this.view,
-    required this.controller,
-    this.tabBar,
-    required this.platBuilder,
-    this.dropPolicy,
-  });
-
+final class const PlatTabGroupView({
+  super.key,
+  required final TabGroupSnapshot view,
+  required final PlatController controller,
+  final PlatTabBarBuilder? tabBar,
+  required final Widget Function(String id) platBuilder,
+  final DropPolicy? dropPolicy,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (view.tabs.isEmpty) return const SizedBox.shrink();
@@ -81,8 +73,14 @@ final class PlatTabGroupView extends StatelessWidget {
         tabs: view,
         controller: controller,
         dropPolicy: dropPolicy,
-        builder: (_, hover) =>
-            platTabBarScope(tabs: view, chips: tabs, hover: hover, child: bar),
+        builder: (_, hover) {
+          return platTabBarScope(
+            tabs: view,
+            chips: tabs,
+            hover: hover,
+            child: bar,
+          );
+        },
       ),
     );
 
@@ -124,31 +122,22 @@ final class PlatTabGroupView extends StatelessWidget {
 
 /// Internal strip used by [PlatTabBar].
 @internal
-final class PlatTabStrip extends StatefulWidget {
-  final TabGroupSnapshot view;
-  final PlatTabBarTheme theme;
-  final List<Widget> chips;
-  final ({int at, TabDragPayload payload})? hover;
-  final Widget? stripLeading;
-  final Widget? stripTrailing;
-  final Widget Function(BuildContext context, TabSnapshot tab) buildPlaceholder;
-
-  const new({
-    super.key,
-    required this.view,
-    required this.theme,
-    required this.chips,
-    required this.hover,
-    required this.buildPlaceholder,
-    this.stripLeading,
-    this.stripTrailing,
-  });
-
+final class const PlatTabStrip({
+  super.key,
+  required final TabGroupSnapshot view,
+  required final PlatTabBarTheme theme,
+  required final List<Widget> chips,
+  required final ({int at, TabDragPayload payload})? hover,
+  required final Widget Function(BuildContext context, TabSnapshot tab)
+  buildPlaceholder,
+  final Widget? stripLeading,
+  final Widget? stripTrailing,
+}) extends StatefulWidget {
   @override
   State<PlatTabStrip> createState() => _PlatTabStripState();
 }
 
-class _PlatTabStripState extends State<PlatTabStrip> {
+class _PlatTabStripState() extends State<PlatTabStrip> {
   final _scrollController = ScrollController();
 
   @override
@@ -321,28 +310,19 @@ class _PlatTabStripState extends State<PlatTabStrip> {
   }
 }
 
-final class _DraggableTab extends StatefulWidget {
-  final int index;
-  final TabSnapshot tab;
-  final TabGroupSnapshot view;
-  final PlatTabBuilder tabBuilder;
-  final PlatController sourceController;
-  final DragFeedbackBuilder? dragFeedbackBuilder;
-
-  const new({
-    required this.view,
-    required this.tab,
-    required this.index,
-    required this.sourceController,
-    required this.tabBuilder,
-    this.dragFeedbackBuilder,
-  });
-
+final class const _DraggableTab({
+  required final TabGroupSnapshot view,
+  required final TabSnapshot tab,
+  required final int index,
+  required final PlatController sourceController,
+  required final PlatTabBuilder tabBuilder,
+  final DragFeedbackBuilder? dragFeedbackBuilder,
+}) extends StatefulWidget {
   @override
   State<_DraggableTab> createState() => _DraggableTabState();
 }
 
-final class _DraggableTabState extends State<_DraggableTab> {
+final class _DraggableTabState() extends State<_DraggableTab> {
   Size? _feedbackSize;
   var _hovered = false;
   var _pressed = false;
@@ -413,8 +393,9 @@ final class _DraggableTabState extends State<_DraggableTab> {
               details: defaultFeedbackDetails,
               hideCloseButton: true,
               child: Builder(
-                builder: (context) =>
-                    widget.tabBuilder(context, defaultFeedbackDetails),
+                builder: (context) {
+                  return widget.tabBuilder(context, defaultFeedbackDetails);
+                },
               ),
             ),
           );
@@ -515,11 +496,10 @@ Offset _centerDragAnchorStrategy(
   return Offset(box.size.width / 2, box.size.height / 2);
 }
 
-final class _TabSizeObserver extends SingleChildRenderObjectWidget {
-  final ValueChanged<Size> onChanged;
-
-  const new({required this.onChanged, required super.child});
-
+final class const _TabSizeObserver({
+  required final ValueChanged<Size> onChanged,
+  required super.child,
+}) extends SingleChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) {
     return _RenderTabSizeObserver(onChanged);
@@ -534,11 +514,9 @@ final class _TabSizeObserver extends SingleChildRenderObjectWidget {
   }
 }
 
-final class _RenderTabSizeObserver extends RenderProxyBox {
-  ValueChanged<Size> onChanged;
+final class _RenderTabSizeObserver(var ValueChanged<Size> onChanged)
+    extends RenderProxyBox {
   Size? _lastSize;
-
-  new(this.onChanged);
 
   @override
   void performLayout() {
@@ -549,25 +527,21 @@ final class _RenderTabSizeObserver extends RenderProxyBox {
   }
 }
 
-final class _TabBarDropTarget extends StatefulWidget {
-  final TabGroupSnapshot tabs;
-  final PlatController controller;
-  final DropPolicy? dropPolicy;
-  final Widget Function(BuildContext, ({int at, TabDragPayload payload})?)
-  builder;
-
-  const new({
-    required this.tabs,
-    required this.controller,
-    required this.dropPolicy,
-    required this.builder,
-  });
-
+final class const _TabBarDropTarget({
+  required final TabGroupSnapshot tabs,
+  required final PlatController controller,
+  required final DropPolicy? dropPolicy,
+  required final Widget Function(
+    BuildContext,
+    ({int at, TabDragPayload payload})?,
+  )
+  builder,
+}) extends StatefulWidget {
   @override
   State<_TabBarDropTarget> createState() => _TabBarDropTargetState();
 }
 
-class _TabBarDropTargetState extends State<_TabBarDropTarget> {
+class _TabBarDropTargetState() extends State<_TabBarDropTarget> {
   ({int at, TabDragPayload payload})? _hover;
 
   @override
@@ -651,8 +625,9 @@ class _TabBarDropTargetState extends State<_TabBarDropTarget> {
     return insertAt.clamp(0, tabs.length);
   }
 
-  void _update(DragTargetDetails<TabDragPayload> details) =>
-      _set((at: _resolveAt(details), payload: details.data));
+  void _update(DragTargetDetails<TabDragPayload> details) {
+    _set((at: _resolveAt(details), payload: details.data));
+  }
 
   void _set(({int at, TabDragPayload payload})? next) {
     if (next == _hover) return;

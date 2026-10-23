@@ -95,36 +95,28 @@ Color _defaultChipBackground(
 /// Hosts can use this directly from [PlatTabBar.tabBuilder] to keep plat's
 /// standard tab treatment while replacing the leading, label, or trailing
 /// content.
-final class PlatTabChip extends StatelessWidget {
+final class const PlatTabChip({
+  super.key,
+
   /// Optional widget before the label.
-  final Widget? leading;
+  final Widget? leading,
 
   /// Optional label widget. Defaults to the tab title, falling back to id.
-  final Widget? label;
+  final Widget? label,
 
   /// Optional widget after the label.
-  final Widget? trailing;
+  final Widget? trailing,
 
   /// Gap between leading / label / trailing slots.
-  final double gap;
+  final double gap = 6,
 
   /// Padding around this chip's content. When null, falls back to
   /// [PlatTabBarTheme.labelPadding].
-  final EdgeInsetsGeometry? labelPadding;
+  final EdgeInsetsGeometry? labelPadding,
 
   /// How to clip this chip's content.
-  final Clip clipBehavior;
-
-  const new({
-    super.key,
-    this.leading,
-    this.label,
-    this.trailing,
-    this.gap = 6,
-    this.labelPadding,
-    this.clipBehavior = .none,
-  });
-
+  final Clip clipBehavior = .none,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tab = _PlatTabScope.of(context);
@@ -286,43 +278,34 @@ final class PlatTabChip extends StatelessWidget {
 }
 
 /// Small close affordance suitable for [PlatTabChip.trailing].
-final class PlatTabCloseButton extends StatelessWidget {
+final class const PlatTabCloseButton({
+  super.key,
+
   /// Called when the close button is pressed.
   ///
   /// When null, the button closes the surrounding Plat tab if used inside a
   /// [PlatTabChip] or [PlatTabBar.tabBuilder].
-  final VoidCallback? onPressed;
+  final VoidCallback? onPressed,
 
   /// Tooltip shown while hovering the close button. When null, falls back to
   /// Material's localized close label when available.
-  final String? tooltip;
+  final String? tooltip,
 
   /// Semantic label for assistive technologies. When null, uses [tooltip].
-  final String? semanticLabel;
+  final String? semanticLabel,
 
   /// Icon color.
-  final Color? color;
+  final Color? color,
 
   /// Background color while hovered.
-  final Color? hoverColor;
+  final Color? hoverColor,
 
   /// Logical size of the hit area.
-  final double size;
+  final double size = 16,
 
   /// Logical size of the icon.
-  final double iconSize;
-
-  const new({
-    super.key,
-    this.onPressed,
-    this.tooltip,
-    this.semanticLabel,
-    this.color,
-    this.hoverColor,
-    this.size = 16,
-    this.iconSize = 12,
-  });
-
+  final double iconSize = 12,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scope = _PlatTabScope.maybeScopeOf(context);
@@ -392,26 +375,31 @@ final class PlatTabCloseButton extends StatelessWidget {
 ///
 /// Use [snapshot] for tab data and [states] for visual state.
 @immutable
-final class PlatTabDetails {
+final class const PlatTabDetails._({
   /// Public immutable tab snapshot.
-  final TabSnapshot snapshot;
+  required final TabSnapshot snapshot,
 
   /// The group that owns the tab bar currently building this tab.
-  final TabGroupSnapshot group;
+  required final TabGroupSnapshot group,
 
   /// Index in [group]. For drag placeholders this is the preview index.
-  final int index;
+  required final int index,
 
   /// Current interaction states for the tab.
-  final Set<WidgetState> states;
-
+  required final Set<WidgetState> states,
+}) {
   @internal
-  new({
-    required this.snapshot,
-    required this.group,
-    required this.index,
+  factory({
+    required TabSnapshot snapshot,
+    required TabGroupSnapshot group,
+    required int index,
     required Set<WidgetState> states,
-  }) : states = Set.unmodifiable(states);
+  }) => PlatTabDetails._(
+    snapshot: snapshot,
+    group: group,
+    index: index,
+    states: Set.unmodifiable(states),
+  );
 }
 
 @internal
@@ -431,24 +419,19 @@ Widget platTabScope({
   );
 }
 
-final class _PlatTabScope extends InheritedWidget {
-  final PlatTabDetails details;
-  final VoidCallback? close;
-  final bool hideCloseButton;
-
-  const new({
-    super.key,
-    required this.details,
-    this.close,
-    this.hideCloseButton = false,
-    required super.child,
-  });
-
+final class const _PlatTabScope({
+  super.key,
+  required final PlatTabDetails details,
+  final VoidCallback? close,
+  final bool hideCloseButton = false,
+  required super.child,
+}) extends InheritedWidget {
   @override
-  bool updateShouldNotify(_PlatTabScope old) =>
-      old.details != details ||
-      old.close != close ||
-      old.hideCloseButton != hideCloseButton;
+  bool updateShouldNotify(_PlatTabScope old) {
+    return old.details != details ||
+        old.close != close ||
+        old.hideCloseButton != hideCloseButton;
+  }
 
   static PlatTabDetails? maybeOf(BuildContext context) {
     return maybeScopeOf(context)?.details;
@@ -465,17 +448,16 @@ final class _PlatTabScope extends InheritedWidget {
   }
 }
 
-final class _HoverBox extends StatefulWidget {
-  final MouseCursor cursor;
-  final Widget Function(BuildContext context, {required bool hovered}) builder;
-
-  const new({required this.cursor, required this.builder});
-
+final class const _HoverBox({
+  required final MouseCursor cursor,
+  required final Widget Function(BuildContext context, {required bool hovered})
+  builder,
+}) extends StatefulWidget {
   @override
   State<_HoverBox> createState() => _HoverBoxState();
 }
 
-final class _HoverBoxState extends State<_HoverBox> {
+final class _HoverBoxState() extends State<_HoverBox> {
   var _hovered = false;
 
   @override

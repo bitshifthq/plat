@@ -47,14 +47,16 @@ void main() {
         const hoveredFg = Color(0xFF333333);
 
         final theme = PlatTabBarTheme(
-          chipBackgroundColor: WidgetStateProperty.resolveWith<Color?>(
-            (states) =>
-                states.contains(WidgetState.hovered) ? hoveredBg : normalBg,
-          ),
-          chipForegroundColor: WidgetStateProperty.resolveWith<Color?>(
-            (states) =>
-                states.contains(WidgetState.hovered) ? hoveredFg : normalFg,
-          ),
+          chipBackgroundColor: WidgetStateProperty.resolveWith<Color?>((
+            states,
+          ) {
+            return states.contains(WidgetState.hovered) ? hoveredBg : normalBg;
+          }),
+          chipForegroundColor: WidgetStateProperty.resolveWith<Color?>((
+            states,
+          ) {
+            return states.contains(WidgetState.hovered) ? hoveredFg : normalFg;
+          }),
         );
 
         expect(theme.chipBackgroundColor!.resolve(const {}), normalBg);
@@ -79,22 +81,18 @@ void main() {
         const bNormalFg = Color(0xFF909090);
         const bHoveredFg = Color(0xFFE0E0E0);
 
-        final aBg = WidgetStateProperty.resolveWith<Color?>(
-          (states) =>
-              states.contains(WidgetState.hovered) ? aHoveredBg : aNormalBg,
-        );
-        final bBg = WidgetStateProperty.resolveWith<Color?>(
-          (states) =>
-              states.contains(WidgetState.hovered) ? bHoveredBg : bNormalBg,
-        );
-        final aFg = WidgetStateProperty.resolveWith<Color?>(
-          (states) =>
-              states.contains(WidgetState.hovered) ? aHoveredFg : aNormalFg,
-        );
-        final bFg = WidgetStateProperty.resolveWith<Color?>(
-          (states) =>
-              states.contains(WidgetState.hovered) ? bHoveredFg : bNormalFg,
-        );
+        final aBg = WidgetStateProperty.resolveWith<Color?>((states) {
+          return states.contains(WidgetState.hovered) ? aHoveredBg : aNormalBg;
+        });
+        final bBg = WidgetStateProperty.resolveWith<Color?>((states) {
+          return states.contains(WidgetState.hovered) ? bHoveredBg : bNormalBg;
+        });
+        final aFg = WidgetStateProperty.resolveWith<Color?>((states) {
+          return states.contains(WidgetState.hovered) ? aHoveredFg : aNormalFg;
+        });
+        final bFg = WidgetStateProperty.resolveWith<Color?>((states) {
+          return states.contains(WidgetState.hovered) ? bHoveredFg : bNormalFg;
+        });
 
         final a = PlatTabBarTheme(
           chipBackgroundColor: aBg,

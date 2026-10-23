@@ -13,9 +13,7 @@ part of 'foundation.dart';
 /// const PlatExtent half = .fraction(0.5);
 /// const PlatExtent unspecified = .auto();
 /// ```
-sealed class PlatExtent {
-  const new _();
-
+sealed class const PlatExtent._() {
   /// Absolute logical-pixel extent. [value] must be non-negative.
   const factory pixel(double value) = Pixels._;
 
@@ -32,13 +30,11 @@ sealed class PlatExtent {
 /// Absolute logical-pixel extent.
 @internal
 @immutable
-final class Pixels extends PlatExtent {
+final class const Pixels._(
   /// Pixel count. Non-negative.
-  final double value;
-
-  const new _(this.value)
-    : assert(value >= 0, 'pixels must be non-negative'),
-      super._();
+  final double value,
+) extends PlatExtent {
+  this : assert(value >= 0, 'pixels must be non-negative'), super._();
 
   @override
   int get hashCode => Object.hash('px', value);
@@ -53,13 +49,12 @@ final class Pixels extends PlatExtent {
 /// Fraction of the parent's available extent.
 @internal
 @immutable
-final class Fraction extends PlatExtent {
+final class const Fraction._(
   /// Fraction in `0..1`.
-  final double value;
-
-  const new _(this.value)
-    : assert(value >= 0 && value <= 1, 'fraction must be in 0..1'),
-      super._();
+  final double value,
+) extends PlatExtent {
+  this
+    : assert(value >= 0 && value <= 1, 'fraction must be in 0..1'), super._();
 
   @override
   int get hashCode => Object.hash('fr', value);
@@ -74,8 +69,8 @@ final class Fraction extends PlatExtent {
 /// The "use the default" extent. See [PlatExtent.auto].
 @internal
 @immutable
-final class AutoExtent extends PlatExtent {
-  const new _() : super._();
+final class const AutoExtent._() extends PlatExtent {
+  this : super._();
 
   @override
   int get hashCode => Object.hash('extent', 'auto');
@@ -110,9 +105,7 @@ final class AutoExtent extends PlatExtent {
 ///   min: .pixel(200),
 /// );
 /// ```
-sealed class PlatSize {
-  const new _();
-
+sealed class const PlatSize._() {
   /// Locked extent. The neighbouring divider does not drag.
   /// [extent] must be a concrete value, not [PlatExtent.auto].
   const factory fixed(PlatExtent extent) = FixedSize._;
@@ -133,11 +126,11 @@ sealed class PlatSize {
 /// Locked extent. See [PlatSize.fixed].
 @internal
 @immutable
-final class FixedSize extends PlatSize {
+final class const FixedSize._(
   /// The locked length. Never [AutoExtent].
-  final PlatExtent extent;
-
-  const new _(this.extent)
+  final PlatExtent extent,
+) extends PlatSize {
+  this
     : assert(
         extent is! AutoExtent,
         'PlatSize.fixed requires a concrete extent (pixel or fraction)',
@@ -148,8 +141,9 @@ final class FixedSize extends PlatSize {
   int get hashCode => Object.hash('fixed', extent);
 
   @override
-  bool operator ==(Object other) =>
-      other is FixedSize && other.extent == extent;
+  bool operator ==(Object other) {
+    return other is FixedSize && other.extent == extent;
+  }
 
   @override
   String toString() => 'FixedSize($extent)';
@@ -195,11 +189,12 @@ final class FlexibleSize extends PlatSize {
   int get hashCode => Object.hash('flexible', initial, min, max);
 
   @override
-  bool operator ==(Object other) =>
-      other is FlexibleSize &&
-      other.initial == initial &&
-      other.min == min &&
-      other.max == max;
+  bool operator ==(Object other) {
+    return other is FlexibleSize &&
+        other.initial == initial &&
+        other.min == min &&
+        other.max == max;
+  }
 
   @override
   String toString() => 'FlexibleSize(initial: $initial, min: $min, max: $max)';

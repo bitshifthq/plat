@@ -142,9 +142,10 @@ void main() {
     });
 
     group('equality', () {
-      SlotSnapshot slotWith(PlatNode child) =>
-          snapshotOf(SlotNode(id: 'slot', persistent: true, child: child))
-              as SlotSnapshot;
+      SlotSnapshot slotWith(PlatNode child) {
+        return snapshotOf(SlotNode(id: 'slot', persistent: true, child: child))
+            as SlotSnapshot;
+      }
 
       test('SlotSnapshot inequality fires when child content differs', () {
         final a = slotWith(
@@ -168,9 +169,10 @@ void main() {
         expect(a, isNot(equals(b)));
       });
 
-      SplitSnapshot rowWith(PlatNode firstChild) =>
-          snapshotOf(hSplit('row', [firstChild, treeTab('z').child]))
-              as SplitSnapshot;
+      SplitSnapshot rowWith(PlatNode firstChild) {
+        return snapshotOf(hSplit('row', [firstChild, treeTab('z').child]))
+            as SplitSnapshot;
+      }
 
       test('SplitSnapshot inequality fires when child content differs', () {
         final a = rowWith(TabGroupNode(id: 'left', tabs: treeTabs([tab('a')])));

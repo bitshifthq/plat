@@ -62,134 +62,107 @@ typedef DragFeedbackBuilder = Widget? Function(
 /// Common bar styling can be set directly on the widget. When non-null,
 /// each styling param overrides the matching field on the inherited
 /// [PlatTabBarTheme]; null falls through to the theme.
-final class PlatTabBar extends StatelessWidget {
+final class const PlatTabBar({
+  super.key,
+
   /// Widget pinned at the start of the bar, outside the tab strip.
-  final Widget? leading;
+  final Widget? leading,
 
   /// Widget pinned at the end of the bar, outside the tab strip.
-  final Widget? trailing;
+  final Widget? trailing,
 
   /// Widget inserted before the first tab inside the strip.
-  final Widget? stripLeading;
+  final Widget? stripLeading,
 
   /// Widget inserted after the last tab inside the strip.
-  final Widget? stripTrailing;
+  final Widget? stripTrailing,
 
   /// Renders a single tab for this bar. When null, the bar falls back to
   /// [PlatTabChip].
-  final PlatTabBuilder? tabBuilder;
+  final PlatTabBuilder? tabBuilder,
 
   /// Renders the preview placeholder for a dragged tab.
-  final PlatTabBuilder? placeholderBuilder;
+  final PlatTabBuilder? placeholderBuilder,
 
   /// Renders the dragged-tab feedback widget that follows the pointer.
   /// Returning `null` falls through to the package default: the source tab
   /// chrome, sized to the rendered chip, with the built-in close button hidden.
-  final DragFeedbackBuilder? dragFeedbackBuilder;
+  final DragFeedbackBuilder? dragFeedbackBuilder,
 
   /// Padding inside the bar around its content. Overrides
   /// [PlatTabBarTheme.padding] when non-null.
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? padding,
 
   /// Gap between adjacent tabs. Overrides [PlatTabBarTheme.spacing]
   /// when non-null.
-  final double? spacing;
+  final double? spacing,
 
   /// Decoration drawn behind the bar's padded content. Overrides
   /// [PlatTabBarTheme.decoration] when non-null. For a plain background
   /// fill, pass `BoxDecoration(color: ...)`.
-  final Decoration? decoration;
+  final Decoration? decoration,
 
   /// Continuous baseline drawn on the body-facing edge of the bar.
   /// Overrides [PlatTabBarTheme.divider] when non-null; otherwise an
   /// explicitly configured Material tab divider may be used.
-  final BorderSide? divider;
+  final BorderSide? divider,
 
   /// Where tabs anchor inside the strip when the total tab extent is
   /// smaller than the bar. Overrides [PlatTabBarTheme.alignment] when
   /// non-null. Only meaningful under [TabStripFit.scrollable].
-  final TabStripAlignment? alignment;
+  final TabStripAlignment? alignment,
 
   /// How tabs are laid out along the bar. Overrides
   /// [PlatTabBarTheme.fit] when non-null.
-  final TabStripFit? fit;
+  final TabStripFit? fit,
 
   /// Padding inside each default tab chip around its content. Overrides
   /// [PlatTabBarTheme.labelPadding] when non-null.
-  final EdgeInsetsGeometry? labelPadding;
+  final EdgeInsetsGeometry? labelPadding,
 
   /// Corner shape of each default chip. Overrides
   /// [PlatTabBarTheme.chipBorderRadius] when non-null.
-  final BorderRadiusGeometry? chipBorderRadius;
+  final BorderRadiusGeometry? chipBorderRadius,
 
   /// Text color for selected tabs. Overrides [PlatTabBarTheme.labelColor].
-  final Color? labelColor;
+  final Color? labelColor,
 
   /// Text style for selected tabs. Overrides [PlatTabBarTheme.labelStyle].
-  final TextStyle? labelStyle;
+  final TextStyle? labelStyle,
 
   /// Text color for unselected tabs.
   /// Overrides [PlatTabBarTheme.unselectedLabelColor].
-  final Color? unselectedLabelColor;
+  final Color? unselectedLabelColor,
 
   /// Text style for unselected tabs.
   /// Overrides [PlatTabBarTheme.unselectedLabelStyle].
-  final TextStyle? unselectedLabelStyle;
+  final TextStyle? unselectedLabelStyle,
 
   /// Default tab overlay color for hover / focus / press states. Overrides
   /// [PlatTabBarTheme.overlayColor] when non-null.
-  final WidgetStateProperty<Color?>? overlayColor;
+  final WidgetStateProperty<Color?>? overlayColor,
 
   /// Selected-tab indicator decoration. Overrides
   /// [PlatTabBarTheme.indicator] when non-null.
-  final Decoration? indicator;
+  final Decoration? indicator,
 
   /// Selected-tab indicator color. Overrides
   /// [PlatTabBarTheme.indicatorColor] when non-null.
-  final Color? indicatorColor;
+  final Color? indicatorColor,
 
   /// Selected-tab indicator thickness. Overrides
   /// [PlatTabBarTheme.indicatorWeight] when non-null.
-  final double? indicatorWeight;
+  final double? indicatorWeight,
 
   /// Insets applied to the selected-tab indicator. Overrides
   /// [PlatTabBarTheme.indicatorPadding] when non-null.
-  final EdgeInsetsGeometry? indicatorPadding;
+  final EdgeInsetsGeometry? indicatorPadding,
 
   /// Mouse cursor over each tab. Overrides [PlatTabBarTheme.mouseCursor] when
   /// non-null; otherwise an explicitly configured Material tab cursor may be
   /// used.
-  final WidgetStateProperty<MouseCursor?>? mouseCursor;
-
-  const new({
-    super.key,
-    this.leading,
-    this.trailing,
-    this.stripLeading,
-    this.stripTrailing,
-    this.tabBuilder,
-    this.placeholderBuilder,
-    this.dragFeedbackBuilder,
-    this.padding,
-    this.spacing,
-    this.decoration,
-    this.divider,
-    this.alignment,
-    this.fit,
-    this.labelPadding,
-    this.chipBorderRadius,
-    this.labelColor,
-    this.labelStyle,
-    this.unselectedLabelColor,
-    this.unselectedLabelStyle,
-    this.overlayColor,
-    this.indicator,
-    this.indicatorColor,
-    this.indicatorWeight,
-    this.indicatorPadding,
-    this.mouseCursor,
-  });
-
+  final WidgetStateProperty<MouseCursor?>? mouseCursor,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final baseTheme = PlatTheme.of(context);
@@ -240,9 +213,10 @@ final class PlatTabBar extends StatelessWidget {
                 final chip = platTabScope(
                   details: details,
                   child: Builder(
-                    builder: (context) =>
-                        tabBuilder?.call(context, details) ??
-                        const PlatTabChip(),
+                    builder: (context) {
+                      return tabBuilder?.call(context, details) ??
+                          const PlatTabChip();
+                    },
                   ),
                 );
                 final placeholder = placeholderBuilder;
@@ -258,8 +232,9 @@ final class PlatTabBar extends StatelessWidget {
                               child: platTabScope(
                                 details: details,
                                 child: Builder(
-                                  builder: (context) =>
-                                      placeholder(context, details),
+                                  builder: (context) {
+                                    return placeholder(context, details);
+                                  },
                                 ),
                               ),
                             ),
@@ -324,24 +299,19 @@ Widget platTabBarScope({
   );
 }
 
-final class _PlatTabBarBinding extends InheritedWidget {
-  final TabGroupSnapshot tabs;
-  final List<Widget> chips;
-  final ({int at, TabDragPayload payload})? hover;
-
-  const new({
-    super.key,
-    required this.tabs,
-    required this.chips,
-    required this.hover,
-    required super.child,
-  });
-
+final class const _PlatTabBarBinding({
+  super.key,
+  required final TabGroupSnapshot tabs,
+  required final List<Widget> chips,
+  required final ({int at, TabDragPayload payload})? hover,
+  required super.child,
+}) extends InheritedWidget {
   @override
-  bool updateShouldNotify(_PlatTabBarBinding old) =>
-      !identical(old.tabs, tabs) ||
-      !identical(old.chips, chips) ||
-      old.hover != hover;
+  bool updateShouldNotify(_PlatTabBarBinding old) {
+    return !identical(old.tabs, tabs) ||
+        !identical(old.chips, chips) ||
+        old.hover != hover;
+  }
 
   static _PlatTabBarBinding of(BuildContext context) {
     final binding = context

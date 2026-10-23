@@ -16,23 +16,18 @@ const _minRevealExtent = 24.0;
 const _maxRevealFraction = 0.5;
 
 @internal
-final class PlatLeafDragHandleHost extends StatefulWidget {
-  final LeafSnapshot leaf;
-  final PlatController controller;
-  final Widget child;
-
-  const new({
-    super.key,
-    required this.leaf,
-    required this.controller,
-    required this.child,
-  });
-
+final class const PlatLeafDragHandleHost({
+  super.key,
+  required final LeafSnapshot leaf,
+  required final PlatController controller,
+  required final Widget child,
+}) extends StatefulWidget {
   @override
   State<PlatLeafDragHandleHost> createState() => _PlatLeafDragHandleHostState();
 }
 
-final class _PlatLeafDragHandleHostState extends State<PlatLeafDragHandleHost> {
+final class _PlatLeafDragHandleHostState()
+    extends State<PlatLeafDragHandleHost> {
   var _visible = false;
   var _handleHovered = false;
 
@@ -138,11 +133,8 @@ final class _PlatLeafDragHandleHostState extends State<PlatLeafDragHandleHost> {
   }
 }
 
-final class _LeafDragHandleDotsPainter extends CustomPainter {
-  final Color color;
-
-  const new(this.color);
-
+final class const _LeafDragHandleDotsPainter(final Color color)
+    extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()

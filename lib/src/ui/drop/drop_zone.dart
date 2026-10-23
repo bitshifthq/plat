@@ -1,5 +1,5 @@
 /// Where a drop lands relative to a target node.
-enum DropZone {
+enum DropZone() {
   /// Center body area.
   center,
 

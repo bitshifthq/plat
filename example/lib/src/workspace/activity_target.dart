@@ -5,7 +5,12 @@ const List<ThemePanelTarget> leftPanelTargets = [.navigator, .assets];
 
 const List<ThemePanelTarget> rightPanelTargets = [.outline, .details];
 
-enum ThemePanelTarget {
+enum ThemePanelTarget({
+  required final String slotId,
+  required final String leafId,
+  required final String title,
+  required final IconData icon,
+}) {
   navigator(
     slotId: 'left-slot',
     leafId: 'nav',
@@ -30,18 +35,6 @@ enum ThemePanelTarget {
     title: 'Details',
     icon: Icons.tune,
   );
-
-  final String slotId;
-  final String leafId;
-  final String title;
-  final IconData icon;
-
-  new({
-    required this.slotId,
-    required this.leafId,
-    required this.title,
-    required this.icon,
-  });
 
   Plat get pane => .leaf(id: leafId, title: title, locked: true);
 }

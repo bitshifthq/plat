@@ -3,9 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'branding.dart';
 import 'workspace/workspace.dart';
 
-final class PlatExampleApp extends StatelessWidget {
-  const new({super.key});
-
+final class const PlatExampleApp({super.key}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

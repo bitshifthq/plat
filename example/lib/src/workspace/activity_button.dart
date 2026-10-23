@@ -2,22 +2,14 @@ import 'package:material_ui/material_ui.dart';
 
 import 'presets.dart';
 
-final class ThemeActivityButton extends StatelessWidget {
-  final ThemePreset preset;
-  final IconData icon;
-  final String tooltip;
-  final bool active;
-  final VoidCallback onPressed;
-
-  const new({
-    super.key,
-    required this.preset,
-    required this.icon,
-    required this.tooltip,
-    required this.active,
-    required this.onPressed,
-  });
-
+final class const ThemeActivityButton({
+  super.key,
+  required final ThemePreset preset,
+  required final IconData icon,
+  required final String tooltip,
+  required final bool active,
+  required final VoidCallback onPressed,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;

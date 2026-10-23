@@ -19,12 +19,11 @@ IconData _tabIcon(TabSnapshot tab) {
   };
 }
 
-final class ThemeTabChip extends StatelessWidget {
-  final ThemePreset preset;
-  final PlatTabDetails tab;
-
-  const new({super.key, required this.preset, required this.tab});
-
+final class const ThemeTabChip({
+  super.key,
+  required final ThemePreset preset,
+  required final PlatTabDetails tab,
+}) extends StatelessWidget {
   bool get _closeable => !tab.snapshot.locked && !tab.snapshot.pinned;
 
   bool get _showCloseButton => preset.chrome.tab.shouldShowCloseButton(
@@ -83,12 +82,10 @@ final class ThemeTabChip extends StatelessWidget {
   }
 }
 
-final class _TabCloseButton extends StatelessWidget {
-  final ThemePreset preset;
-  final bool visible;
-
-  const new({required this.preset, required this.visible});
-
+final class const _TabCloseButton({
+  required final ThemePreset preset,
+  required final bool visible,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -107,12 +104,10 @@ final class _TabCloseButton extends StatelessWidget {
   }
 }
 
-final class _TabLeadingIcon extends StatelessWidget {
-  final ThemePreset preset;
-  final IconData icon;
-
-  const new({required this.preset, required this.icon});
-
+final class const _TabLeadingIcon({
+  required final ThemePreset preset,
+  required final IconData icon,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = preset.chrome.tab;

@@ -51,7 +51,7 @@ part 'controller_impl.dart';
 ///   back: [focus], [setMaximized], and [setTabBarSide].
 /// - **Grouped** mutations bundle a sequence into a single undo entry
 ///   via [transaction].
-abstract base class PlatController extends ChangeNotifier {
+abstract base class PlatController._base() extends ChangeNotifier {
   /// Creates a controller seeded from [initialPlat] (or empty when omitted).
   ///
   /// [undoLimit] caps the depth of the undo and redo stacks (default `100`).
@@ -66,8 +66,6 @@ abstract base class PlatController extends ChangeNotifier {
     int recentLimit,
     IdConflict idConflict,
   }) = PlatControllerImpl;
-
-  new _base();
 
   /// True when [redo] would do something.
   bool get canRedo;

@@ -1,4 +1,3 @@
-// ignore_for_file: unsafe_variance
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart' show internal;
 
@@ -20,35 +19,30 @@ import 'package:meta/meta.dart' show internal;
 /// );
 /// ```
 @internal
-class SelectListenableBuilder<L extends Listenable, T> extends StatefulWidget {
+class const SelectListenableBuilder<L extends Listenable, T>({
+  super.key,
+
   /// Source the builder subscribes to.
-  final L listenable;
+  required final L listenable,
 
   /// Pulls the slice this builder cares about. Called once on mount and
   /// on every [listenable] notification.
-  final T Function(L listenable) selector;
+  required final T Function(L listenable) selector,
 
   /// Renders the slice. Re-invoked only when [buildWhen] approves.
-  final Widget Function(BuildContext context, T value) builder;
+  required final Widget Function(BuildContext context, T value) builder,
 
   /// Decides whether a notification should rebuild. Defaults to
   /// `next != previous`.
-  final bool Function(T previous, T next)? buildWhen;
-
-  const new({
-    super.key,
-    required this.listenable,
-    required this.selector,
-    required this.builder,
-    this.buildWhen,
-  });
-
+  final bool Function(T previous, T next)? buildWhen,
+}) extends StatefulWidget {
   @override
-  State<SelectListenableBuilder<L, T>> createState() =>
-      _SelectListenableBuilderState<L, T>();
+  State<SelectListenableBuilder<L, T>> createState() {
+    return _SelectListenableBuilderState<L, T>();
+  }
 }
 
-class _SelectListenableBuilderState<L extends Listenable, T>
+class _SelectListenableBuilderState<L extends Listenable, T>()
     extends State<SelectListenableBuilder<L, T>> {
   late T _value;
 

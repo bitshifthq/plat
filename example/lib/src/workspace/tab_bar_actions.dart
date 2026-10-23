@@ -3,12 +3,11 @@ import 'package:plat/plat.dart';
 
 import 'presets.dart';
 
-final class ThemeMinimizeButton extends StatelessWidget {
-  final ThemePreset preset;
-  final VoidCallback onPressed;
-
-  const new({super.key, required this.preset, required this.onPressed});
-
+final class const ThemeMinimizeButton({
+  super.key,
+  required final ThemePreset preset,
+  required final VoidCallback onPressed,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;

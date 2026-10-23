@@ -413,8 +413,9 @@ Future<void> _pumpTwoViews(
               child: PlatView(
                 key: const ValueKey('view:left'),
                 controller: source,
-                leafBuilder: (_, leaf) =>
-                    Center(child: Text('body:${leaf.id}')),
+                leafBuilder: (_, leaf) {
+                  return Center(child: Text('body:${leaf.id}'));
+                },
               ),
             ),
             Expanded(
@@ -422,8 +423,9 @@ Future<void> _pumpTwoViews(
                 key: const ValueKey('view:right'),
                 controller: destination,
                 dropPolicy: destinationPolicy,
-                leafBuilder: (_, leaf) =>
-                    Center(child: Text('body:${leaf.id}')),
+                leafBuilder: (_, leaf) {
+                  return Center(child: Text('body:${leaf.id}'));
+                },
               ),
             ),
           ],

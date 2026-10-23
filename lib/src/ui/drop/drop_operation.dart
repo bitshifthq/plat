@@ -97,13 +97,15 @@ DropOperation? _leafDrop(
   final destination = switch ((target, zone)) {
     (final TabGroupSnapshot t, .center) => (
       targetId: t.id,
-      insert: (LeafSnapshot leaf) =>
-          controller.insertTab(tabGroupId: t.id, tab: _tabFromLeaf(leaf)),
+      insert: (LeafSnapshot leaf) {
+        return controller.insertTab(tabGroupId: t.id, tab: _tabFromLeaf(leaf));
+      },
     ),
     (final SlotSnapshot t, .center) when t.child == null => (
       targetId: t.id,
-      insert: (LeafSnapshot leaf) =>
-          controller.setSlotChild(slotId: t.id, child: leaf.toPane()),
+      insert: (LeafSnapshot leaf) {
+        return controller.setSlotChild(slotId: t.id, child: leaf.toPane());
+      },
     ),
     (_, .center) => null,
     (_, final edge) => (
@@ -192,8 +194,12 @@ DropOperation? _tabDrop(
       local: () => t.id == payload.sourceTabGroupId
           ? controller.focus(payload.id)
           : controller.moveTab(tabId: payload.id, tabGroupId: t.id),
-      remote: () =>
-          controller.insertTab(tabGroupId: t.id, tab: payload.tab.toEntry()),
+      remote: () {
+        return controller.insertTab(
+          tabGroupId: t.id,
+          tab: payload.tab.toEntry(),
+        );
+      },
     ),
     (final SlotSnapshot t, .center) when t.child == null => (
       local: () => controller.moveTabIntoSlot(tabId: payload.id, slotId: t.id),
@@ -239,8 +245,9 @@ DropOperation? _tabDrop(
   );
 }
 
-PlatTab _tabFromLeaf(LeafSnapshot leaf) =>
-    PlatTab(child: leaf.toPane(), title: leaf.title, locked: leaf.locked);
+PlatTab _tabFromLeaf(LeafSnapshot leaf) {
+  return PlatTab(child: leaf.toPane(), title: leaf.title, locked: leaf.locked);
+}
 
 PlatSnapshot _tabOperationTarget(
   PlatController controller,

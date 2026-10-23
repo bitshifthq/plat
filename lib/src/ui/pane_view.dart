@@ -64,24 +64,15 @@ typedef SlotBuilder = Widget Function(
 /// The selector keeps the public snapshot value, while [buildWhen] narrows
 /// wrapper rebuilds to the fields each render layer actually consumes.
 @internal
-final class PlatPaneView extends StatelessWidget {
-  final String paneId;
-  final DropPolicy? dropPolicy;
-  final LeafBuilder leafBuilder;
-  final PlatController controller;
-  final PlatTabBarBuilder? tabBar;
-  final SlotBuilder? slotBuilder;
-
-  const new({
-    super.key,
-    required this.paneId,
-    required this.tabBar,
-    required this.controller,
-    required this.dropPolicy,
-    required this.leafBuilder,
-    required this.slotBuilder,
-  });
-
+final class const PlatPaneView({
+  super.key,
+  required final String paneId,
+  required final PlatTabBarBuilder? tabBar,
+  required final PlatController controller,
+  required final DropPolicy? dropPolicy,
+  required final LeafBuilder leafBuilder,
+  required final SlotBuilder? slotBuilder,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SelectListenableBuilder<PlatController, PlatSnapshot?>(

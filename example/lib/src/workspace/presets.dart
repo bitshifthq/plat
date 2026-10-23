@@ -27,21 +27,13 @@ final class PresetActionButton {
   });
 }
 
-final class PresetActivityButton {
-  final double size;
-  final double iconSize;
-  final BorderRadius radius;
-  final bool usesAccent;
-  final bool bordered;
-
-  const new({
-    this.size = 36,
-    this.iconSize = 18,
-    this.radius = const .all(Radius.circular(8)),
-    this.usesAccent = false,
-    this.bordered = true,
-  });
-
+final class const PresetActivityButton({
+  final double size = 36,
+  final double iconSize = 18,
+  final BorderRadius radius = const .all(Radius.circular(8)),
+  final bool usesAccent = false,
+  final bool bordered = true,
+}) {
   Color background(ColorScheme colors) => usesAccent
       ? colors.primary.withValues(alpha: 0.14)
       : colors.surfaceContainerHigh.withValues(alpha: 0.72);
@@ -51,7 +43,21 @@ final class PresetActivityButton {
       : .none;
 }
 
-final class PresetChrome {
+final class const PresetChrome({
+  final bool wrapsGroups = false,
+  final bool frameOnCanvas = false,
+  final bool activityBarOnCanvas = false,
+  final double activityBarWidth = 42,
+  final PresetActivityButton activityButton = const PresetActivityButton(),
+  final PresetActionButton editorAction = const PresetActionButton.editor(),
+  final PresetActionButton tabAction = const PresetActionButton.tab(),
+  final PresetTabChrome tab = const PresetTabChrome(),
+  final BorderRadius leafRadius = .zero,
+  final EdgeInsetsGeometry toolWindowPadding = const EdgeInsetsDirectional.only(
+    start: 10,
+    end: 5,
+  ),
+}) {
   static const material = PresetChrome(
     activityBarWidth: 44,
     tabAction: PresetActionButton.tab(size: 28),
@@ -128,38 +134,6 @@ final class PresetChrome {
       previewHeight: 12,
     ),
   );
-  final bool wrapsGroups;
-  final bool frameOnCanvas;
-  final bool activityBarOnCanvas;
-  final double activityBarWidth;
-  final PresetActivityButton activityButton;
-
-  final PresetActionButton editorAction;
-
-  final PresetActionButton tabAction;
-
-  final PresetTabChrome tab;
-
-  final BorderRadius leafRadius;
-
-  final EdgeInsetsGeometry toolWindowPadding;
-
-  const new({
-    this.wrapsGroups = false,
-    this.frameOnCanvas = false,
-    this.activityBarOnCanvas = false,
-    this.activityBarWidth = 42,
-    this.activityButton = const PresetActivityButton(),
-    this.editorAction = const PresetActionButton.editor(),
-    this.tabAction = const PresetActionButton.tab(),
-    this.tab = const PresetTabChrome(),
-    this.leafRadius = .zero,
-    this.toolWindowPadding = const EdgeInsetsDirectional.only(
-      start: 10,
-      end: 5,
-    ),
-  });
-
   bool get hasActivityBarBorder => !activityBarOnCanvas;
 
   bool get hasFrameBorder => !frameOnCanvas;
@@ -168,11 +142,12 @@ final class PresetChrome {
       ? colors.surfaceContainerLowest
       : colors.surfaceContainerLow;
 
-  Color frameColor(ColorScheme colors) =>
-      frameOnCanvas ? colors.surfaceContainerLowest : colors.surface;
+  Color frameColor(ColorScheme colors) {
+    return frameOnCanvas ? colors.surfaceContainerLowest : colors.surface;
+  }
 }
 
-enum PresetCloseVisibility {
+enum PresetCloseVisibility() {
   selected,
   selectedOrHovered,
   always;
@@ -186,7 +161,23 @@ enum PresetCloseVisibility {
   };
 }
 
-final class PresetPalette {
+final class const PresetPalette({
+  required final Color accent,
+  required final Color border,
+  required final Color canvas,
+  required final Color foreground,
+  required final Color lowSurface,
+  required final Color muted,
+  required final Color raised,
+  required final Color surface,
+  final Brightness brightness = .light,
+  final VisualDensity density = .standard,
+  final BorderRadius buttonRadius = const .all(Radius.circular(20)),
+  final BorderRadius cardRadius = const .all(Radius.circular(12)),
+  final BorderRadius chipRadius = const .all(Radius.circular(8)),
+  final BorderRadius frameRadius = const .all(Radius.circular(14)),
+  final BorderRadius groupRadius = .zero,
+}) {
   static const material = PresetPalette(
     accent: Color(0xFF6750A4),
     border: Color(0xFFE0D7E5),
@@ -258,45 +249,6 @@ final class PresetPalette {
     chipRadius: .zero,
     frameRadius: .zero,
   );
-
-  final Brightness brightness;
-  final VisualDensity density;
-  final Color accent;
-  final Color border;
-  final Color canvas;
-  final Color foreground;
-  final Color lowSurface;
-  final Color muted;
-  final Color raised;
-  final Color surface;
-
-  final BorderRadius buttonRadius;
-
-  final BorderRadius cardRadius;
-
-  final BorderRadius chipRadius;
-
-  final BorderRadius frameRadius;
-
-  final BorderRadius groupRadius;
-
-  const new({
-    required this.accent,
-    required this.border,
-    required this.canvas,
-    required this.foreground,
-    required this.lowSurface,
-    required this.muted,
-    required this.raised,
-    required this.surface,
-    this.brightness = .light,
-    this.density = .standard,
-    this.buttonRadius = const .all(Radius.circular(20)),
-    this.cardRadius = const .all(Radius.circular(12)),
-    this.chipRadius = const .all(Radius.circular(8)),
-    this.frameRadius = const .all(Radius.circular(14)),
-    this.groupRadius = .zero,
-  });
 
   ThemeData materialTheme(ThemeData base) {
     final scheme =
@@ -374,38 +326,25 @@ final class PresetPalette {
   }
 }
 
-final class PresetTabChrome {
-  final double closeButtonSize;
-  final double closeIconSize;
-  final Color? closeHoverFill;
-  final bool closeHoverUsesAccent;
-  final bool reserveCloseButtonSpace;
-  final double leadingMinWidth;
-  final double closeMinWidth;
-  final double gap;
-  final double leadingIconSize;
-  final double leadingGlyphSize;
-  final PresetCloseVisibility closeVisibility;
-  final double previewHeight;
-
-  const new({
-    this.closeButtonSize = 16,
-    this.closeIconSize = 11,
-    this.closeHoverFill,
-    this.closeHoverUsesAccent = false,
-    this.reserveCloseButtonSpace = false,
-    this.leadingMinWidth = 64,
-    this.closeMinWidth = 42,
-    this.gap = 6,
-    this.leadingIconSize = 16,
-    this.leadingGlyphSize = 14,
-    this.closeVisibility = PresetCloseVisibility.selectedOrHovered,
-    this.previewHeight = 14,
-  });
-
-  Color? closeHoverColor(ColorScheme colors) =>
-      closeHoverFill ??
-      (closeHoverUsesAccent ? colors.primary.withValues(alpha: 0.18) : null);
+final class const PresetTabChrome({
+  final double closeButtonSize = 16,
+  final double closeIconSize = 11,
+  final Color? closeHoverFill,
+  final bool closeHoverUsesAccent = false,
+  final bool reserveCloseButtonSpace = false,
+  final double leadingMinWidth = 64,
+  final double closeMinWidth = 42,
+  final double gap = 6,
+  final double leadingIconSize = 16,
+  final double leadingGlyphSize = 14,
+  final PresetCloseVisibility closeVisibility =
+      PresetCloseVisibility.selectedOrHovered,
+  final double previewHeight = 14,
+}) {
+  Color? closeHoverColor(ColorScheme colors) {
+    return closeHoverFill ??
+        (closeHoverUsesAccent ? colors.primary.withValues(alpha: 0.18) : null);
+  }
 
   bool shouldShowCloseButton({
     required Set<WidgetState> states,
@@ -417,7 +356,13 @@ final class PresetTabChrome {
   }
 }
 
-enum ThemePreset {
+enum ThemePreset(
+  final String label,
+  final String description,
+  final String shape, {
+  required final PresetPalette palette,
+  required final PresetChrome chrome,
+}) {
   material(
     'Material',
     'Clean Material workspace',
@@ -452,19 +397,5 @@ enum ThemePreset {
     'Sharp',
     palette: PresetPalette.oneDark,
     chrome: PresetChrome.oneDark,
-  );
-
-  final String label;
-  final String description;
-  final String shape;
-  final PresetPalette palette;
-  final PresetChrome chrome;
-
-  new(
-    this.label,
-    this.description,
-    this.shape, {
-    required this.palette,
-    required this.chrome,
-  });
+  ),
 }

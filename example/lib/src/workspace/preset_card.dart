@@ -2,13 +2,12 @@ import 'package:material_ui/material_ui.dart';
 
 import 'presets.dart';
 
-final class PresetCard extends StatelessWidget {
-  final ThemePreset value;
-  final ThemePreset selected;
-  final ValueChanged<ThemePreset> onSelected;
-
-  const new(this.value, this.selected, this.onSelected, {super.key});
-
+final class const PresetCard(
+  final ThemePreset value,
+  final ThemePreset selected,
+  final ValueChanged<ThemePreset> onSelected, {
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -49,12 +48,10 @@ final class PresetCard extends StatelessWidget {
   }
 }
 
-final class _CardHeader extends StatelessWidget {
-  final ThemePreset value;
-  final bool showShape;
-
-  const new({required this.value, this.showShape = false});
-
+final class const _CardHeader({
+  required final ThemePreset value,
+  final bool showShape = false,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = value.palette;
@@ -88,11 +85,8 @@ final class _CardHeader extends StatelessWidget {
   }
 }
 
-final class _CompactContent extends StatelessWidget {
-  final ThemePreset value;
-
-  const new(this.value);
-
+final class const _CompactContent(final ThemePreset value)
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -106,11 +100,8 @@ final class _CompactContent extends StatelessWidget {
   }
 }
 
-final class _FullContent extends StatelessWidget {
-  final ThemePreset value;
-
-  const new(this.value);
-
+final class const _FullContent(final ThemePreset value)
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -131,10 +122,8 @@ final class _FullContent extends StatelessWidget {
   }
 }
 
-final class _PreviewStrip extends StatelessWidget {
-  final ThemePreset preset;
-  const new({required this.preset});
-
+final class const _PreviewStrip({required final ThemePreset preset})
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = preset.palette;
@@ -160,12 +149,11 @@ final class _PreviewStrip extends StatelessWidget {
   }
 }
 
-final class _PreviewTab extends StatelessWidget {
-  final ThemePreset preset;
-  final int flex;
-  final bool selected;
-  const new(this.preset, this.flex, {this.selected = false});
-
+final class const _PreviewTab(
+  final ThemePreset preset,
+  final int flex, {
+  final bool selected = false,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = preset.palette;
@@ -182,10 +170,8 @@ final class _PreviewTab extends StatelessWidget {
   }
 }
 
-final class _Swatch extends StatelessWidget {
-  final Color color;
-  const new({required this.color});
-
+final class const _Swatch({required final Color color})
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(

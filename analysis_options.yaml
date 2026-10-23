@@ -83,3 +83,4 @@ linter:
     public_member_api_docs: false
     sort_constructors_first: false
     specify_nonobvious_property_types: false
+    use_primary_constructors: true

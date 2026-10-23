@@ -100,4 +100,7 @@ final class ThemeActivityBar extends StatelessWidget {
   bool _visible(String id) => controller.snapshot(id)?.hidden == false;
 }
 
-enum _ActivitySide { left, right }
+enum _ActivitySide() {
+  left,
+  right,
+}

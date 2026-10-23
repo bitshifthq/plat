@@ -1,7 +1,7 @@
 part of 'foundation.dart';
 
 /// Orientation of a split.
-enum SplitAxis {
+enum SplitAxis() {
   /// Arranges children left-to-right.
   horizontal,
 

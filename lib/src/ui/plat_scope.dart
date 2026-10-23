@@ -2,8 +2,11 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart' show internal;
 
 @internal
-PlatLeafKeyRegistry? maybePlatLeafKeyRegistryOf(BuildContext context) =>
-    context.dependOnInheritedWidgetOfExactType<_InheritedPlatScope>()?.registry;
+PlatLeafKeyRegistry? maybePlatLeafKeyRegistryOf(BuildContext context) {
+  return context
+      .dependOnInheritedWidgetOfExactType<_InheritedPlatScope>()
+      ?.registry;
+}
 
 @internal
 PlatLeafKeyRegistry platLeafKeyRegistryOf(BuildContext context) {
@@ -13,7 +16,7 @@ PlatLeafKeyRegistry platLeafKeyRegistryOf(BuildContext context) {
 }
 
 @internal
-final class PlatLeafKeyRegistry {
+final class PlatLeafKeyRegistry() {
   final _leafKeys = <String, GlobalKey>{};
 
   GlobalKey leafKeyFor(String id) {
@@ -31,16 +34,13 @@ final class PlatLeafKeyRegistry {
 /// leaf widget state across structural moves and cross-view handoff. The scope
 /// also ensures an [Overlay] exists for drag/drop when the ambient tree does
 /// not already provide one.
-class PlatScope extends StatefulWidget {
-  final Widget child;
-
-  const new({super.key, required this.child});
-
+class const PlatScope({super.key, required final Widget child})
+    extends StatefulWidget {
   @override
   State<PlatScope> createState() => _PlatScopeState();
 }
 
-class _PlatScopeState extends State<PlatScope> {
+class _PlatScopeState() extends State<PlatScope> {
   final _registry = PlatLeafKeyRegistry();
 
   @override
@@ -56,11 +56,10 @@ class _PlatScopeState extends State<PlatScope> {
   }
 }
 
-class _InheritedPlatScope extends InheritedWidget {
-  final PlatLeafKeyRegistry registry;
-
-  const new({required this.registry, required super.child});
-
+class const _InheritedPlatScope({
+  required final PlatLeafKeyRegistry registry,
+  required super.child,
+}) extends InheritedWidget {
   @override
   bool updateShouldNotify(_InheritedPlatScope oldWidget) {
     return !identical(oldWidget.registry, registry);
