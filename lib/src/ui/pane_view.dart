@@ -53,32 +53,26 @@ typedef LeafBuilder = Widget Function(BuildContext context, LeafSnapshot leaf);
 
 /// Renders a [PlatSlot] wrapper. [child] is the already-built widget for
 /// the slot's child node, or `null` when the slot is empty.
-typedef SlotBuilder =
-    Widget Function(BuildContext context, SlotSnapshot slot, Widget? child);
+typedef SlotBuilder = Widget Function(
+  BuildContext context,
+  SlotSnapshot slot,
+  Widget? child,
+);
 
 /// Renders one pane and subscribes only to that pane's snapshot.
 ///
 /// The selector keeps the public snapshot value, while [buildWhen] narrows
 /// wrapper rebuilds to the fields each render layer actually consumes.
 @internal
-final class PlatPaneView extends StatelessWidget {
-  final String paneId;
-  final DropPolicy? dropPolicy;
-  final LeafBuilder leafBuilder;
-  final PlatController controller;
-  final PlatTabBarBuilder? tabBar;
-  final SlotBuilder? slotBuilder;
-
-  const PlatPaneView({
-    super.key,
-    required this.paneId,
-    required this.tabBar,
-    required this.controller,
-    required this.dropPolicy,
-    required this.leafBuilder,
-    required this.slotBuilder,
-  });
-
+final class const PlatPaneView({
+  super.key,
+  required final String paneId,
+  required final PlatTabBarBuilder? tabBar,
+  required final PlatController controller,
+  required final DropPolicy? dropPolicy,
+  required final LeafBuilder leafBuilder,
+  required final SlotBuilder? slotBuilder,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SelectListenableBuilder<PlatController, PlatSnapshot?>(

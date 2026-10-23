@@ -10,20 +10,13 @@ import 'slot_shell.dart';
 import 'tab_bar_actions.dart';
 import 'tabs.dart';
 
-final class ThemeWorkspaceView extends StatelessWidget {
-  final PlatController controller;
-  final ThemePreset preset;
-  final bool showTabBarActions;
-  final ValueChanged<ThemeEditorTabKind> onOpenEditorTab;
-
-  const ThemeWorkspaceView({
-    super.key,
-    required this.controller,
-    required this.preset,
-    required this.showTabBarActions,
-    required this.onOpenEditorTab,
-  });
-
+final class const ThemeWorkspaceView({
+  super.key,
+  required final PlatController controller,
+  required final ThemePreset preset,
+  required final bool showTabBarActions,
+  required final ValueChanged<ThemeEditorTabKind> onOpenEditorTab,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -40,8 +33,9 @@ final class ThemeWorkspaceView extends StatelessWidget {
                       onPressed: (id) => controller.setHidden(id, hidden: true),
                     )
                   : null,
-              tabBuilder: (context, tab) =>
-                  ThemeTabChip(preset: preset, tab: tab),
+              tabBuilder: (context, tab) {
+                return ThemeTabChip(preset: preset, tab: tab);
+              },
             ),
             leafBuilder: (context, leaf) => ThemeEmptyPane(
               preset: preset,
@@ -70,6 +64,7 @@ final class ThemeWorkspaceView extends StatelessWidget {
     return _isEditorArea(attempt.target.id);
   }
 
-  bool _isEditorArea(String id) =>
-      controller.pathTo(id).contains(themeMainSlotId);
+  bool _isEditorArea(String id) {
+    return controller.pathTo(id).contains(themeMainSlotId);
+  }
 }

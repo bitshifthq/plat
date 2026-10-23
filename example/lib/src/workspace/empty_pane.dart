@@ -4,18 +4,12 @@ import 'package:plat/plat.dart';
 import 'editor_actions.dart';
 import 'presets.dart';
 
-final class ThemeEmptyPane extends StatelessWidget {
-  final ThemePreset preset;
-  final LeafSnapshot leaf;
-  final ValueChanged<ThemeEditorTabKind> onOpenEditorTab;
-
-  const ThemeEmptyPane({
-    super.key,
-    required this.preset,
-    required this.leaf,
-    required this.onOpenEditorTab,
-  });
-
+final class const ThemeEmptyPane({
+  super.key,
+  required final ThemePreset preset,
+  required final LeafSnapshot leaf,
+  required final ValueChanged<ThemeEditorTabKind> onOpenEditorTab,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
@@ -66,12 +60,10 @@ final class ThemeEmptyPane extends StatelessWidget {
   }
 }
 
-final class _NavigatorPane extends StatelessWidget {
-  final ThemePreset preset;
-  final ValueChanged<ThemeEditorTabKind> onOpenEditorTab;
-
-  const _NavigatorPane({required this.preset, required this.onOpenEditorTab});
-
+final class const _NavigatorPane({
+  required final ThemePreset preset,
+  required final ValueChanged<ThemeEditorTabKind> onOpenEditorTab,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;

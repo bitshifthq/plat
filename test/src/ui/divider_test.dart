@@ -114,5 +114,10 @@ void main() {
   });
 }
 
-Widget _dividerHost(ColorScheme colorScheme, Widget child) =>
-    testHost(child, theme: ThemeData(colorScheme: colorScheme), overlay: false);
+Widget _dividerHost(ColorScheme colorScheme, Widget child) {
+  return testHost(
+    child,
+    theme: ThemeData(colorScheme: colorScheme),
+    overlay: false,
+  );
+}

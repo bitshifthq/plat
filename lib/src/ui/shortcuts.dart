@@ -10,72 +10,50 @@ import '../model/plat_snapshot.dart';
 /// Split the focused leaf along [axis], moving the active tab into a
 /// new sibling group on [side].
 @internal
-final class SplitIntent extends Intent {
-  final Axis axis;
-  final PlatSide side;
-
-  const SplitIntent({required this.axis, this.side = .right});
-}
+final class const SplitIntent({
+  required final Axis axis,
+  final PlatSide side = .right,
+}) extends Intent;
 
 /// Close the focused tab.
 @internal
-final class CloseTabIntent extends Intent {
-  const CloseTabIntent();
-}
+final class const CloseTabIntent() extends Intent;
 
 /// Close every tab in the focused tab group node.
 @internal
-final class CloseGroupIntent extends Intent {
-  const CloseGroupIntent();
-}
+final class const CloseGroupIntent() extends Intent;
 
 /// Move active tab in the focused tab group node by [delta] (signed).
 @internal
-final class CycleTabIntent extends Intent {
-  final int delta;
-
-  const CycleTabIntent(this.delta);
-}
+final class const CycleTabIntent(final int delta) extends Intent;
 
 /// Activate the n-th tab (1-indexed) in the focused tab group node.
 @internal
-final class JumpTabIntent extends Intent {
-  final int oneIndex;
-
-  const JumpTabIntent(this.oneIndex);
-}
+final class const JumpTabIntent(final int oneIndex) extends Intent;
 
 /// Move focus to the previous / next tab group node in tree order.
 @internal
-final class FocusDirectionIntent extends Intent {
-  final PlatSide direction;
-
-  const FocusDirectionIntent(this.direction);
-}
+final class const FocusDirectionIntent(final PlatSide direction) extends Intent;
 
 /// Toggle maximize on the focused tab group node.
 @internal
-final class MaximizeIntent extends Intent {
-  const MaximizeIntent();
-}
+final class const MaximizeIntent() extends Intent;
 
 /// Undo a layout change.
 @internal
-final class PlatUndoIntent extends Intent {
-  const PlatUndoIntent();
-}
+final class const PlatUndoIntent() extends Intent;
 
 /// Redo a layout change.
 @internal
-final class PlatRedoIntent extends Intent {
-  const PlatRedoIntent();
-}
+final class const PlatRedoIntent() extends Intent;
 
 /// A bundle of keyboard activators mapped to plat intents. The view
 /// installs platform-default bindings unconditionally.
 @internal
 @immutable
-final class PlatKeyBindings {
+final class const PlatKeyBindings(
+  final Map<ShortcutActivator, Intent> activators,
+) {
   /// Empty bindings. Useful for hosts wiring their own [Shortcuts].
   static const none = PlatKeyBindings(<ShortcutActivator, Intent>{});
 
@@ -89,12 +67,8 @@ final class PlatKeyBindings {
   /// Windows / Linux defaults: Ctrl-modified.
   static final desktop = PlatKeyBindings(_coreBindings(control: true));
 
-  final Map<ShortcutActivator, Intent> activators;
-
-  const PlatKeyBindings(this.activators);
-
   /// `mac` on Apple platforms, `desktop` elsewhere.
-  factory PlatKeyBindings.platformDefault() {
+  factory platformDefault() {
     final isApple =
         defaultTargetPlatform == .macOS || defaultTargetPlatform == .iOS;
     return isApple ? mac : desktop;
@@ -199,6 +173,6 @@ Map<Type, Action<Intent>> actionsFor(PlatController c) => {
   PlatRedoIntent: _Fn<PlatRedoIntent>((_) => c.redo()),
 };
 
-class _Fn<T extends Intent> extends CallbackAction<T> {
-  _Fn(void Function(T) run) : super(onInvoke: (i) => run(i));
+class _Fn<T extends Intent>(void Function(T) run) extends CallbackAction<T> {
+  this : super(onInvoke: (i) => run(i));
 }

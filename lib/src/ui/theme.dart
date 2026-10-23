@@ -51,50 +51,44 @@ WidgetStateProperty<Decoration?>? _lerpDecorationStateProperty(
 
 /// Split divider visuals and hit area.
 @immutable
-final class PlatDividerTheme {
+final class const PlatDividerTheme({
   /// Logical pixel thickness of the drawable divider line.
-  final double thickness;
+  final double thickness = 1,
 
   /// Hit-test slop around the divider line (extends each side).
-  final double hitSlop;
+  final double hitSlop = 4,
 
   /// State-driven decoration, resolved per [WidgetState] set. Takes
   /// precedence over [color]. `null` (or a resolver returning `null`)
   /// falls through to [color].
-  final WidgetStateProperty<Decoration?>? decoration;
+  final WidgetStateProperty<Decoration?>? decoration,
 
   /// State-driven color, resolved per [WidgetState] set. `null` (or a
   /// resolver returning `null`) falls back to `colorScheme.primary`
   /// when hovered or dragged, and `colorScheme.outlineVariant`
   /// otherwise, at render time.
-  final WidgetStateProperty<Color?>? color;
+  final WidgetStateProperty<Color?>? color,
 
   /// Mouse cursor over the divider's hit area. `null` falls back to
   /// `SystemMouseCursors.resizeColumn` for horizontal splits and
   /// `SystemMouseCursors.resizeRow` for vertical splits at render time.
-  final MouseCursor? cursor;
-
-  const PlatDividerTheme({
-    this.thickness = 1,
-    this.hitSlop = 4,
-    this.decoration,
-    this.color,
-    this.cursor,
-  });
+  final MouseCursor? cursor,
+}) {
+  @override
+  int get hashCode {
+    return Object.hash(thickness, hitSlop, decoration, color, cursor);
+  }
 
   @override
-  int get hashCode =>
-      Object.hash(thickness, hitSlop, decoration, color, cursor);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PlatDividerTheme &&
-          other.thickness == thickness &&
-          other.hitSlop == hitSlop &&
-          other.decoration == decoration &&
-          other.color == color &&
-          other.cursor == cursor;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is PlatDividerTheme &&
+            other.thickness == thickness &&
+            other.hitSlop == hitSlop &&
+            other.decoration == decoration &&
+            other.color == color &&
+            other.cursor == cursor;
+  }
 
   PlatDividerTheme copyWith({
     double? thickness,
@@ -133,48 +127,43 @@ final class PlatDividerTheme {
 /// derived from the destination's enclosing `ClipRRect`, so rounded edges stay
 /// aligned without another public styling field.
 @immutable
-final class PlatDropHintTheme {
+final class const PlatDropHintTheme({
   /// Fill color for the drop hint overlay. `null` resolves to
   /// `colorScheme.primary` at 18 % opacity at render time.
-  final Color? fill;
+  final Color? fill,
 
   /// Border for the drop hint overlay. `null` resolves to a 2 px stroke
   /// of `colorScheme.primary` at render time.
-  final BorderSide? border;
+  final BorderSide? border,
 
   /// Duration of the hint appear/disappear transition.
-  final Duration duration;
+  final Duration duration = const Duration(milliseconds: 120),
 
   /// How the hint enters and exits. Defaults to
   /// `AnimatedSwitcher.defaultTransitionBuilder`.
-  final AnimatedSwitcherTransitionBuilder transitionBuilder;
+  final AnimatedSwitcherTransitionBuilder transitionBuilder =
+      AnimatedSwitcher.defaultTransitionBuilder,
 
   /// Fraction of each edge that counts as an edge drop zone.
   /// `0.25` means the outer 25% on each side splits, while the center accepts
   /// a tab-group drop.
-  final double edgeFraction;
-
-  const PlatDropHintTheme({
-    this.fill,
-    this.border,
-    this.duration = const Duration(milliseconds: 120),
-    this.transitionBuilder = AnimatedSwitcher.defaultTransitionBuilder,
-    this.edgeFraction = 0.25,
-  });
+  final double edgeFraction = 0.25,
+}) {
+  @override
+  int get hashCode {
+    return Object.hash(fill, border, duration, transitionBuilder, edgeFraction);
+  }
 
   @override
-  int get hashCode =>
-      Object.hash(fill, border, duration, transitionBuilder, edgeFraction);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PlatDropHintTheme &&
-          other.fill == fill &&
-          other.border == border &&
-          other.duration == duration &&
-          other.transitionBuilder == transitionBuilder &&
-          other.edgeFraction == edgeFraction;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is PlatDropHintTheme &&
+            other.fill == fill &&
+            other.border == border &&
+            other.duration == duration &&
+            other.transitionBuilder == transitionBuilder &&
+            other.edgeFraction == edgeFraction;
+  }
 
   PlatDropHintTheme copyWith({
     Color? fill,
@@ -211,144 +200,118 @@ final class PlatDropHintTheme {
 
 /// Tab bar layout, decoration, and tab-flow knobs.
 @immutable
-final class PlatTabBarTheme {
+final class const PlatTabBarTheme({
   /// Thickness of the tab bar — perpendicular to chip flow. For top /
   /// bottom bars this is height; for left / right bars this is width.
-  final double size;
+  final double size = 32,
 
   /// Padding inside the tab bar around its content.
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 4),
 
   /// Decoration (background color, border, shadow). Applied behind the
   /// padded content so it covers the bar edge to edge. Takes precedence
   /// over [backgroundColor].
-  final Decoration? decoration;
+  final Decoration? decoration,
 
   /// Solid background fill for the bar. Used only when [decoration] is
   /// `null`. `null` resolves to `colorScheme.surface` at render time.
-  final Color? backgroundColor;
+  final Color? backgroundColor,
 
   /// How tabs are laid out along the bar.
-  final TabStripFit fit;
+  final TabStripFit fit = .scrollable,
 
   /// Maximum tab width when [fit] is [TabStripFit.expand].
-  final double? chipMaxWidth;
+  final double? chipMaxWidth,
 
   /// Minimum tab width when [fit] is [TabStripFit.expand].
-  final double? chipMinWidth;
+  final double? chipMinWidth,
 
   /// Width assigned to pinned tabs when [fit] is [TabStripFit.expand]. `null`
   /// means pinned tabs share the available width like every other tab.
-  final double? pinnedChipWidth;
+  final double? pinnedChipWidth,
 
   /// Gap between adjacent tabs.
-  final double spacing;
+  final double spacing = 0,
 
   /// Scroll physics for the tab strip. `null` defers to the platform
   /// default (bouncy on iOS / macOS, clamping elsewhere).
-  final ScrollPhysics? physics;
+  final ScrollPhysics? physics,
 
   /// Where tabs anchor inside the strip when their total extent is smaller
   /// than the bar. Only meaningful under [TabStripFit.scrollable].
-  final TabStripAlignment alignment;
+  final TabStripAlignment alignment = .start,
 
   /// Continuous baseline on the body-facing edge of the bar. When null,
   /// [PlatTabBar] uses an explicitly configured Material tab divider if
   /// present.
-  final BorderSide? divider;
+  final BorderSide? divider,
 
   /// Mouse cursor over tabs. `null` resolves to [defaultPlatTabCursor].
-  final WidgetStateProperty<MouseCursor?>? mouseCursor;
+  final WidgetStateProperty<MouseCursor?>? mouseCursor,
 
   /// Corner shape of each default chip.
-  final BorderRadiusGeometry? chipBorderRadius;
+  final BorderRadiusGeometry? chipBorderRadius,
 
   /// Padding inside each default tab chip around its content. Mirrors
   /// Material `TabBar.labelPadding`.
-  final EdgeInsetsGeometry labelPadding;
+  final EdgeInsetsGeometry labelPadding = const .symmetric(
+    horizontal: 12,
+    vertical: 8,
+  ),
 
   /// Text color for selected tabs. May be a [WidgetStateColor]. When null,
   /// falls back to [TabBarThemeData.labelColor], then `colorScheme.onSurface`.
-  final Color? labelColor;
+  final Color? labelColor,
 
   /// Text style for selected tabs. Merged on top of
   /// [TabBarThemeData.labelStyle] when present, otherwise
   /// `textTheme.labelMedium`.
-  final TextStyle? labelStyle;
+  final TextStyle? labelStyle,
 
   /// Text color for unselected tabs. May be a [WidgetStateColor]. When null,
   /// falls back to [TabBarThemeData.unselectedLabelColor], then
   /// `colorScheme.onSurfaceVariant`.
-  final Color? unselectedLabelColor;
+  final Color? unselectedLabelColor,
 
   /// Text style for unselected tabs. Merged on top of
   /// [TabBarThemeData.unselectedLabelStyle] when present, otherwise
   /// [TabBarThemeData.labelStyle] or `textTheme.labelMedium`.
-  final TextStyle? unselectedLabelStyle;
+  final TextStyle? unselectedLabelStyle,
 
   /// Overlay painted by the default tab chip for hovered / focused / pressed
   /// states. This is a non-Material overlay because plat's tab strip does not
   /// require a [Material] ancestor. When null, falls back to
   /// [TabBarThemeData.overlayColor], then a compact Material-like hover /
   /// press overlay.
-  final WidgetStateProperty<Color?>? overlayColor;
+  final WidgetStateProperty<Color?>? overlayColor,
 
   /// Decoration drawn as the selected-tab indicator strip on the body-facing
   /// edge of the selected chip. When non-null, [indicatorColor] is ignored.
-  final Decoration? indicator;
+  final Decoration? indicator,
 
   /// Color of the selected-tab indicator. When null, falls back to
   /// [TabBarThemeData.indicatorColor], then `colorScheme.primary`.
-  final Color? indicatorColor;
+  final Color? indicatorColor,
 
   /// Thickness of the selected-tab indicator.
-  final double indicatorWeight;
+  final double indicatorWeight = 2,
 
   /// Insets applied to the selected-tab indicator.
-  final EdgeInsetsGeometry indicatorPadding;
+  final EdgeInsetsGeometry indicatorPadding = EdgeInsets.zero,
 
   /// State-driven background color of each default chip. `null` (or a
   /// resolver returning `null`) falls back to an opaque accent-tinted
   /// surface while dragged, `colorScheme.surfaceContainerHigh` while selected,
   /// and `colorScheme.surface` otherwise.
-  final WidgetStateProperty<Color?>? chipBackgroundColor;
+  final WidgetStateProperty<Color?>? chipBackgroundColor,
 
   /// State-driven foreground color of each default chip's content, including
   /// text and icons. `null` (or a resolver returning `null`) falls back to
   /// [labelColor] / [unselectedLabelColor], matching
   /// [TabBarThemeData] label colors, then `colorScheme.onSurface` /
   /// `onSurfaceVariant` at render time.
-  final WidgetStateProperty<Color?>? chipForegroundColor;
-
-  const PlatTabBarTheme({
-    this.size = 32,
-    this.padding = const EdgeInsets.symmetric(horizontal: 4),
-    this.decoration,
-    this.backgroundColor,
-    this.fit = .scrollable,
-    this.chipMaxWidth,
-    this.chipMinWidth,
-    this.pinnedChipWidth,
-    this.spacing = 0,
-    this.physics,
-    this.alignment = .start,
-    this.divider,
-    this.mouseCursor,
-    this.chipBorderRadius,
-    this.labelPadding = const .symmetric(horizontal: 12, vertical: 8),
-    this.labelColor,
-    this.labelStyle,
-    this.unselectedLabelColor,
-    this.unselectedLabelStyle,
-    this.overlayColor,
-    this.indicator,
-    this.indicatorColor,
-    this.indicatorWeight = 2,
-    this.indicatorPadding = EdgeInsets.zero,
-    this.chipBackgroundColor,
-    this.chipForegroundColor,
-  });
-
+  final WidgetStateProperty<Color?>? chipForegroundColor,
+}) {
   @override
   int get hashCode => Object.hashAll([
     size,
@@ -380,35 +343,36 @@ final class PlatTabBarTheme {
   ]);
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PlatTabBarTheme &&
-          other.size == size &&
-          other.padding == padding &&
-          other.decoration == decoration &&
-          other.backgroundColor == backgroundColor &&
-          other.fit == fit &&
-          other.chipMaxWidth == chipMaxWidth &&
-          other.chipMinWidth == chipMinWidth &&
-          other.pinnedChipWidth == pinnedChipWidth &&
-          other.spacing == spacing &&
-          other.physics == physics &&
-          other.alignment == alignment &&
-          other.divider == divider &&
-          other.mouseCursor == mouseCursor &&
-          other.chipBorderRadius == chipBorderRadius &&
-          other.labelPadding == labelPadding &&
-          other.labelColor == labelColor &&
-          other.labelStyle == labelStyle &&
-          other.unselectedLabelColor == unselectedLabelColor &&
-          other.unselectedLabelStyle == unselectedLabelStyle &&
-          other.overlayColor == overlayColor &&
-          other.indicator == indicator &&
-          other.indicatorColor == indicatorColor &&
-          other.indicatorWeight == indicatorWeight &&
-          other.indicatorPadding == indicatorPadding &&
-          other.chipBackgroundColor == chipBackgroundColor &&
-          other.chipForegroundColor == chipForegroundColor;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is PlatTabBarTheme &&
+            other.size == size &&
+            other.padding == padding &&
+            other.decoration == decoration &&
+            other.backgroundColor == backgroundColor &&
+            other.fit == fit &&
+            other.chipMaxWidth == chipMaxWidth &&
+            other.chipMinWidth == chipMinWidth &&
+            other.pinnedChipWidth == pinnedChipWidth &&
+            other.spacing == spacing &&
+            other.physics == physics &&
+            other.alignment == alignment &&
+            other.divider == divider &&
+            other.mouseCursor == mouseCursor &&
+            other.chipBorderRadius == chipBorderRadius &&
+            other.labelPadding == labelPadding &&
+            other.labelColor == labelColor &&
+            other.labelStyle == labelStyle &&
+            other.unselectedLabelColor == unselectedLabelColor &&
+            other.unselectedLabelStyle == unselectedLabelStyle &&
+            other.overlayColor == overlayColor &&
+            other.indicator == indicator &&
+            other.indicatorColor == indicatorColor &&
+            other.indicatorWeight == indicatorWeight &&
+            other.indicatorPadding == indicatorPadding &&
+            other.chipBackgroundColor == chipBackgroundColor &&
+            other.chipForegroundColor == chipForegroundColor;
+  }
 
   PlatTabBarTheme copyWith({
     double? size,
@@ -526,11 +490,11 @@ final class PlatTabBarTheme {
 ///
 /// Use [PlatTheme.of] inside a builder to resolve the active values.
 /// Falls back to a default [PlatThemeData] when no ancestor is found.
-final class PlatTheme extends InheritedTheme {
-  final PlatThemeData data;
-
-  const PlatTheme({super.key, required this.data, required super.child});
-
+final class const PlatTheme({
+  super.key,
+  required final PlatThemeData data,
+  required super.child,
+}) extends InheritedTheme {
   @override
   bool updateShouldNotify(PlatTheme old) => old.data != data;
 
@@ -565,41 +529,42 @@ final class PlatTheme extends InheritedTheme {
 /// - `WidgetState.dragged`  — tab or divider is being dragged
 /// - `WidgetState.disabled` — reserved for custom disabled tab chrome
 @immutable
-final class PlatThemeData extends ThemeExtension<PlatThemeData> {
+final class const PlatThemeData({
   /// Tab bar layout, decoration, and tab-flow knobs.
-  final PlatTabBarTheme tabBar;
+  final PlatTabBarTheme tabBar = const PlatTabBarTheme(),
 
   /// Split divider visuals and hit area.
-  final PlatDividerTheme divider;
+  final PlatDividerTheme divider = const PlatDividerTheme(),
 
   /// Drop hint overlay visuals and timing.
-  final PlatDropHintTheme dropHint;
+  final PlatDropHintTheme dropHint = const PlatDropHintTheme(),
 
   /// Background color for the reserved leaf drag-handle strip.
   ///
   /// Defaults to transparent so leaf content controls its own surface. Set this
   /// when an app wants the strip to match a known pane background.
-  final Color? leafDragHandleBackgroundColor;
-
-  const PlatThemeData({
-    this.tabBar = const PlatTabBarTheme(),
-    this.divider = const PlatDividerTheme(),
-    this.dropHint = const PlatDropHintTheme(),
-    this.leafDragHandleBackgroundColor,
-  });
+  final Color? leafDragHandleBackgroundColor,
+}) extends ThemeExtension<PlatThemeData> {
+  @override
+  int get hashCode {
+    return Object.hash(
+      tabBar,
+      divider,
+      dropHint,
+      leafDragHandleBackgroundColor,
+    );
+  }
 
   @override
-  int get hashCode =>
-      Object.hash(tabBar, divider, dropHint, leafDragHandleBackgroundColor);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PlatThemeData &&
-          other.tabBar == tabBar &&
-          other.divider == divider &&
-          other.dropHint == dropHint &&
-          other.leafDragHandleBackgroundColor == leafDragHandleBackgroundColor;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is PlatThemeData &&
+            other.tabBar == tabBar &&
+            other.divider == divider &&
+            other.dropHint == dropHint &&
+            other.leafDragHandleBackgroundColor ==
+                leafDragHandleBackgroundColor;
+  }
 
   @override
   PlatThemeData copyWith({
@@ -635,7 +600,7 @@ final class PlatThemeData extends ThemeExtension<PlatThemeData> {
 /// Where chips anchor inside a [TabStripFit.scrollable] strip.
 ///
 /// Has no effect under [TabStripFit.expand] or when the tabs overflow.
-enum TabStripAlignment {
+enum TabStripAlignment() {
   /// Leading edge.
   start,
 
@@ -647,7 +612,7 @@ enum TabStripAlignment {
 }
 
 /// How a tab group lays its chips inside the available bar extent.
-enum TabStripFit {
+enum TabStripFit() {
   /// Chips keep their intrinsic width, and the bar scrolls when they overflow.
   scrollable,
 

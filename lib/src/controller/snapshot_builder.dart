@@ -112,13 +112,14 @@ LeafSnapshot _leafSnapshotOf(LeafNode l) => LeafSnapshot(
   focused: l.focused,
 );
 
-TabSnapshot _tabSnapshotOf(TabNode tab, {required bool selected}) =>
-    TabSnapshot(
-      id: tab.id,
-      title: tab.title,
-      pinned: tab.pinned,
-      locked: tab.locked,
-      preview: tab.preview,
-      selected: selected,
-      child: snapshotOf(tab.child),
-    );
+TabSnapshot _tabSnapshotOf(TabNode tab, {required bool selected}) {
+  return TabSnapshot(
+    id: tab.id,
+    title: tab.title,
+    pinned: tab.pinned,
+    locked: tab.locked,
+    preview: tab.preview,
+    selected: selected,
+    child: snapshotOf(tab.child),
+  );
+}

@@ -50,40 +50,32 @@ import 'tabs/bar.dart';
 /// installed automatically using platform-default bindings. Pass
 /// [autofocus] = `false` to skip the initial focus request — required
 /// when more than one [PlatView] sits in the same tree.
-class PlatView extends StatelessWidget {
+class const PlatView({
+  super.key,
+
   /// Controller driving the layout tree.
-  final PlatController controller;
+  required final PlatController controller,
 
   /// Renders a [LeafSnapshot]'s content.
-  final LeafBuilder leafBuilder;
+  required final LeafBuilder leafBuilder,
 
   /// Builds the widget mounted inside every tab group's bar slot.
   /// Defaults to `const PlatTabBar()` when null.
-  final PlatTabBarBuilder? tabBar;
+  final PlatTabBarBuilder? tabBar,
 
   /// Renders a [PlatSlot] wrapper. Default: passes the child through
   /// unchanged (or a neutral placeholder when the slot is empty).
-  final SlotBuilder? slotBuilder;
+  final SlotBuilder? slotBuilder,
 
   /// Decides whether a pending drop is allowed.
-  final DropPolicy? dropPolicy;
+  final DropPolicy? dropPolicy,
 
   /// Whether the view should claim keyboard focus when first mounted.
   /// Pass `false` when more than one [PlatView] sits in the same tree
   /// to avoid focus-fighting; the user clicks into the view to activate
   /// shortcuts.
-  final bool autofocus;
-
-  const PlatView({
-    super.key,
-    required this.controller,
-    required this.leafBuilder,
-    this.tabBar,
-    this.slotBuilder,
-    this.dropPolicy,
-    this.autofocus = true,
-  });
-
+  final bool autofocus = true,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (maybePlatLeafKeyRegistryOf(context) == null) {

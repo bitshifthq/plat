@@ -9,27 +9,24 @@ part of 'tree.dart';
 /// drop it below that, the surviving child takes the split's place
 /// and inherits its [size]. See [cleanTree] and [_rewrite].
 @internal
-final class SplitNode extends PlatNode {
+final class SplitNode({
+  required super.id,
+
   /// Axis children are laid out along.
-  final SplitAxis axis;
+  required final SplitAxis axis,
+
+  /// The split's children, in order along [axis]. Always two or more.
+  required final List<PlatNode> children,
 
   /// When true, dividers in this split accept drag input and rewrite
   /// the resizable children's `initial` extent. When false, children
   /// keep their declared sizes verbatim.
-  final bool resizable;
-
-  /// The split's children, in order along [axis]. Always two or more.
-  final List<PlatNode> children;
-
-  SplitNode({
-    required super.id,
-    required this.axis,
-    required this.children,
-    this.resizable = true,
-    super.size,
-    super.hidden,
-    super.maximized,
-  }) : assert(children.length >= 2, 'splits need at least two children');
+  final bool resizable = true,
+  super.size,
+  super.hidden,
+  super.maximized,
+}) extends PlatNode {
+  this : assert(children.length >= 2, 'splits need at least two children');
 
   @override
   PlatNode? cleanTree() {
@@ -200,8 +197,9 @@ final class SplitNode extends PlatNode {
     return true;
   }
 
-  bool _shouldInline(SplitNode inner) =>
-      inner.axis == axis && inner.resizable && resizable;
+  bool _shouldInline(SplitNode inner) {
+    return inner.axis == axis && inner.resizable && resizable;
+  }
 
   @override
   _FocusWriteResult _writeFocus(String focusId, {required bool seenTarget}) {

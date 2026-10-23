@@ -395,8 +395,9 @@ void main() {
               child: PlatView(
                 controller: controller,
                 leafBuilder: (_, leaf) => Text('body:${leaf.id}'),
-                tabBar: (_, _) =>
-                    const PlatTabBar(decoration: widgetDecoration),
+                tabBar: (_, _) {
+                  return const PlatTabBar(decoration: widgetDecoration);
+                },
               ),
             ),
           ),
@@ -488,8 +489,9 @@ void main() {
               leafBuilder: (_, leaf) => Text('body:${leaf.id}'),
               tabBar: (_, _) => PlatTabBar(
                 fit: .expand,
-                tabBuilder: (_, t) =>
-                    Center(child: Text('chip:${t.snapshot.id}')),
+                tabBuilder: (_, t) {
+                  return Center(child: Text('chip:${t.snapshot.id}'));
+                },
               ),
             ),
           ),
@@ -522,8 +524,12 @@ void main() {
               child: PlatView(
                 controller: controller,
                 leafBuilder: (_, leaf) => Text('body:${leaf.id}'),
-                tabBar: (_, _) =>
-                    const PlatTabBar(fit: .expand, tabBuilder: _slottedTabChip),
+                tabBar: (_, _) {
+                  return const PlatTabBar(
+                    fit: .expand,
+                    tabBuilder: _slottedTabChip,
+                  );
+                },
               ),
             ),
           ),
@@ -606,8 +612,9 @@ void main() {
                 child: PlatView(
                   controller: controller,
                   leafBuilder: (_, leaf) => Text('body:${leaf.id}'),
-                  tabBar: (_, _) =>
-                      const PlatTabBar(chipBorderRadius: widgetRadius),
+                  tabBar: (_, _) {
+                    return const PlatTabBar(chipBorderRadius: widgetRadius);
+                  },
                 ),
               ),
             ),
@@ -628,8 +635,9 @@ void main() {
         await pumpPlatView(
           tester,
           controller,
-          tabBar: (_, _) =>
-              PlatTabBar(tabBuilder: (_, _) => const PlatTabChip()),
+          tabBar: (_, _) {
+            return PlatTabBar(tabBuilder: (_, _) => const PlatTabChip());
+          },
         );
 
         expect(find.text('a'), findsOneWidget);
@@ -776,8 +784,9 @@ void main() {
           tester,
           controller,
           tabBar: (_, _) => PlatTabBar(
-            dragFeedbackBuilder: (_, tab) =>
-                Text('feedback:${tab.snapshot.id}'),
+            dragFeedbackBuilder: (_, tab) {
+              return Text('feedback:${tab.snapshot.id}');
+            },
           ),
         );
 
@@ -864,8 +873,9 @@ void main() {
           controller,
           tabBar: (_, _) => PlatTabBar(
             fit: .expand,
-            tabBuilder: (_, tab) =>
-                SizedBox.expand(key: ValueKey('chip-${tab.snapshot.id}')),
+            tabBuilder: (_, tab) {
+              return SizedBox.expand(key: ValueKey('chip-${tab.snapshot.id}'));
+            },
           ),
         );
 
@@ -923,10 +933,10 @@ void main() {
           find
               .ancestor(
                 of: find.text('tab:a'),
-                matching: find.byWidgetPredicate(
-                  (widget) =>
-                      widget is Container && widget.decoration is BoxDecoration,
-                ),
+                matching: find.byWidgetPredicate((widget) {
+                  return widget is Container &&
+                      widget.decoration is BoxDecoration;
+                }),
               )
               .last,
         );
@@ -1048,8 +1058,9 @@ void main() {
           tester,
           controller,
           tabBar: (_, _) => PlatTabBar(
-            tabBuilder: (_, _) =>
-                const PlatTabChip(trailing: PlatTabCloseButton()),
+            tabBuilder: (_, _) {
+              return const PlatTabChip(trailing: PlatTabCloseButton());
+            },
           ),
         );
 
@@ -1345,10 +1356,9 @@ BoxDecoration _tabChipDecoration(WidgetTester tester, Finder label) {
     find
         .ancestor(
           of: label,
-          matching: find.byWidgetPredicate(
-            (widget) =>
-                widget is Container && widget.decoration is BoxDecoration,
-          ),
+          matching: find.byWidgetPredicate((widget) {
+            return widget is Container && widget.decoration is BoxDecoration;
+          }),
         )
         .last,
   );

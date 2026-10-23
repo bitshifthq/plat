@@ -2,16 +2,11 @@ import 'package:material_ui/material_ui.dart';
 
 import 'presets.dart';
 
-final class ThemePreviewFrame extends StatelessWidget {
-  final ThemePreset preset;
-  final Widget child;
-
-  const ThemePreviewFrame({
-    super.key,
-    required this.preset,
-    required this.child,
-  });
-
+final class const ThemePreviewFrame({
+  super.key,
+  required final ThemePreset preset,
+  required final Widget child,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

@@ -4,18 +4,12 @@ import '../branding.dart';
 import 'preset_card.dart';
 import 'presets.dart';
 
-final class ThemeSelector extends StatelessWidget {
-  final ThemePreset preset;
-  final ValueChanged<ThemePreset> onPresetChanged;
-  final bool compact;
-
-  const ThemeSelector({
-    super.key,
-    required this.preset,
-    required this.onPresetChanged,
-    required this.compact,
-  });
-
+final class const ThemeSelector({
+  super.key,
+  required final ThemePreset preset,
+  required final ValueChanged<ThemePreset> onPresetChanged,
+  required final bool compact,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -45,11 +39,8 @@ final class ThemeSelector extends StatelessWidget {
   }
 }
 
-final class _Header extends StatelessWidget {
-  final ThemePreset preset;
-
-  const _Header({required this.preset});
-
+final class const _Header({required final ThemePreset preset})
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -73,16 +64,14 @@ final class _Header extends StatelessWidget {
                   children: [
                     Text(
                       platDemoTitle,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: colors.onSurface,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium
+                          ?.copyWith(color: colors.onSurface),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       'Workspace themes',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: colors.onSurfaceVariant,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall
+                          ?.copyWith(color: colors.onSurfaceVariant),
                     ),
                   ],
                 ),
@@ -92,16 +81,14 @@ final class _Header extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             preset.description,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium?.copyWith(color: colors.onSurface),
+            style: Theme.of(context).textTheme.bodyMedium
+                ?.copyWith(color: colors.onSurface),
           ),
           const SizedBox(height: 4),
           Text(
             'Switch themes, resize panes, drag tabs, and toggle panels.',
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(color: colors.onSurfaceVariant),
+            style: Theme.of(context).textTheme.bodySmall
+                ?.copyWith(color: colors.onSurfaceVariant),
           ),
         ],
       ),
@@ -109,12 +96,10 @@ final class _Header extends StatelessWidget {
   }
 }
 
-final class _PresetGrid extends StatelessWidget {
-  final ThemePreset preset;
-  final ValueChanged<ThemePreset> onPresetChanged;
-
-  const _PresetGrid(this.preset, this.onPresetChanged);
-
+final class const _PresetGrid(
+  final ThemePreset preset,
+  final ValueChanged<ThemePreset> onPresetChanged,
+) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
@@ -128,12 +113,10 @@ final class _PresetGrid extends StatelessWidget {
   }
 }
 
-final class _PresetStrip extends StatelessWidget {
-  final ThemePreset preset;
-  final ValueChanged<ThemePreset> onPresetChanged;
-
-  const _PresetStrip(this.preset, this.onPresetChanged);
-
+final class const _PresetStrip(
+  final ThemePreset preset,
+  final ValueChanged<ThemePreset> onPresetChanged,
+) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(

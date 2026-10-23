@@ -6,40 +6,36 @@ part of 'tree.dart';
 /// child subtree is the one rendered; the rest sit behind the tab strip and
 /// are switched into view on selection.
 @internal
-final class TabGroupNode extends PlatNode {
+final class TabGroupNode({
+  required super.id,
+
+  /// The tabs managed by this group, in display order.
+  final List<TabNode> tabs = const [],
+
   /// Index of the active tab. In `[0, tabs.length)`, or `0` when [tabs] is
   /// empty.
-  final int activeIndex;
+  final int activeIndex = 0,
 
   /// Edge of the body where the tab bar sits.
-  final TabBarSide side;
+  final TabBarSide side = .top,
 
   /// When true, this group's body accepts tab drops from other groups or views.
   /// Tab-strip reordering still works when false.
-  final bool acceptsDrops;
-
-  /// The tabs managed by this group, in display order.
-  final List<TabNode> tabs;
-
-  TabGroupNode({
-    required super.id,
-    this.tabs = const [],
-    this.activeIndex = 0,
-    this.side = .top,
-    this.acceptsDrops = true,
-    super.size,
-    super.hidden,
-    super.maximized,
-  }) : assert(
-         tabs.isEmpty
-             ? activeIndex == 0
-             : activeIndex >= 0 && activeIndex < tabs.length,
-         'activeIndex must be in [0, tabs.length) (or 0 when empty)',
-       );
+  final bool acceptsDrops = true,
+  super.size,
+  super.hidden,
+  super.maximized,
+}) extends PlatNode {
+  this
+    : assert(
+        tabs.isEmpty
+            ? activeIndex == 0
+            : activeIndex >= 0 && activeIndex < tabs.length,
+        'activeIndex must be in [0, tabs.length) (or 0 when empty)',
+      );
 
   /// A tab group with no tabs yet.
-  factory TabGroupNode.empty({String? id}) =>
-      TabGroupNode(id: id ?? generateNodeId());
+  factory empty({String? id}) => TabGroupNode(id: id ?? generateNodeId());
 
   /// Returns the first focused leaf in the active tab, or its first leaf when
   /// unfocused.
@@ -210,9 +206,10 @@ final class TabGroupNode extends PlatNode {
   }
 
   @override
-  String toString() =>
-      'TabGroupNode($id, ${tabs.length} tabs, active=$activeIndex, '
-      'side=$side)';
+  String toString() {
+    return 'TabGroupNode($id, ${tabs.length} tabs, active=$activeIndex, '
+        'side=$side)';
+  }
 
   /// Resolves the next active index after replacing [tabs] with [nextTabs].
   ///

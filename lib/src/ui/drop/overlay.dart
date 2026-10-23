@@ -25,25 +25,18 @@ typedef _DropGeometry = ({DropZone zone, DropZone nearestSide});
 /// [PlatDropHintTheme.edgeFraction] on each side is an edge zone; the
 /// inner area is center.
 @internal
-class DropOverlay extends StatefulWidget {
-  final Widget child;
-  final PlatSnapshot target;
-  final PlatController controller;
-  final DropPolicy? dropPolicy;
-
-  const DropOverlay({
-    super.key,
-    required this.target,
-    required this.controller,
-    required this.child,
-    this.dropPolicy,
-  });
-
+class const DropOverlay({
+  super.key,
+  required final PlatSnapshot target,
+  required final PlatController controller,
+  required final Widget child,
+  final DropPolicy? dropPolicy,
+}) extends StatefulWidget {
   @override
   State<DropOverlay> createState() => _DropOverlayState();
 }
 
-class _DropOverlayState extends State<DropOverlay> {
+class _DropOverlayState() extends State<DropOverlay> {
   DropZone? _zone;
   _AncestorClip? _clip;
 
@@ -163,12 +156,11 @@ class _DropOverlayState extends State<DropOverlay> {
   }
 }
 
-class _ZoneHint extends StatelessWidget {
-  final DropZone zone;
-  final _AncestorClip? clip;
-
-  const _ZoneHint({super.key, required this.zone, required this.clip});
-
+class const _ZoneHint({
+  super.key,
+  required final DropZone zone,
+  required final _AncestorClip? clip,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = PlatTheme.of(context);
@@ -210,10 +202,14 @@ class _ZoneHint extends StatelessWidget {
     final r = clip.radius;
     Radius tl() => clip.touchesTop && clip.touchesLeft ? r.topLeft : .zero;
     Radius tr() => clip.touchesTop && clip.touchesRight ? r.topRight : .zero;
-    Radius bl() =>
-        clip.touchesBottom && clip.touchesLeft ? r.bottomLeft : .zero;
-    Radius br() =>
-        clip.touchesBottom && clip.touchesRight ? r.bottomRight : .zero;
+    Radius bl() {
+      return clip.touchesBottom && clip.touchesLeft ? r.bottomLeft : .zero;
+    }
+
+    Radius br() {
+      return clip.touchesBottom && clip.touchesRight ? r.bottomRight : .zero;
+    }
+
     return switch (zone) {
       .center => BorderRadius.only(
         topLeft: tl(),

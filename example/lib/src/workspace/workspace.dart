@@ -9,16 +9,15 @@ import 'presets.dart';
 import 'selector.dart';
 import 'workspace_view.dart';
 
-final class WorkspaceExample extends StatefulWidget {
-  final ThemePreset initialPreset;
-
-  const WorkspaceExample({super.key, this.initialPreset = .material});
-
+final class const WorkspaceExample({
+  super.key,
+  final ThemePreset initialPreset = .material,
+}) extends StatefulWidget {
   @override
   State<WorkspaceExample> createState() => _WorkspaceExampleState();
 }
 
-final class _WorkspaceExampleState extends State<WorkspaceExample> {
+final class _WorkspaceExampleState() extends State<WorkspaceExample> {
   late final PlatController _controller;
   late ThemePreset _preset;
   var _nextEditorTab = 1;
@@ -62,11 +61,13 @@ final class _WorkspaceExampleState extends State<WorkspaceExample> {
 
   String? get _firstEditorGroupId => firstThemeTabGroupIn(_mainSlot?.child);
 
-  SlotSnapshot? get _mainSlot =>
-      findThemeSlot(_controller.root, themeMainSlotId);
+  SlotSnapshot? get _mainSlot {
+    return findThemeSlot(_controller.root, themeMainSlotId);
+  }
 
-  bool _isEditorArea(String id) =>
-      _controller.pathTo(id).contains(themeMainSlotId);
+  bool _isEditorArea(String id) {
+    return _controller.pathTo(id).contains(themeMainSlotId);
+  }
 
   @override
   Widget build(BuildContext context) {

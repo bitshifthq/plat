@@ -6,29 +6,30 @@ PlatNode _initialControllerRoot(Plat? initialPlat) => initialPlat == null
 
 /// Default implementation of [PlatController].
 @internal
-final class PlatControllerImpl extends PlatController {
+final class PlatControllerImpl._(
+  var PlatNode _root, {
+
   /// Cap on undo and redo stack depth. Older entries fall off the
   /// bottom when the limit is exceeded.
-  final int undoLimit;
+  required final int undoLimit,
 
   /// Cap on the most-recently-focused leaf list used by close-time
   /// refocus.
-  final int recentLimit;
+  required final int recentLimit,
 
   /// Policy for incoming ids that already exist in this controller.
-  final IdConflict idConflict;
-
+  required final IdConflict idConflict,
+}) extends PlatController {
   final _undo = <PlatNode>[];
   final _redo = <PlatNode>[];
   final _recent = <String>[]; // most-recent first
 
-  PlatNode _root;
-  String? _maximizedId;
-  String? _focusedLeafId;
+  String? _maximizedId = _root.maximizedPane()?.id;
+  String? _focusedLeafId = _root.focusedLeaf()?.id;
   var _interactionDepth = 0;
   PlatNode? _interactionStartRoot;
 
-  PlatControllerImpl({
+  new({
     Plat? initialPlat,
     int undoLimit = 100,
     int recentLimit = 200,
@@ -40,15 +41,7 @@ final class PlatControllerImpl extends PlatController {
          idConflict: idConflict,
        );
 
-  PlatControllerImpl._(
-    PlatNode root, {
-    required this.undoLimit,
-    required this.recentLimit,
-    required this.idConflict,
-  }) : _root = root,
-       _focusedLeafId = root.focusedLeaf()?.id,
-       _maximizedId = root.maximizedPane()?.id,
-       super._base() {
+  this : super._base() {
     final initialFocusId = _focusedLeafId;
     if (initialFocusId != null) _recent.add(initialFocusId);
   }
@@ -498,8 +491,9 @@ final class PlatControllerImpl extends PlatController {
 
   bool _commitTransient(PlatNode next) => _replaceRoot(next);
 
-  ({TabGroupNode group, int index, TabNode tab})? _directTabOf(String tabId) =>
-      _root.directTabOf(tabId);
+  ({TabGroupNode group, int index, TabNode tab})? _directTabOf(String tabId) {
+    return _root.directTabOf(tabId);
+  }
 
   void _endInteraction() {
     if (_interactionDepth == 0) return;

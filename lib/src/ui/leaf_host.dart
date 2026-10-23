@@ -4,23 +4,17 @@ import 'package:meta/meta.dart' show internal;
 import 'plat_scope.dart';
 
 @internal
-final class PlatLeafHost extends StatefulWidget {
-  final String leafId;
-  final Widget child;
-  final PlatLeafKeyRegistry registry;
-
-  const PlatLeafHost({
-    required super.key,
-    required this.leafId,
-    required this.registry,
-    required this.child,
-  });
-
+final class const PlatLeafHost({
+  required super.key,
+  required final String leafId,
+  required final PlatLeafKeyRegistry registry,
+  required final Widget child,
+}) extends StatefulWidget {
   @override
   State<PlatLeafHost> createState() => _PlatLeafHostState();
 }
 
-class _PlatLeafHostState extends State<PlatLeafHost> {
+class _PlatLeafHostState() extends State<PlatLeafHost> {
   @override
   Widget build(BuildContext context) => widget.child;
 

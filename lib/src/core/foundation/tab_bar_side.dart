@@ -1,7 +1,7 @@
 part of 'foundation.dart';
 
 /// Which edge of a body the tab bar sits on.
-enum TabBarSide {
+enum TabBarSide() {
   /// Top edge. The conventional browser and IDE editor-tab placement.
   top,
 

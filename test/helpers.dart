@@ -43,14 +43,17 @@ PlatController controllerFromLeaves(List<LeafNode> leaves) => PlatController(
   ], id: generateNodeId()),
 );
 
-PlatController controllerFromTree(PlatNode root) =>
-    PlatController(initialPlat: asLayout(root));
+PlatController controllerFromTree(PlatNode root) {
+  return PlatController(initialPlat: asLayout(root));
+}
 
-SplitNode hSplit(String id, List<PlatNode> children) =>
-    SplitNode(id: id, axis: .horizontal, children: children);
+SplitNode hSplit(String id, List<PlatNode> children) {
+  return SplitNode(id: id, axis: .horizontal, children: children);
+}
 
-LeafNode tab(String id, {bool locked = false}) =>
-    LeafNode(id: id, title: id, locked: locked);
+LeafNode tab(String id, {bool locked = false}) {
+  return LeafNode(id: id, title: id, locked: locked);
+}
 
 PlatTab tabPane(
   String id, {

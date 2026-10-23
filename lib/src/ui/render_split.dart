@@ -75,7 +75,7 @@ typedef _PairUpdate = ({PlatSize leftSize, PlatSize rightSize});
 
 typedef _Slot = ({String id, PlatSize size, double pixels});
 
-class _SplitParentData extends ContainerBoxParentData<RenderBox> {
+class _SplitParentData() extends ContainerBoxParentData<RenderBox> {
   // `contentId == null` discriminates a divider from a content child.
   String? contentId;
   PlatSize? platSize;
@@ -89,14 +89,14 @@ class PlatSlotData extends ParentDataWidget<_SplitParentData> {
   final String? contentId;
   final PlatSize? platSize;
 
-  const PlatSlotData.content({
+  const new content({
     super.key,
     required String this.contentId,
     required PlatSize this.platSize,
     required super.child,
   });
 
-  const PlatSlotData.divider({super.key, required super.child})
+  const new divider({super.key, required super.child})
     : contentId = null,
       platSize = null;
 
@@ -116,7 +116,7 @@ class PlatSlotData extends ParentDataWidget<_SplitParentData> {
 /// Hover/drag indices published by [RenderPlatSplit] and read by the
 /// divider widgets. Leaves never subscribe.
 @internal
-class DividerInteraction extends ChangeNotifier {
+class DividerInteraction() extends ChangeNotifier {
   int? _hovered;
   int? _dragging;
 
@@ -140,27 +140,17 @@ class DividerInteraction extends ChangeNotifier {
 /// Render-object widget for a [PlatSplit] node. Children alternate content
 /// and divider via [PlatSlotData].
 @internal
-class PlatSplit extends MultiChildRenderObjectWidget {
-  final Axis axis;
-  final double spacing;
-  final double hitSlop;
-  final bool resizable;
-  final DividerInteraction interaction;
-  final ValueChanged<List<PlatSize>> onCommit;
-  final MouseCursor? cursor;
-
-  const PlatSplit({
-    super.key,
-    required this.axis,
-    required this.spacing,
-    required this.hitSlop,
-    required this.resizable,
-    required this.interaction,
-    required this.onCommit,
-    required super.children,
-    this.cursor,
-  });
-
+class const PlatSplit({
+  super.key,
+  required final Axis axis,
+  required final double spacing,
+  required final double hitSlop,
+  required final bool resizable,
+  required final DividerInteraction interaction,
+  required final ValueChanged<List<PlatSize>> onCommit,
+  required super.children,
+  final MouseCursor? cursor,
+}) extends MultiChildRenderObjectWidget {
   @override
   RenderPlatSplit createRenderObject(BuildContext context) => RenderPlatSplit(
     axis: axis,
@@ -190,29 +180,19 @@ class PlatSplit extends MultiChildRenderObjectWidget {
 /// live drag updates reflow this render object alone — leaves and
 /// divider widgets do not rebuild.
 @internal
-class RenderPlatSplit extends RenderBox
+class RenderPlatSplit({
+  required var Axis _axis,
+  required var double _spacing,
+  required var double hitSlop,
+  required var bool resizable,
+  required var DividerInteraction interaction,
+  required var ValueChanged<List<PlatSize>> onCommit,
+  var MouseCursor? _cursor,
+}) extends RenderBox
     with
         ContainerRenderObjectMixin<RenderBox, _SplitParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, _SplitParentData>
     implements MouseTrackerAnnotation {
-  RenderPlatSplit({
-    required this._axis,
-    required this._spacing,
-    required this.hitSlop,
-    required this.resizable,
-    required this.interaction,
-    required this.onCommit,
-    this._cursor,
-  });
-
-  Axis _axis;
-  double _spacing;
-  double hitSlop;
-  bool resizable;
-  DividerInteraction interaction;
-  ValueChanged<List<PlatSize>> onCommit;
-  MouseCursor? _cursor;
-
   set cursor(MouseCursor? value) {
     if (_cursor == value) return;
     _cursor = value;
@@ -264,14 +244,16 @@ class RenderPlatSplit extends RenderBox
 
   double _mainOf(Offset point) => _isHorizontal ? point.dx : point.dy;
 
-  Offset _mainOffset(double main) =>
-      _isHorizontal ? Offset(main, 0) : Offset(0, main);
+  Offset _mainOffset(double main) {
+    return _isHorizontal ? Offset(main, 0) : Offset(0, main);
+  }
 
-  BoxConstraints _tightAxis(double main, double cross) =>
-      BoxConstraints.tightFor(
-        width: _isHorizontal ? main : cross,
-        height: _isHorizontal ? cross : main,
-      );
+  BoxConstraints _tightAxis(double main, double cross) {
+    return BoxConstraints.tightFor(
+      width: _isHorizontal ? main : cross,
+      height: _isHorizontal ? cross : main,
+    );
+  }
 
   @override
   void setupParentData(RenderBox child) {
@@ -376,8 +358,9 @@ class RenderPlatSplit extends RenderBox
   bool hitTestSelf(Offset position) => true;
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
-      defaultHitTestChildren(result, position: position);
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
+    return defaultHitTestChildren(result, position: position);
+  }
 
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) {
@@ -424,10 +407,11 @@ class RenderPlatSplit extends RenderBox
     return null;
   }
 
-  bool _isLockedAt(int dividerIndex) =>
-      !resizable ||
-      _slots[dividerIndex].size is FixedSize ||
-      _slots[dividerIndex + 1].size is FixedSize;
+  bool _isLockedAt(int dividerIndex) {
+    return !resizable ||
+        _slots[dividerIndex].size is FixedSize ||
+        _slots[dividerIndex + 1].size is FixedSize;
+  }
 
   @override
   void handleEvent(PointerEvent event, BoxHitTestEntry entry) {
@@ -521,11 +505,13 @@ class RenderPlatSplit extends RenderBox
 }
 
 extension on PlatExtent {
-  double maxBound(double available) =>
-      this is AutoExtent ? available : pixels(available);
+  double maxBound(double available) {
+    return this is AutoExtent ? available : pixels(available);
+  }
 
-  double minBound(double available) =>
-      this is AutoExtent ? 0 : pixels(available);
+  double minBound(double available) {
+    return this is AutoExtent ? 0 : pixels(available);
+  }
 
   /// Resolve to pixels. [AutoExtent] resolves to 0 — call [minBound] or
   /// [maxBound] when you want auto to mean "no bound".
@@ -551,8 +537,9 @@ extension on PlatSize {
 }
 
 extension on FlexibleSize {
-  ({double min, double max}) bounds(double available) =>
-      (min: min.minBound(available), max: max.maxBound(available));
+  ({double min, double max}) bounds(double available) {
+    return (min: min.minBound(available), max: max.maxBound(available));
+  }
 
   /// Rewrite [initial] to reflect [newPixels], preserving the original
   /// unit (`Fraction` stays fractional, anything else becomes `Pixels`).

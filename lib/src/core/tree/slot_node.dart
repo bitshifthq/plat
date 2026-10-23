@@ -8,29 +8,24 @@ part of 'tree.dart';
 /// disappears when its child does; a [persistent] slot stays put as
 /// an empty stub.
 @internal
-final class SlotNode extends PlatNode {
+final class SlotNode({
+  required super.id,
+
   /// The wrapped node, or `null` when the slot is empty.
-  final PlatNode? child;
+  final PlatNode? child,
 
   /// When true, the slot survives losing its child and stays in the
   /// tree as an empty stub. When false (the default), the slot is
   /// pruned alongside its child.
-  final bool persistent;
+  final bool persistent = false,
 
   /// When true, a maximize triggered inside this slot expands to fill
   /// the slot's bounds rather than the whole tree.
-  final bool boundsMaximize;
-
-  SlotNode({
-    required super.id,
-    this.child,
-    this.persistent = false,
-    this.boundsMaximize = false,
-    super.size,
-    super.hidden,
-    super.maximized,
-  });
-
+  final bool boundsMaximize = false,
+  super.size,
+  super.hidden,
+  super.maximized,
+}) extends PlatNode {
   @override
   PlatNode? cleanTree() {
     final c = child;

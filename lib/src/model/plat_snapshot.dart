@@ -32,27 +32,20 @@ bool _snapshotsEqual(List<PlatSnapshot> a, List<PlatSnapshot> b) {
 /// compare, hash, and store in widget state for rebuild diffing. The four
 /// variants ([SplitSnapshot], [TabGroupSnapshot], [SlotSnapshot],
 /// [LeafSnapshot]) mirror the four node kinds.
-sealed class PlatSnapshot {
+sealed class const PlatSnapshot({
   /// Stable identity, mirroring the underlying node.
-  final String id;
-
-  /// True when the node is excluded from layout.
-  final bool hidden;
+  required final String id,
 
   /// Allocation hint for the parent split.
-  final PlatSize size;
+  required final PlatSize size,
+
+  /// True when the node is excluded from layout.
+  required final bool hidden,
 
   /// True when this node is the one currently maximized within its
   /// scope.
-  final bool maximized;
-
-  const PlatSnapshot({
-    required this.id,
-    required this.size,
-    required this.hidden,
-    required this.maximized,
-  });
-
+  required final bool maximized,
+}) {
   /// The first leaf in this subtree in tree order, or `null` when none exists.
   LeafSnapshot? get firstLeaf => switch (this) {
     final LeafSnapshot leaf => leaf,
@@ -87,34 +80,27 @@ sealed class PlatSnapshot {
 /// Carries the leaf's [data], [title], and state flags. Two leaf snapshots
 /// compare equal when every field matches.
 @immutable
-final class LeafSnapshot extends PlatSnapshot {
-  /// True when the leaf refuses close and drag operations.
-  final bool locked;
-
-  /// True when the default UI may expose a handle for dragging this leaf.
-  final bool draggable;
-
-  /// True when this leaf currently holds focus.
-  final bool focused;
-
-  /// Display label.
-  final String title;
+final class const LeafSnapshot({
+  required super.id,
+  required super.size,
+  required super.hidden,
+  required super.maximized,
 
   /// Opaque host payload.
-  final Object? data;
+  required final Object? data,
 
-  const LeafSnapshot({
-    required super.id,
-    required super.size,
-    required super.hidden,
-    required super.maximized,
-    required this.data,
-    required this.title,
-    required this.locked,
-    required this.draggable,
-    required this.focused,
-  });
+  /// Display label.
+  required final String title,
 
+  /// True when the leaf refuses close and drag operations.
+  required final bool locked,
+
+  /// True when the default UI may expose a handle for dragging this leaf.
+  required final bool draggable,
+
+  /// True when this leaf currently holds focus.
+  required final bool focused,
+}) extends PlatSnapshot {
   @override
   int get hashCode => Object.hash(
     id,
@@ -129,44 +115,40 @@ final class LeafSnapshot extends PlatSnapshot {
   );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is LeafSnapshot &&
-          other.id == id &&
-          other.size == size &&
-          other.hidden == hidden &&
-          other.maximized == maximized &&
-          other.data == data &&
-          other.title == title &&
-          other.locked == locked &&
-          other.draggable == draggable &&
-          other.focused == focused;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is LeafSnapshot &&
+            other.id == id &&
+            other.size == size &&
+            other.hidden == hidden &&
+            other.maximized == maximized &&
+            other.data == data &&
+            other.title == title &&
+            other.locked == locked &&
+            other.draggable == draggable &&
+            other.focused == focused;
+  }
 }
 
 /// Snapshot of a slot node wrapping an optional [child].
 @immutable
-final class SlotSnapshot extends PlatSnapshot {
+final class const SlotSnapshot({
+  required super.id,
+  required super.size,
+  required super.hidden,
+  required super.maximized,
+
+  /// The wrapped snapshot, or `null` when the slot is empty.
+  required final PlatSnapshot? child,
+
   /// True when the slot stays in the tree even after losing its
   /// child.
-  final bool persistent;
+  required final bool persistent,
 
   /// True when a maximize triggered inside this slot stays bounded
   /// by the slot rather than expanding to fill the whole tree.
-  final bool boundsMaximize;
-
-  /// The wrapped snapshot, or `null` when the slot is empty.
-  final PlatSnapshot? child;
-
-  const SlotSnapshot({
-    required super.id,
-    required super.size,
-    required super.hidden,
-    required super.maximized,
-    required this.child,
-    required this.persistent,
-    required this.boundsMaximize,
-  });
-
+  required final bool boundsMaximize,
+}) extends PlatSnapshot {
   @override
   int get hashCode => Object.hash(
     id,
@@ -179,40 +161,36 @@ final class SlotSnapshot extends PlatSnapshot {
   );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SlotSnapshot &&
-          other.id == id &&
-          other.size == size &&
-          other.hidden == hidden &&
-          other.maximized == maximized &&
-          other.persistent == persistent &&
-          other.boundsMaximize == boundsMaximize &&
-          other.child == child;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is SlotSnapshot &&
+            other.id == id &&
+            other.size == size &&
+            other.hidden == hidden &&
+            other.maximized == maximized &&
+            other.persistent == persistent &&
+            other.boundsMaximize == boundsMaximize &&
+            other.child == child;
+  }
 }
 
 /// Snapshot of a split node arranging [children] along [axis].
 @immutable
-final class SplitSnapshot extends PlatSnapshot {
-  /// Axis children are laid out along.
-  final SplitAxis axis;
+final class const SplitSnapshot({
+  required super.id,
+  required super.size,
+  required super.hidden,
+  required super.maximized,
 
-  /// True when dividers in this split accept drag input.
-  final bool resizable;
+  /// Axis children are laid out along.
+  required final SplitAxis axis,
 
   /// Children, in order along [axis].
-  final List<PlatSnapshot> children;
+  required final List<PlatSnapshot> children,
 
-  const SplitSnapshot({
-    required super.id,
-    required super.size,
-    required super.hidden,
-    required super.maximized,
-    required this.axis,
-    required this.children,
-    required this.resizable,
-  });
-
+  /// True when dividers in this split accept drag input.
+  required final bool resizable,
+}) extends PlatSnapshot {
   @override
   int get hashCode => Object.hash(
     id,
@@ -225,54 +203,45 @@ final class SplitSnapshot extends PlatSnapshot {
   );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SplitSnapshot &&
-          other.id == id &&
-          other.size == size &&
-          other.hidden == hidden &&
-          other.maximized == maximized &&
-          other.axis == axis &&
-          other.resizable == resizable &&
-          _snapshotsEqual(other.children, children);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is SplitSnapshot &&
+            other.id == id &&
+            other.size == size &&
+            other.hidden == hidden &&
+            other.maximized == maximized &&
+            other.axis == axis &&
+            other.resizable == resizable &&
+            _snapshotsEqual(other.children, children);
+  }
 }
 
 /// Snapshot of a tab group.
 @immutable
-final class TabSnapshot {
+final class const TabSnapshot({
   /// Stable identity of the wrapped tab child.
-  final String id;
+  required final String id,
 
   /// Display label shown in chrome.
-  final String title;
+  required final String title,
 
   /// True when the tab is presented as pinned.
-  final bool pinned;
+  required final bool pinned,
 
   /// True when the tab refuses close and drag operations.
-  final bool locked;
+  required final bool locked,
 
   /// True when the tab is the preview tab for its containing tab group.
-  final bool preview;
+  required final bool preview,
 
   /// True when this tab is active in its group.
   /// Mirrors `i == TabGroupSnapshot.activeIndex` so callers can dispatch
   /// without the parent snapshot.
-  final bool selected;
+  required final bool selected,
 
   /// Child subtree rendered when this tab is active.
-  final PlatSnapshot child;
-
-  const TabSnapshot({
-    required this.id,
-    required this.title,
-    required this.pinned,
-    required this.locked,
-    required this.preview,
-    required this.selected,
-    required this.child,
-  });
-
+  required final PlatSnapshot child,
+}) {
   /// Convenience payload from a leaf-rooted tab or the first leaf in a nested
   /// subtree.
   Object? get data => switch (child) {
@@ -294,52 +263,51 @@ final class TabSnapshot {
   LeafSnapshot? get focusedLeaf => child.focusedLeaf;
 
   @override
-  int get hashCode =>
-      Object.hash(id, title, pinned, locked, preview, selected, child);
+  int get hashCode {
+    return Object.hash(id, title, pinned, locked, preview, selected, child);
+  }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is TabSnapshot &&
-          other.id == id &&
-          other.title == title &&
-          other.pinned == pinned &&
-          other.locked == locked &&
-          other.preview == preview &&
-          other.selected == selected &&
-          other.child == child;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is TabSnapshot &&
+            other.id == id &&
+            other.title == title &&
+            other.pinned == pinned &&
+            other.locked == locked &&
+            other.preview == preview &&
+            other.selected == selected &&
+            other.child == child;
+  }
 }
 
 /// Snapshot of a tab group.
 @immutable
-final class TabGroupSnapshot extends PlatSnapshot {
-  /// Index of the active tab, or `0` when [tabs] is empty.
-  final int activeIndex;
-
-  /// Edge of the body where the tab bar sits.
-  final TabBarSide side;
-
-  /// True when this group's body accepts tab drops from other groups or views.
-  final bool acceptsDrops;
+final class const TabGroupSnapshot({
+  required super.id,
+  required super.size,
+  required super.hidden,
+  required super.maximized,
 
   /// The tabs managed by this group, in display order.
-  final List<TabSnapshot> tabs;
+  required final List<TabSnapshot> tabs,
 
-  const TabGroupSnapshot({
-    required super.id,
-    required super.size,
-    required super.hidden,
-    required super.maximized,
-    required this.tabs,
-    required this.activeIndex,
-    required this.acceptsDrops,
-    required this.side,
-  });
+  /// Index of the active tab, or `0` when [tabs] is empty.
+  required final int activeIndex,
 
+  /// True when this group's body accepts tab drops from other groups or views.
+  required final bool acceptsDrops,
+
+  /// Edge of the body where the tab bar sits.
+  required final TabBarSide side,
+}) extends PlatSnapshot {
   /// The focused leaf in the active tab, or that tab's first leaf when
   /// unfocused.
-  LeafSnapshot? get activeLeaf =>
-      activeTab == null ? null : activeTab!.focusedLeaf ?? activeTab!.firstLeaf;
+  LeafSnapshot? get activeLeaf {
+    return activeTab == null
+        ? null
+        : activeTab!.focusedLeaf ?? activeTab!.firstLeaf;
+  }
 
   /// The currently active tab, or `null` when [tabs] is empty.
   TabSnapshot? get activeTab => tabs.isEmpty ? null : tabs[activeIndex];
@@ -357,15 +325,16 @@ final class TabGroupSnapshot extends PlatSnapshot {
   );
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is TabGroupSnapshot &&
-          other.id == id &&
-          other.size == size &&
-          other.hidden == hidden &&
-          other.maximized == maximized &&
-          other.activeIndex == activeIndex &&
-          other.acceptsDrops == acceptsDrops &&
-          other.side == side &&
-          _tabsEqual(other.tabs, tabs);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is TabGroupSnapshot &&
+            other.id == id &&
+            other.size == size &&
+            other.hidden == hidden &&
+            other.maximized == maximized &&
+            other.activeIndex == activeIndex &&
+            other.acceptsDrops == acceptsDrops &&
+            other.side == side &&
+            _tabsEqual(other.tabs, tabs);
+  }
 }

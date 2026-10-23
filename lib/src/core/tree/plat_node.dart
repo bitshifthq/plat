@@ -16,29 +16,22 @@ typedef _NodeEditResult = ({PlatNode? node, bool found, bool changed});
 /// [TabGroupNode], and [SlotNode]. All nodes are immutable; mutating
 /// methods return new nodes and leave `this` untouched.
 @internal
-sealed class PlatNode {
+sealed class const PlatNode({
   /// Stable identity for this node.
-  final String id;
+  required final String id,
 
   /// When true, the node is excluded from layout. Hidden nodes still
   /// occupy a slot in the tree and keep their identity.
-  final bool hidden;
-
-  /// Allocation hint for the parent split. Ignored when this node has
-  /// no parent split.
-  final PlatSize size;
+  final bool hidden = false,
 
   /// When true, this node is the one currently maximized within its
   /// scope. At most one node in any scope is maximized at a time.
-  final bool maximized;
+  final bool maximized = false,
 
-  const PlatNode({
-    required this.id,
-    this.hidden = false,
-    this.maximized = false,
-    this.size = const .auto(),
-  });
-
+  /// Allocation hint for the parent split. Ignored when this node has
+  /// no parent split.
+  final PlatSize size = const .auto(),
+}) {
   /// IDs of every leaf in this subtree, in tree order.
   Iterable<String> get leafIds sync* {
     if (this is LeafNode) yield id;
@@ -680,6 +673,7 @@ sealed class PlatNode {
 extension on PlatSide {
   bool get _afterTarget => this == .bottom || this == .right;
 
-  SplitAxis get _axis =>
-      this == .left || this == .right ? .horizontal : .vertical;
+  SplitAxis get _axis {
+    return this == .left || this == .right ? .horizontal : .vertical;
+  }
 }

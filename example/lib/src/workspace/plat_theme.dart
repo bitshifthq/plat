@@ -15,30 +15,32 @@ WidgetStateProperty<Color?> _chipFill(
   return rest;
 });
 
-WidgetStateProperty<Color?> _chipText(Color selected, Color rest) =>
-    WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.selected)) return selected;
-      return rest;
-    });
+WidgetStateProperty<Color?> _chipText(Color selected, Color rest) {
+  return WidgetStateProperty.resolveWith((states) {
+    if (states.contains(WidgetState.selected)) return selected;
+    return rest;
+  });
+}
 
 PlatDividerTheme _flatDivider(Color canvas) => PlatDividerTheme(
   hitSlop: 6,
   decoration: WidgetStatePropertyAll(BoxDecoration(color: canvas)),
 );
 
-WidgetStateProperty<Color?> _ideaChipFill() =>
-    WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.dragged)) {
-        return ideaTabDraggedFill;
-      }
-      if (states.contains(WidgetState.selected)) {
-        return ideaTabSelectedFill;
-      }
-      if (states.contains(WidgetState.hovered)) {
-        return ideaTabHoverFill;
-      }
-      return Colors.transparent;
-    });
+WidgetStateProperty<Color?> _ideaChipFill() {
+  return WidgetStateProperty.resolveWith((states) {
+    if (states.contains(WidgetState.dragged)) {
+      return ideaTabDraggedFill;
+    }
+    if (states.contains(WidgetState.selected)) {
+      return ideaTabSelectedFill;
+    }
+    if (states.contains(WidgetState.hovered)) {
+      return ideaTabHoverFill;
+    }
+    return Colors.transparent;
+  });
+}
 
 PlatDividerTheme _splitDivider(Color color, Color accent) => PlatDividerTheme(
   color: WidgetStateProperty.resolveWith((states) {

@@ -5,20 +5,13 @@ import 'editor_actions.dart';
 import 'presets.dart';
 import 'tab_bar_actions.dart';
 
-final class ThemeSlotShell extends StatelessWidget {
-  final ThemePreset preset;
-  final SlotSnapshot slot;
-  final Widget? child;
-  final ValueChanged<String> onMinimize;
-
-  const ThemeSlotShell({
-    super.key,
-    required this.preset,
-    required this.slot,
-    required this.child,
-    required this.onMinimize,
-  });
-
+final class const ThemeSlotShell({
+  super.key,
+  required final ThemePreset preset,
+  required final SlotSnapshot slot,
+  required final Widget? child,
+  required final ValueChanged<String> onMinimize,
+}) extends StatelessWidget {
   bool get _isEmptyEditorSlot => switch (slot.child) {
     TabGroupSnapshot(tabs: []) when slot.id == 'main-slot' => true,
     _ => false,
@@ -62,12 +55,10 @@ final class ThemeSlotShell extends StatelessWidget {
   }
 }
 
-final class _GroupShell extends StatelessWidget {
-  final ThemePreset preset;
-  final Widget child;
-
-  const _GroupShell({required this.preset, required this.child});
-
+final class const _GroupShell({
+  required final ThemePreset preset,
+  required final Widget child,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!preset.chrome.wrapsGroups) return child;
@@ -87,19 +78,12 @@ final class _GroupShell extends StatelessWidget {
   }
 }
 
-final class _ToolWindowShell extends StatelessWidget {
-  final ThemePreset preset;
-  final String title;
-  final VoidCallback onMinimize;
-  final Widget child;
-
-  const _ToolWindowShell({
-    required this.preset,
-    required this.title,
-    required this.onMinimize,
-    required this.child,
-  });
-
+final class const _ToolWindowShell({
+  required final ThemePreset preset,
+  required final String title,
+  required final VoidCallback onMinimize,
+  required final Widget child,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

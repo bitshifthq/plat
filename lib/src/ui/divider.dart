@@ -6,12 +6,12 @@ import 'theme.dart';
 /// Default divider used in splits. Reads visuals from [PlatThemeData].
 ///
 /// Pure paint widget — gestures live on the split's render object.
-final class PlatDivider extends StatelessWidget {
+final class const PlatDivider({
+  super.key,
+
   /// Active interaction states (`hovered`, `dragged`).
-  final Set<WidgetState> states;
-
-  const PlatDivider({super.key, required this.states});
-
+  required final Set<WidgetState> states,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dividerTheme = PlatTheme.of(context).divider;

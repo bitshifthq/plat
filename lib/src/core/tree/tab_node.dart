@@ -3,32 +3,27 @@ part of 'tree.dart';
 /// Metadata and content for a single tab inside a [TabGroupNode].
 @internal
 @immutable
-final class TabNode {
+final class const TabNode({
   /// Child subtree rendered when this tab is active.
-  final PlatNode child;
+  required final PlatNode child,
 
   /// Display label shown in chrome.
-  final String title;
+  final String title = '',
 
   /// When true, the tab is presented as pinned.
-  final bool pinned;
+  final bool pinned = false,
 
   /// When true, the tab refuses to be closed or dragged.
-  final bool locked;
+  final bool locked = false,
 
   /// When true, the tab is the preview tab for its containing tab group.
-  final bool preview;
-
-  const TabNode({
-    required this.child,
-    this.title = '',
-    this.pinned = false,
-    this.locked = false,
-    this.preview = false,
-  }) : assert(
-         !preview || (!pinned && !locked),
-         'preview tabs cannot be pinned or locked',
-       );
+  final bool preview = false,
+}) {
+  this
+    : assert(
+        !preview || (!pinned && !locked),
+        'preview tabs cannot be pinned or locked',
+      );
 
   /// Stable tab identity, reusing the wrapped root pane's id.
   String get id => child.id;

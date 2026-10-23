@@ -6,39 +6,31 @@ import '../../model/plat_snapshot.dart';
 
 @immutable
 @internal
-sealed class PlatDragPayload {
-  final PlatController source;
-  final Offset feedbackAnchor;
-
+sealed class const PlatDragPayload({
+  required final PlatController source,
+  final Offset feedbackAnchor = .zero,
+}) {
   String get id;
-
-  const PlatDragPayload({required this.source, this.feedbackAnchor = .zero});
 }
 
 @immutable
 @internal
-final class TabDragPayload extends PlatDragPayload {
-  final TabSnapshot tab;
-  final String sourceTabGroupId;
-
-  const TabDragPayload({
-    required this.tab,
-    required super.source,
-    required this.sourceTabGroupId,
-    required super.feedbackAnchor,
-  });
-
+final class const TabDragPayload({
+  required final TabSnapshot tab,
+  required super.source,
+  required final String sourceTabGroupId,
+  required super.feedbackAnchor,
+}) extends PlatDragPayload {
   @override
   String get id => tab.id;
 }
 
 @immutable
 @internal
-final class LeafDragPayload extends PlatDragPayload {
-  final LeafSnapshot leaf;
-
-  const LeafDragPayload({required this.leaf, required super.source});
-
+final class const LeafDragPayload({
+  required final LeafSnapshot leaf,
+  required super.source,
+}) extends PlatDragPayload {
   @override
   String get id => leaf.id;
 }

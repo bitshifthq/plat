@@ -1,7 +1,7 @@
 part of 'foundation.dart';
 
 /// Direction relative to a target pane.
-enum PlatSide {
+enum PlatSide() {
   /// Left of the target.
   left,
 

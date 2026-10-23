@@ -2,16 +2,11 @@ import 'package:material_ui/material_ui.dart';
 
 import 'presets.dart';
 
-final class ThemeEditorActions extends StatelessWidget {
-  final ThemePreset preset;
-  final ValueChanged<ThemeEditorTabKind> onOpenTab;
-
-  const ThemeEditorActions({
-    super.key,
-    required this.preset,
-    required this.onOpenTab,
-  });
-
+final class const ThemeEditorActions({
+  super.key,
+  required final ThemePreset preset,
+  required final ValueChanged<ThemeEditorTabKind> onOpenTab,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,11 +26,10 @@ final class ThemeEditorActions extends StatelessWidget {
   }
 }
 
-final class ThemeEditorPlaceholder extends StatelessWidget {
-  final ThemePreset preset;
-
-  const ThemeEditorPlaceholder({super.key, required this.preset});
-
+final class const ThemeEditorPlaceholder({
+  super.key,
+  required final ThemePreset preset,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -58,18 +52,15 @@ final class ThemeEditorPlaceholder extends StatelessWidget {
                 Text(
                   'No editor tabs open',
                   textAlign: .center,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: colors.onSurface,
-                    fontWeight: .w600,
-                  ),
+                  style: Theme.of(context).textTheme.titleSmall
+                      ?.copyWith(color: colors.onSurface, fontWeight: .w600),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'Open a tab from Navigator to continue.',
                   textAlign: .center,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: colors.onSurfaceVariant,
-                  ),
+                  style: Theme.of(context).textTheme.bodySmall
+                      ?.copyWith(color: colors.onSurfaceVariant),
                 ),
               ],
             ),
@@ -80,29 +71,18 @@ final class ThemeEditorPlaceholder extends StatelessWidget {
   }
 }
 
-enum ThemeEditorTabKind {
+enum ThemeEditorTabKind(final String label, final IconData icon) {
   normal('Document', Icons.article_outlined),
   pinned('Pinned', Icons.push_pin_outlined),
   locked('Locked', Icons.lock_outline),
-  preview('Preview', Icons.visibility_outlined);
-
-  final String label;
-  final IconData icon;
-
-  const ThemeEditorTabKind(this.label, this.icon);
+  preview('Preview', Icons.visibility_outlined),
 }
 
-final class _EditorActionButton extends StatelessWidget {
-  final ThemePreset preset;
-  final ThemeEditorTabKind kind;
-  final VoidCallback onPressed;
-
-  const _EditorActionButton({
-    required this.preset,
-    required this.kind,
-    required this.onPressed,
-  });
-
+final class const _EditorActionButton({
+  required final ThemePreset preset,
+  required final ThemeEditorTabKind kind,
+  required final VoidCallback onPressed,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final action = preset.chrome.editorAction;
@@ -147,9 +127,8 @@ final class _EditorActionButton extends StatelessWidget {
       iconColor: WidgetStatePropertyAll(colors.onSurfaceVariant),
       iconSize: WidgetStatePropertyAll(action.iconSize),
       textStyle: WidgetStatePropertyAll(
-        Theme.of(
-          context,
-        ).textTheme.labelSmall?.copyWith(fontWeight: .w500, height: 1.1),
+        Theme.of(context).textTheme.labelSmall
+            ?.copyWith(fontWeight: .w500, height: 1.1),
       ),
     );
   }

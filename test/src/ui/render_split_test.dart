@@ -169,11 +169,10 @@ void main() {
             _centered(_app(c, theme: _theme(thickness: 4))),
           );
           expect(
-            find.byWidgetPredicate(
-              (widget) =>
-                  widget is MouseRegion &&
-                  widget.cursor == SystemMouseCursors.resizeColumn,
-            ),
+            find.byWidgetPredicate((widget) {
+              return widget is MouseRegion &&
+                  widget.cursor == SystemMouseCursors.resizeColumn;
+            }),
             findsNothing,
           );
         },
@@ -222,11 +221,10 @@ void main() {
           _centered(_app(c, theme: _theme(thickness: 4))),
         );
         expect(
-          find.byWidgetPredicate(
-            (widget) =>
-                widget is MouseRegion &&
-                widget.cursor == SystemMouseCursors.resizeColumn,
-          ),
+          find.byWidgetPredicate((widget) {
+            return widget is MouseRegion &&
+                widget.cursor == SystemMouseCursors.resizeColumn;
+          }),
           findsNothing,
         );
       });
@@ -385,11 +383,10 @@ void main() {
           );
           final found = find.byWidgetPredicate((widget) {
             if (widget is! RawGestureDetector) return false;
-            return widget.gestures.keys.any(
-              (type) =>
-                  type == HorizontalDragGestureRecognizer ||
-                  type == VerticalDragGestureRecognizer,
-            );
+            return widget.gestures.keys.any((type) {
+              return type == HorizontalDragGestureRecognizer ||
+                  type == VerticalDragGestureRecognizer;
+            });
           });
           expect(found, findsNothing);
         },
@@ -410,12 +407,11 @@ void main() {
         final gesture = await tester.startGesture(_dividerCenter(tester));
         await gesture.moveBy(const Offset(20, 0));
         await tester.pump();
-        final overlays = find.byWidgetPredicate(
-          (widget) =>
-              widget is MouseRegion &&
+        final overlays = find.byWidgetPredicate((widget) {
+          return widget is MouseRegion &&
               (widget.cursor == SystemMouseCursors.resizeColumn ||
-                  widget.cursor == SystemMouseCursors.resizeRow),
-        );
+                  widget.cursor == SystemMouseCursors.resizeRow);
+        });
         expect(overlays, findsNothing);
         await gesture.up();
       });
@@ -544,11 +540,13 @@ double _bodyWidth(WidgetTester tester, String id) => tester
     )
     .width;
 
-Widget _centered(Widget child) =>
-    Center(child: SizedBox(width: 600, height: 200, child: child));
+Widget _centered(Widget child) {
+  return Center(child: SizedBox(width: 600, height: 200, child: child));
+}
 
-Offset _dividerCenter(WidgetTester tester) =>
-    tester.getCenter(find.byType(PlatView));
+Offset _dividerCenter(WidgetTester tester) {
+  return tester.getCenter(find.byType(PlatView));
+}
 
 Color _dividerColor(WidgetTester tester) => tester
     .widget<ColoredBox>(
@@ -607,7 +605,8 @@ bool _splitChromeUses(Element split, Type type) {
   return found;
 }
 
-PlatThemeData _theme({double thickness = 0, double hitSlop = 8}) =>
-    PlatThemeData(
-      divider: PlatDividerTheme(thickness: thickness, hitSlop: hitSlop),
-    );
+PlatThemeData _theme({double thickness = 0, double hitSlop = 8}) {
+  return PlatThemeData(
+    divider: PlatDividerTheme(thickness: thickness, hitSlop: hitSlop),
+  );
+}
