@@ -12,7 +12,7 @@ sealed class PlatDragPayload {
 
   String get id;
 
-  const PlatDragPayload({required this.source, this.feedbackAnchor = .zero});
+  const new({required this.source, this.feedbackAnchor = .zero});
 }
 
 @immutable
@@ -21,7 +21,7 @@ final class TabDragPayload extends PlatDragPayload {
   final TabSnapshot tab;
   final String sourceTabGroupId;
 
-  const TabDragPayload({
+  const new({
     required this.tab,
     required super.source,
     required this.sourceTabGroupId,
@@ -37,7 +37,7 @@ final class TabDragPayload extends PlatDragPayload {
 final class LeafDragPayload extends PlatDragPayload {
   final LeafSnapshot leaf;
 
-  const LeafDragPayload({required this.leaf, required super.source});
+  const new({required this.leaf, required super.source});
 
   @override
   String get id => leaf.id;

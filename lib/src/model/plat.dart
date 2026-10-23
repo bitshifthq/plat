@@ -66,10 +66,10 @@ sealed class Plat {
   /// Allocation hint applied when this node sits inside a parent split.
   final PlatSize size;
 
-  const Plat({this.id, this.size = const .auto()});
+  const new({this.id, this.size = const .auto()});
 
   /// A vertical split over [children]. Shorthand for [PlatSplit.column].
-  const factory Plat.column({
+  const factory column({
     String? id,
     required List<Plat> children,
     PlatSize size,
@@ -77,7 +77,7 @@ sealed class Plat {
   }) = PlatSplit.column;
 
   /// A standalone leaf. Redirects to [PlatLeaf.new].
-  const factory Plat.leaf({
+  const factory leaf({
     String? id,
     PlatSize size,
     Object? data,
@@ -87,7 +87,7 @@ sealed class Plat {
   }) = PlatLeaf;
 
   /// A horizontal split over [children]. Shorthand for [PlatSplit.row].
-  const factory Plat.row({
+  const factory row({
     String? id,
     required List<Plat> children,
     PlatSize size,
@@ -96,7 +96,7 @@ sealed class Plat {
 
   /// A structural slot wrapping an optional [child]. Redirects to
   /// [PlatSlot.new].
-  const factory Plat.slot({
+  const factory slot({
     String? id,
     PlatSize size,
     Plat? child,
@@ -105,7 +105,7 @@ sealed class Plat {
   }) = PlatSlot;
 
   /// A tab group over [tabs]. Redirects to [PlatTabGroup.new].
-  const factory Plat.tabs(
+  const factory tabs(
     List<PlatTab> tabs, {
     String? id,
     PlatSize size,
@@ -136,7 +136,7 @@ final class PlatTab {
   /// When true, the tab is the preview tab for its containing tab group.
   final bool preview;
 
-  const PlatTab({
+  const new({
     required this.child,
     this.title = '',
     this.pinned = false,
@@ -148,7 +148,7 @@ final class PlatTab {
        );
 
   /// Convenience constructor for a tab backed by a single [PlatLeaf].
-  factory PlatTab.leaf({
+  factory leaf({
     String? id,
     PlatSize size = const .auto(),
     Object? data,
@@ -190,7 +190,7 @@ final class PlatLeaf extends Plat {
   /// When true, the default UI may expose a handle for dragging this leaf.
   final bool draggable;
 
-  const PlatLeaf({
+  const new({
     super.id,
     super.size,
     this.data,
@@ -218,7 +218,7 @@ final class PlatSlot extends Plat {
   /// fill the slot's bounds rather than the whole tree.
   final bool boundsMaximize;
 
-  const PlatSlot({
+  const new({
     super.id,
     super.size,
     this.child,
@@ -244,7 +244,7 @@ final class PlatSplit extends Plat {
   /// Children, in order along [axis]. Two or more.
   final List<Plat> children;
 
-  const PlatSplit({
+  const new({
     super.id,
     required this.axis,
     required this.children,
@@ -253,7 +253,7 @@ final class PlatSplit extends Plat {
   });
 
   /// A vertical split over [children].
-  const factory PlatSplit.column({
+  const factory column({
     String? id,
     required List<Plat> children,
     PlatSize size,
@@ -261,21 +261,21 @@ final class PlatSplit extends Plat {
   }) = PlatSplit._column;
 
   /// A horizontal split over [children].
-  const factory PlatSplit.row({
+  const factory row({
     String? id,
     required List<Plat> children,
     PlatSize size,
     bool resizable,
   }) = PlatSplit._row;
 
-  const PlatSplit._column({
+  const new _column({
     super.id,
     required this.children,
     super.size,
     this.resizable = true,
   }) : axis = .vertical;
 
-  const PlatSplit._row({
+  const new _row({
     super.id,
     required this.children,
     super.size,
@@ -302,7 +302,7 @@ final class PlatTabGroup extends Plat {
   /// The tabs in this group, in display order.
   final List<PlatTab> tabs;
 
-  const PlatTabGroup(
+  const new(
     this.tabs, {
     super.id,
     super.size,

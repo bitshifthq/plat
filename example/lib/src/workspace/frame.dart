@@ -6,11 +6,7 @@ final class ThemePreviewFrame extends StatelessWidget {
   final ThemePreset preset;
   final Widget child;
 
-  const ThemePreviewFrame({
-    super.key,
-    required this.preset,
-    required this.child,
-  });
+  const new({super.key, required this.preset, required this.child});
 
   @override
   Widget build(BuildContext context) {

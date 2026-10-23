@@ -12,14 +12,14 @@ final class PresetActionButton {
   final double startPadding;
   final BorderRadius radius;
 
-  const PresetActionButton.editor({
+  const new editor({
     this.size = 32,
     this.iconSize = 14,
     this.startPadding = 10,
     this.radius = const .all(.circular(5)),
   });
 
-  const PresetActionButton.tab({
+  const new tab({
     this.size = 24,
     this.iconSize = 14,
     this.startPadding = 0,
@@ -34,7 +34,7 @@ final class PresetActivityButton {
   final bool usesAccent;
   final bool bordered;
 
-  const PresetActivityButton({
+  const new({
     this.size = 36,
     this.iconSize = 18,
     this.radius = const .all(Radius.circular(8)),
@@ -144,7 +144,7 @@ final class PresetChrome {
 
   final EdgeInsetsGeometry toolWindowPadding;
 
-  const PresetChrome({
+  const new({
     this.wrapsGroups = false,
     this.frameOnCanvas = false,
     this.activityBarOnCanvas = false,
@@ -280,7 +280,7 @@ final class PresetPalette {
 
   final BorderRadius groupRadius;
 
-  const PresetPalette({
+  const new({
     required this.accent,
     required this.border,
     required this.canvas,
@@ -388,7 +388,7 @@ final class PresetTabChrome {
   final PresetCloseVisibility closeVisibility;
   final double previewHeight;
 
-  const PresetTabChrome({
+  const new({
     this.closeButtonSize = 16,
     this.closeIconSize = 11,
     this.closeHoverFill,
@@ -460,7 +460,7 @@ enum ThemePreset {
   final PresetPalette palette;
   final PresetChrome chrome;
 
-  const ThemePreset(
+  new(
     this.label,
     this.description,
     this.shape, {

@@ -35,7 +35,7 @@ class SelectListenableBuilder<L extends Listenable, T> extends StatefulWidget {
   /// `next != previous`.
   final bool Function(T previous, T next)? buildWhen;
 
-  const SelectListenableBuilder({
+  const new({
     super.key,
     required this.listenable,
     required this.selector,

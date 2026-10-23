@@ -6,11 +6,7 @@ final class ThemeEditorActions extends StatelessWidget {
   final ThemePreset preset;
   final ValueChanged<ThemeEditorTabKind> onOpenTab;
 
-  const ThemeEditorActions({
-    super.key,
-    required this.preset,
-    required this.onOpenTab,
-  });
+  const new({super.key, required this.preset, required this.onOpenTab});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +30,7 @@ final class ThemeEditorActions extends StatelessWidget {
 final class ThemeEditorPlaceholder extends StatelessWidget {
   final ThemePreset preset;
 
-  const ThemeEditorPlaceholder({super.key, required this.preset});
+  const new({super.key, required this.preset});
 
   @override
   Widget build(BuildContext context) {
@@ -58,18 +54,15 @@ final class ThemeEditorPlaceholder extends StatelessWidget {
                 Text(
                   'No editor tabs open',
                   textAlign: .center,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: colors.onSurface,
-                    fontWeight: .w600,
-                  ),
+                  style: Theme.of(context).textTheme.titleSmall
+                      ?.copyWith(color: colors.onSurface, fontWeight: .w600),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'Open a tab from Navigator to continue.',
                   textAlign: .center,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: colors.onSurfaceVariant,
-                  ),
+                  style: Theme.of(context).textTheme.bodySmall
+                      ?.copyWith(color: colors.onSurfaceVariant),
                 ),
               ],
             ),
@@ -89,7 +82,7 @@ enum ThemeEditorTabKind {
   final String label;
   final IconData icon;
 
-  const ThemeEditorTabKind(this.label, this.icon);
+  new(this.label, this.icon);
 }
 
 final class _EditorActionButton extends StatelessWidget {
@@ -97,7 +90,7 @@ final class _EditorActionButton extends StatelessWidget {
   final ThemeEditorTabKind kind;
   final VoidCallback onPressed;
 
-  const _EditorActionButton({
+  const new({
     required this.preset,
     required this.kind,
     required this.onPressed,
@@ -147,9 +140,8 @@ final class _EditorActionButton extends StatelessWidget {
       iconColor: WidgetStatePropertyAll(colors.onSurfaceVariant),
       iconSize: WidgetStatePropertyAll(action.iconSize),
       textStyle: WidgetStatePropertyAll(
-        Theme.of(
-          context,
-        ).textTheme.labelSmall?.copyWith(fontWeight: .w500, height: 1.1),
+        Theme.of(context).textTheme.labelSmall
+            ?.copyWith(fontWeight: .w500, height: 1.1),
       ),
     );
   }

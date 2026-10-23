@@ -11,7 +11,7 @@ final class ThemeSlotShell extends StatelessWidget {
   final Widget? child;
   final ValueChanged<String> onMinimize;
 
-  const ThemeSlotShell({
+  const new({
     super.key,
     required this.preset,
     required this.slot,
@@ -66,7 +66,7 @@ final class _GroupShell extends StatelessWidget {
   final ThemePreset preset;
   final Widget child;
 
-  const _GroupShell({required this.preset, required this.child});
+  const new({required this.preset, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ final class _ToolWindowShell extends StatelessWidget {
   final VoidCallback onMinimize;
   final Widget child;
 
-  const _ToolWindowShell({
+  const new({
     required this.preset,
     required this.title,
     required this.onMinimize,

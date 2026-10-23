@@ -32,7 +32,7 @@ sealed class PlatNode {
   /// scope. At most one node in any scope is maximized at a time.
   final bool maximized;
 
-  const PlatNode({
+  const new({
     required this.id,
     this.hidden = false,
     this.maximized = false,

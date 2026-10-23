@@ -4,7 +4,7 @@ import 'branding.dart';
 import 'workspace/workspace.dart';
 
 final class PlatExampleApp extends StatelessWidget {
-  const PlatExampleApp({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {

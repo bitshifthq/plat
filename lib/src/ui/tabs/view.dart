@@ -38,7 +38,7 @@ final class PlatTabGroupView extends StatelessWidget {
   final Widget Function(String id) platBuilder;
   final DropPolicy? dropPolicy;
 
-  const PlatTabGroupView({
+  const new({
     super.key,
     required this.view,
     required this.controller,
@@ -133,7 +133,7 @@ final class PlatTabStrip extends StatefulWidget {
   final Widget? stripTrailing;
   final Widget Function(BuildContext context, TabSnapshot tab) buildPlaceholder;
 
-  const PlatTabStrip({
+  const new({
     super.key,
     required this.view,
     required this.theme,
@@ -329,7 +329,7 @@ final class _DraggableTab extends StatefulWidget {
   final PlatController sourceController;
   final DragFeedbackBuilder? dragFeedbackBuilder;
 
-  const _DraggableTab({
+  const new({
     required this.view,
     required this.tab,
     required this.index,
@@ -518,7 +518,7 @@ Offset _centerDragAnchorStrategy(
 final class _TabSizeObserver extends SingleChildRenderObjectWidget {
   final ValueChanged<Size> onChanged;
 
-  const _TabSizeObserver({required this.onChanged, required super.child});
+  const new({required this.onChanged, required super.child});
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -538,7 +538,7 @@ final class _RenderTabSizeObserver extends RenderProxyBox {
   ValueChanged<Size> onChanged;
   Size? _lastSize;
 
-  _RenderTabSizeObserver(this.onChanged);
+  new(this.onChanged);
 
   @override
   void performLayout() {
@@ -556,7 +556,7 @@ final class _TabBarDropTarget extends StatefulWidget {
   final Widget Function(BuildContext, ({int at, TabDragPayload payload})?)
   builder;
 
-  const _TabBarDropTarget({
+  const new({
     required this.tabs,
     required this.controller,
     required this.dropPolicy,

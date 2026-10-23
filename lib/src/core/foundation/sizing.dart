@@ -14,19 +14,19 @@ part of 'foundation.dart';
 /// const PlatExtent unspecified = .auto();
 /// ```
 sealed class PlatExtent {
-  const PlatExtent._();
+  const new _();
 
   /// Absolute logical-pixel extent. [value] must be non-negative.
-  const factory PlatExtent.pixel(double value) = Pixels._;
+  const factory pixel(double value) = Pixels._;
 
   /// Fraction of the parent's available extent. [value] is in `0..1`.
-  const factory PlatExtent.fraction(double value) = Fraction._;
+  const factory fraction(double value) = Fraction._;
 
   /// Sentinel meaning "no concrete value": defer to the default at
   /// this position. As a size's initial value, the node shares leftover
   /// space with sibling flexible panes; as a min or max bound, it imposes
   /// no bound.
-  const factory PlatExtent.auto() = AutoExtent._;
+  const factory auto() = AutoExtent._;
 }
 
 /// Absolute logical-pixel extent.
@@ -36,7 +36,7 @@ final class Pixels extends PlatExtent {
   /// Pixel count. Non-negative.
   final double value;
 
-  const Pixels._(this.value)
+  const new _(this.value)
     : assert(value >= 0, 'pixels must be non-negative'),
       super._();
 
@@ -57,7 +57,7 @@ final class Fraction extends PlatExtent {
   /// Fraction in `0..1`.
   final double value;
 
-  const Fraction._(this.value)
+  const new _(this.value)
     : assert(value >= 0 && value <= 1, 'fraction must be in 0..1'),
       super._();
 
@@ -75,7 +75,7 @@ final class Fraction extends PlatExtent {
 @internal
 @immutable
 final class AutoExtent extends PlatExtent {
-  const AutoExtent._() : super._();
+  const new _() : super._();
 
   @override
   int get hashCode => Object.hash('extent', 'auto');
@@ -111,15 +111,15 @@ final class AutoExtent extends PlatExtent {
 /// );
 /// ```
 sealed class PlatSize {
-  const PlatSize._();
+  const new _();
 
   /// Locked extent. The neighbouring divider does not drag.
   /// [extent] must be a concrete value, not [PlatExtent.auto].
-  const factory PlatSize.fixed(PlatExtent extent) = FixedSize._;
+  const factory fixed(PlatExtent extent) = FixedSize._;
 
   /// Variable extent. [initial] is the starting value; drags rewrite
   /// it. [min] and [max] clamp it. Each defaults to [PlatExtent.auto].
-  const factory PlatSize.resizable({
+  const factory resizable({
     PlatExtent initial,
     PlatExtent min,
     PlatExtent max,
@@ -127,7 +127,7 @@ sealed class PlatSize {
 
   /// Variable extent with no bounds, sharing leftover space with
   /// sibling resizables.
-  const factory PlatSize.auto() = FlexibleSize._auto;
+  const factory auto() = FlexibleSize._auto;
 }
 
 /// Locked extent. See [PlatSize.fixed].
@@ -137,7 +137,7 @@ final class FixedSize extends PlatSize {
   /// The locked length. Never [AutoExtent].
   final PlatExtent extent;
 
-  const FixedSize._(this.extent)
+  const new _(this.extent)
     : assert(
         extent is! AutoExtent,
         'PlatSize.fixed requires a concrete extent (pixel or fraction)',
@@ -168,13 +168,13 @@ final class FlexibleSize extends PlatSize {
   /// Upper bound, or [PlatExtent.auto] for no bound.
   final PlatExtent max;
 
-  const FlexibleSize._({
+  const new _({
     this.initial = const AutoExtent._(),
     this.min = const AutoExtent._(),
     this.max = const AutoExtent._(),
   }) : super._();
 
-  const FlexibleSize._auto()
+  const new _auto()
     : initial = const AutoExtent._(),
       min = const AutoExtent._(),
       max = const AutoExtent._(),

@@ -21,7 +21,7 @@ final class SplitNode extends PlatNode {
   /// The split's children, in order along [axis]. Always two or more.
   final List<PlatNode> children;
 
-  SplitNode({
+  new({
     required super.id,
     required this.axis,
     required this.children,

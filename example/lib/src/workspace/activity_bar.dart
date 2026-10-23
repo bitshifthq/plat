@@ -10,17 +10,11 @@ final class ThemeActivityBar extends StatelessWidget {
   final PlatController controller;
   final _ActivitySide _side;
 
-  const ThemeActivityBar.left({
-    super.key,
-    required this.preset,
-    required this.controller,
-  }) : _side = .left;
+  const new left({super.key, required this.preset, required this.controller})
+    : _side = .left;
 
-  const ThemeActivityBar.right({
-    super.key,
-    required this.preset,
-    required this.controller,
-  }) : _side = .right;
+  const new right({super.key, required this.preset, required this.controller})
+    : _side = .right;
 
   List<ThemePanelTarget> get _targets => switch (_side) {
     .left => leftPanelTargets,

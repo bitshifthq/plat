@@ -31,7 +31,7 @@ class DropOverlay extends StatefulWidget {
   final PlatController controller;
   final DropPolicy? dropPolicy;
 
-  const DropOverlay({
+  const new({
     super.key,
     required this.target,
     required this.controller,
@@ -167,7 +167,7 @@ class _ZoneHint extends StatelessWidget {
   final DropZone zone;
   final _AncestorClip? clip;
 
-  const _ZoneHint({super.key, required this.zone, required this.clip});
+  const new({super.key, required this.zone, required this.clip});
 
   @override
   Widget build(BuildContext context) {

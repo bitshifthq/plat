@@ -28,7 +28,7 @@ final class PlatControllerImpl extends PlatController {
   var _interactionDepth = 0;
   PlatNode? _interactionStartRoot;
 
-  PlatControllerImpl({
+  new({
     Plat? initialPlat,
     int undoLimit = 100,
     int recentLimit = 200,
@@ -40,7 +40,7 @@ final class PlatControllerImpl extends PlatController {
          idConflict: idConflict,
        );
 
-  PlatControllerImpl._(
+  new _(
     PlatNode root, {
     required this.undoLimit,
     required this.recentLimit,

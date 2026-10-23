@@ -7,7 +7,7 @@ final class PresetCard extends StatelessWidget {
   final ThemePreset selected;
   final ValueChanged<ThemePreset> onSelected;
 
-  const PresetCard(this.value, this.selected, this.onSelected, {super.key});
+  const new(this.value, this.selected, this.onSelected, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ final class _CardHeader extends StatelessWidget {
   final ThemePreset value;
   final bool showShape;
 
-  const _CardHeader({required this.value, this.showShape = false});
+  const new({required this.value, this.showShape = false});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ final class _CardHeader extends StatelessWidget {
 final class _CompactContent extends StatelessWidget {
   final ThemePreset value;
 
-  const _CompactContent(this.value);
+  const new(this.value);
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ final class _CompactContent extends StatelessWidget {
 final class _FullContent extends StatelessWidget {
   final ThemePreset value;
 
-  const _FullContent(this.value);
+  const new(this.value);
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +133,7 @@ final class _FullContent extends StatelessWidget {
 
 final class _PreviewStrip extends StatelessWidget {
   final ThemePreset preset;
-  const _PreviewStrip({required this.preset});
+  const new({required this.preset});
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +164,7 @@ final class _PreviewTab extends StatelessWidget {
   final ThemePreset preset;
   final int flex;
   final bool selected;
-  const _PreviewTab(this.preset, this.flex, {this.selected = false});
+  const new(this.preset, this.flex, {this.selected = false});
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +184,7 @@ final class _PreviewTab extends StatelessWidget {
 
 final class _Swatch extends StatelessWidget {
   final Color color;
-  const _Swatch({required this.color});
+  const new({required this.color});
 
   @override
   Widget build(BuildContext context) {

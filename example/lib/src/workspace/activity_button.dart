@@ -9,7 +9,7 @@ final class ThemeActivityButton extends StatelessWidget {
   final bool active;
   final VoidCallback onPressed;
 
-  const ThemeActivityButton({
+  const new({
     super.key,
     required this.preset,
     required this.icon,

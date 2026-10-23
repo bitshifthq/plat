@@ -21,7 +21,7 @@ final class SlotNode extends PlatNode {
   /// the slot's bounds rather than the whole tree.
   final bool boundsMaximize;
 
-  SlotNode({
+  new({
     required super.id,
     this.child,
     this.persistent = false,

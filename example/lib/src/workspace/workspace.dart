@@ -12,7 +12,7 @@ import 'workspace_view.dart';
 final class WorkspaceExample extends StatefulWidget {
   final ThemePreset initialPreset;
 
-  const WorkspaceExample({super.key, this.initialPreset = .material});
+  const new({super.key, this.initialPreset = .material});
 
   @override
   State<WorkspaceExample> createState() => _WorkspaceExampleState();

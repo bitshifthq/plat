@@ -53,8 +53,11 @@ typedef LeafBuilder = Widget Function(BuildContext context, LeafSnapshot leaf);
 
 /// Renders a [PlatSlot] wrapper. [child] is the already-built widget for
 /// the slot's child node, or `null` when the slot is empty.
-typedef SlotBuilder =
-    Widget Function(BuildContext context, SlotSnapshot slot, Widget? child);
+typedef SlotBuilder = Widget Function(
+  BuildContext context,
+  SlotSnapshot slot,
+  Widget? child,
+);
 
 /// Renders one pane and subscribes only to that pane's snapshot.
 ///
@@ -69,7 +72,7 @@ final class PlatPaneView extends StatelessWidget {
   final PlatTabBarBuilder? tabBar;
   final SlotBuilder? slotBuilder;
 
-  const PlatPaneView({
+  const new({
     super.key,
     required this.paneId,
     required this.tabBar,

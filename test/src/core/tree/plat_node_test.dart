@@ -336,9 +336,11 @@ void main() {
             activeIndex: 1,
           );
 
-          final next =
-              root.insertLeaf('group', tab('mid'), activate: false)
-                  as TabGroupNode;
+          final next = root.insertLeaf(
+            'group',
+            tab('mid'),
+            activate: false,
+          ) as TabGroupNode;
 
           expect(next.activeIndex, 1);
         });
@@ -369,9 +371,10 @@ void main() {
             activeIndex: 1,
           );
 
-          final next =
-              root.insertTab('group', treeTab('new-preview', preview: true))
-                  as TabGroupNode;
+          final next = root.insertTab(
+            'group',
+            treeTab('new-preview', preview: true),
+          ) as TabGroupNode;
 
           expect(next.tabs.map((tab) => tab.id).toList(), [
             'a',
@@ -394,13 +397,11 @@ void main() {
               ],
             );
 
-            final next =
-                root.insertTab(
-                      'group',
-                      treeTab('new-preview', preview: true),
-                      index: 0,
-                    )
-                    as TabGroupNode;
+            final next = root.insertTab(
+              'group',
+              treeTab('new-preview', preview: true),
+              index: 0,
+            ) as TabGroupNode;
 
             expect(next.tabs.map((tab) => tab.id).toList(), [
               'new-preview',
@@ -773,12 +774,10 @@ void main() {
             TabGroupNode(id: 'right', tabs: treeTabs([tab('b')])),
           ]);
 
-          final next =
-              root.resizeSplit('root', const [
-                    .resizable(initial: .fraction(0.3)),
-                    .resizable(initial: .fraction(0.7)),
-                  ])
-                  as SplitNode;
+          final next = root.resizeSplit('root', const [
+            .resizable(initial: .fraction(0.3)),
+            .resizable(initial: .fraction(0.7)),
+          ]) as SplitNode;
 
           expect(
             next.children[0].size,

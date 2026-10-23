@@ -9,7 +9,7 @@ final class ThemeEmptyPane extends StatelessWidget {
   final LeafSnapshot leaf;
   final ValueChanged<ThemeEditorTabKind> onOpenEditorTab;
 
-  const ThemeEmptyPane({
+  const new({
     super.key,
     required this.preset,
     required this.leaf,
@@ -70,7 +70,7 @@ final class _NavigatorPane extends StatelessWidget {
   final ThemePreset preset;
   final ValueChanged<ThemeEditorTabKind> onOpenEditorTab;
 
-  const _NavigatorPane({required this.preset, required this.onOpenEditorTab});
+  const new({required this.preset, required this.onOpenEditorTab});
 
   @override
   Widget build(BuildContext context) {

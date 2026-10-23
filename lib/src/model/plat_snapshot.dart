@@ -46,7 +46,7 @@ sealed class PlatSnapshot {
   /// scope.
   final bool maximized;
 
-  const PlatSnapshot({
+  const new({
     required this.id,
     required this.size,
     required this.hidden,
@@ -103,7 +103,7 @@ final class LeafSnapshot extends PlatSnapshot {
   /// Opaque host payload.
   final Object? data;
 
-  const LeafSnapshot({
+  const new({
     required super.id,
     required super.size,
     required super.hidden,
@@ -157,7 +157,7 @@ final class SlotSnapshot extends PlatSnapshot {
   /// The wrapped snapshot, or `null` when the slot is empty.
   final PlatSnapshot? child;
 
-  const SlotSnapshot({
+  const new({
     required super.id,
     required super.size,
     required super.hidden,
@@ -203,7 +203,7 @@ final class SplitSnapshot extends PlatSnapshot {
   /// Children, in order along [axis].
   final List<PlatSnapshot> children;
 
-  const SplitSnapshot({
+  const new({
     required super.id,
     required super.size,
     required super.hidden,
@@ -263,7 +263,7 @@ final class TabSnapshot {
   /// Child subtree rendered when this tab is active.
   final PlatSnapshot child;
 
-  const TabSnapshot({
+  const new({
     required this.id,
     required this.title,
     required this.pinned,
@@ -325,7 +325,7 @@ final class TabGroupSnapshot extends PlatSnapshot {
   /// The tabs managed by this group, in display order.
   final List<TabSnapshot> tabs;
 
-  const TabGroupSnapshot({
+  const new({
     required super.id,
     required super.size,
     required super.hidden,

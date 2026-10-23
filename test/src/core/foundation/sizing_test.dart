@@ -97,9 +97,10 @@ void main() {
       });
 
       test('preserves mixed-unit bounds', () {
-        const size =
-            PlatSize.resizable(initial: .fraction(0.3), min: .pixel(200))
-                as FlexibleSize;
+        const size = PlatSize.resizable(
+          initial: .fraction(0.3),
+          min: .pixel(200),
+        ) as FlexibleSize;
 
         expect(size.initial, const PlatExtent.fraction(0.3));
         expect(size.min, const PlatExtent.pixel(200));
@@ -107,9 +108,10 @@ void main() {
       });
 
       test('copyWith overrides only the provided bound', () {
-        const original =
-            PlatSize.resizable(initial: .fraction(0.3), min: .pixel(200))
-                as FlexibleSize;
+        const original = PlatSize.resizable(
+          initial: .fraction(0.3),
+          min: .pixel(200),
+        ) as FlexibleSize;
 
         final updated = original.copyWith(max: const .fraction(0.5));
 

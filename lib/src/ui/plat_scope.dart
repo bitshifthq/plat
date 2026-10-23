@@ -34,7 +34,7 @@ final class PlatLeafKeyRegistry {
 class PlatScope extends StatefulWidget {
   final Widget child;
 
-  const PlatScope({super.key, required this.child});
+  const new({super.key, required this.child});
 
   @override
   State<PlatScope> createState() => _PlatScopeState();
@@ -59,7 +59,7 @@ class _PlatScopeState extends State<PlatScope> {
 class _InheritedPlatScope extends InheritedWidget {
   final PlatLeafKeyRegistry registry;
 
-  const _InheritedPlatScope({required this.registry, required super.child});
+  const new({required this.registry, required super.child});
 
   @override
   bool updateShouldNotify(_InheritedPlatScope oldWidget) {

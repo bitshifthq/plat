@@ -89,14 +89,14 @@ class PlatSlotData extends ParentDataWidget<_SplitParentData> {
   final String? contentId;
   final PlatSize? platSize;
 
-  const PlatSlotData.content({
+  const new content({
     super.key,
     required String this.contentId,
     required PlatSize this.platSize,
     required super.child,
   });
 
-  const PlatSlotData.divider({super.key, required super.child})
+  const new divider({super.key, required super.child})
     : contentId = null,
       platSize = null;
 
@@ -149,7 +149,7 @@ class PlatSplit extends MultiChildRenderObjectWidget {
   final ValueChanged<List<PlatSize>> onCommit;
   final MouseCursor? cursor;
 
-  const PlatSplit({
+  const new({
     super.key,
     required this.axis,
     required this.spacing,
@@ -195,7 +195,7 @@ class RenderPlatSplit extends RenderBox
         ContainerRenderObjectMixin<RenderBox, _SplitParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, _SplitParentData>
     implements MouseTrackerAnnotation {
-  RenderPlatSplit({
+  new({
     required this._axis,
     required this._spacing,
     required this.hitSlop,

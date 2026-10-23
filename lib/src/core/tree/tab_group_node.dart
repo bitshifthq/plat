@@ -21,7 +21,7 @@ final class TabGroupNode extends PlatNode {
   /// The tabs managed by this group, in display order.
   final List<TabNode> tabs;
 
-  TabGroupNode({
+  new({
     required super.id,
     this.tabs = const [],
     this.activeIndex = 0,
@@ -38,8 +38,7 @@ final class TabGroupNode extends PlatNode {
        );
 
   /// A tab group with no tabs yet.
-  factory TabGroupNode.empty({String? id}) =>
-      TabGroupNode(id: id ?? generateNodeId());
+  factory empty({String? id}) => TabGroupNode(id: id ?? generateNodeId());
 
   /// Returns the first focused leaf in the active tab, or its first leaf when
   /// unfocused.

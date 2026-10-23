@@ -115,7 +115,7 @@ final class PlatTabChip extends StatelessWidget {
   /// How to clip this chip's content.
   final Clip clipBehavior;
 
-  const PlatTabChip({
+  const new({
     super.key,
     this.leading,
     this.label,
@@ -312,7 +312,7 @@ final class PlatTabCloseButton extends StatelessWidget {
   /// Logical size of the icon.
   final double iconSize;
 
-  const PlatTabCloseButton({
+  const new({
     super.key,
     this.onPressed,
     this.tooltip,
@@ -406,7 +406,7 @@ final class PlatTabDetails {
   final Set<WidgetState> states;
 
   @internal
-  PlatTabDetails({
+  new({
     required this.snapshot,
     required this.group,
     required this.index,
@@ -436,7 +436,7 @@ final class _PlatTabScope extends InheritedWidget {
   final VoidCallback? close;
   final bool hideCloseButton;
 
-  const _PlatTabScope({
+  const new({
     super.key,
     required this.details,
     this.close,
@@ -469,7 +469,7 @@ final class _HoverBox extends StatefulWidget {
   final MouseCursor cursor;
   final Widget Function(BuildContext context, {required bool hovered}) builder;
 
-  const _HoverBox({required this.cursor, required this.builder});
+  const new({required this.cursor, required this.builder});
 
   @override
   State<_HoverBox> createState() => _HoverBoxState();

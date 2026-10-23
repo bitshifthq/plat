@@ -60,14 +60,14 @@ abstract base class PlatController extends ChangeNotifier {
   /// attach mutations handle incoming ids that already exist in this controller
   /// (default [IdConflict.reject]). [replace] ignores [idConflict] because
   /// it swaps the whole tree.
-  factory PlatController({
+  factory({
     Plat? initialPlat,
     int undoLimit,
     int recentLimit,
     IdConflict idConflict,
   }) = PlatControllerImpl;
 
-  PlatController._base();
+  new _base();
 
   /// True when [redo] would do something.
   bool get canRedo;

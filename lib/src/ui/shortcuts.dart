@@ -14,19 +14,19 @@ final class SplitIntent extends Intent {
   final Axis axis;
   final PlatSide side;
 
-  const SplitIntent({required this.axis, this.side = .right});
+  const new({required this.axis, this.side = .right});
 }
 
 /// Close the focused tab.
 @internal
 final class CloseTabIntent extends Intent {
-  const CloseTabIntent();
+  const new();
 }
 
 /// Close every tab in the focused tab group node.
 @internal
 final class CloseGroupIntent extends Intent {
-  const CloseGroupIntent();
+  const new();
 }
 
 /// Move active tab in the focused tab group node by [delta] (signed).
@@ -34,7 +34,7 @@ final class CloseGroupIntent extends Intent {
 final class CycleTabIntent extends Intent {
   final int delta;
 
-  const CycleTabIntent(this.delta);
+  const new(this.delta);
 }
 
 /// Activate the n-th tab (1-indexed) in the focused tab group node.
@@ -42,7 +42,7 @@ final class CycleTabIntent extends Intent {
 final class JumpTabIntent extends Intent {
   final int oneIndex;
 
-  const JumpTabIntent(this.oneIndex);
+  const new(this.oneIndex);
 }
 
 /// Move focus to the previous / next tab group node in tree order.
@@ -50,25 +50,25 @@ final class JumpTabIntent extends Intent {
 final class FocusDirectionIntent extends Intent {
   final PlatSide direction;
 
-  const FocusDirectionIntent(this.direction);
+  const new(this.direction);
 }
 
 /// Toggle maximize on the focused tab group node.
 @internal
 final class MaximizeIntent extends Intent {
-  const MaximizeIntent();
+  const new();
 }
 
 /// Undo a layout change.
 @internal
 final class PlatUndoIntent extends Intent {
-  const PlatUndoIntent();
+  const new();
 }
 
 /// Redo a layout change.
 @internal
 final class PlatRedoIntent extends Intent {
-  const PlatRedoIntent();
+  const new();
 }
 
 /// A bundle of keyboard activators mapped to plat intents. The view
@@ -91,10 +91,10 @@ final class PlatKeyBindings {
 
   final Map<ShortcutActivator, Intent> activators;
 
-  const PlatKeyBindings(this.activators);
+  const new(this.activators);
 
   /// `mac` on Apple platforms, `desktop` elsewhere.
-  factory PlatKeyBindings.platformDefault() {
+  factory platformDefault() {
     final isApple =
         defaultTargetPlatform == .macOS || defaultTargetPlatform == .iOS;
     return isApple ? mac : desktop;
@@ -200,5 +200,5 @@ Map<Type, Action<Intent>> actionsFor(PlatController c) => {
 };
 
 class _Fn<T extends Intent> extends CallbackAction<T> {
-  _Fn(void Function(T) run) : super(onInvoke: (i) => run(i));
+  new(void Function(T) run) : super(onInvoke: (i) => run(i));
 }

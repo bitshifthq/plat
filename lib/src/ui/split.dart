@@ -17,7 +17,7 @@ class SplitRender extends StatefulWidget {
   final PlatController controller;
   final Widget Function(BuildContext, PlatSnapshot) childBuilder;
 
-  const SplitRender({
+  const new({
     super.key,
     required this.view,
     required this.controller,

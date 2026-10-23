@@ -16,7 +16,7 @@ final class ThemeWorkspaceView extends StatelessWidget {
   final bool showTabBarActions;
   final ValueChanged<ThemeEditorTabKind> onOpenEditorTab;
 
-  const ThemeWorkspaceView({
+  const new({
     super.key,
     required this.controller,
     required this.preset,

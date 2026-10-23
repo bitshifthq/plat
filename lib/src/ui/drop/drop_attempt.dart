@@ -24,7 +24,7 @@ final class DropAttempt {
   /// only — do not mutate through this reference.
   final PlatController sourceController;
 
-  const DropAttempt({
+  const new({
     required this.tab,
     required this.target,
     required this.zone,

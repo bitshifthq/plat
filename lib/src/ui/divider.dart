@@ -10,7 +10,7 @@ final class PlatDivider extends StatelessWidget {
   /// Active interaction states (`hovered`, `dragged`).
   final Set<WidgetState> states;
 
-  const PlatDivider({super.key, required this.states});
+  const new({super.key, required this.states});
 
   @override
   Widget build(BuildContext context) {

@@ -36,7 +36,7 @@ enum ThemePanelTarget {
   final String title;
   final IconData icon;
 
-  const ThemePanelTarget({
+  new({
     required this.slotId,
     required this.leafId,
     required this.title,

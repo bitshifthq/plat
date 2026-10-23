@@ -51,6 +51,8 @@ builders, and themeable chrome.
 
 ## Getting started
 
+Requires Dart 3.13 or later and Flutter 3.47 or later.
+
 Add `plat` to your app:
 
 ```sh

@@ -212,14 +212,12 @@ void main() {
       });
 
       TabSnapshot tabWith(PlatNode child) {
-        final tabs =
-            snapshotOf(
-                  TabGroupNode(
-                    id: 'group',
-                    tabs: [TabNode(child: child, title: 't')],
-                  ),
-                )
-                as TabGroupSnapshot;
+        final tabs = snapshotOf(
+          TabGroupNode(
+            id: 'group',
+            tabs: [TabNode(child: child, title: 't')],
+          ),
+        ) as TabGroupSnapshot;
         return tabs.tabs.single;
       }
 

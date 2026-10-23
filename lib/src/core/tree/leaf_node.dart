@@ -23,7 +23,7 @@ final class LeafNode extends PlatNode {
   /// is up to the host's leaf builder.
   final Object? data;
 
-  const LeafNode({
+  const new({
     required super.id,
     this.data,
     this.title = '',

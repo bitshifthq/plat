@@ -19,7 +19,7 @@ final class TabNode {
   /// When true, the tab is the preview tab for its containing tab group.
   final bool preview;
 
-  const TabNode({
+  const new({
     required this.child,
     this.title = '',
     this.pinned = false,

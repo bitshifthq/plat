@@ -1017,7 +1017,7 @@ PlatController _twoSidedController({bool persistentLeft = false}) =>
 class _Counter extends StatefulWidget {
   final String label;
 
-  const _Counter({required this.label});
+  const new({required this.label});
 
   @override
   State<_Counter> createState() => _CounterState();

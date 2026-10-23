@@ -74,7 +74,7 @@ class PlatView extends StatelessWidget {
   /// shortcuts.
   final bool autofocus;
 
-  const PlatView({
+  const new({
     super.key,
     required this.controller,
     required this.leafBuilder,

@@ -74,7 +74,7 @@ final class PlatDividerTheme {
   /// `SystemMouseCursors.resizeRow` for vertical splits at render time.
   final MouseCursor? cursor;
 
-  const PlatDividerTheme({
+  const new({
     this.thickness = 1,
     this.hitSlop = 4,
     this.decoration,
@@ -154,7 +154,7 @@ final class PlatDropHintTheme {
   /// a tab-group drop.
   final double edgeFraction;
 
-  const PlatDropHintTheme({
+  const new({
     this.fill,
     this.border,
     this.duration = const Duration(milliseconds: 120),
@@ -320,7 +320,7 @@ final class PlatTabBarTheme {
   /// `onSurfaceVariant` at render time.
   final WidgetStateProperty<Color?>? chipForegroundColor;
 
-  const PlatTabBarTheme({
+  const new({
     this.size = 32,
     this.padding = const EdgeInsets.symmetric(horizontal: 4),
     this.decoration,
@@ -529,7 +529,7 @@ final class PlatTabBarTheme {
 final class PlatTheme extends InheritedTheme {
   final PlatThemeData data;
 
-  const PlatTheme({super.key, required this.data, required super.child});
+  const new({super.key, required this.data, required super.child});
 
   @override
   bool updateShouldNotify(PlatTheme old) => old.data != data;
@@ -581,7 +581,7 @@ final class PlatThemeData extends ThemeExtension<PlatThemeData> {
   /// when an app wants the strip to match a known pane background.
   final Color? leafDragHandleBackgroundColor;
 
-  const PlatThemeData({
+  const new({
     this.tabBar = const PlatTabBarTheme(),
     this.divider = const PlatDividerTheme(),
     this.dropHint = const PlatDropHintTheme(),

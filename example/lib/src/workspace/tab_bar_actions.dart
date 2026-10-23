@@ -7,11 +7,7 @@ final class ThemeMinimizeButton extends StatelessWidget {
   final ThemePreset preset;
   final VoidCallback onPressed;
 
-  const ThemeMinimizeButton({
-    super.key,
-    required this.preset,
-    required this.onPressed,
-  });
+  const new({super.key, required this.preset, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

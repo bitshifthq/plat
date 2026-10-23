@@ -31,21 +31,27 @@ PlatTabDetails _placeholderDetails({
 }
 
 /// Builds the tab bar for a single [TabGroupSnapshot] group.
-typedef PlatTabBarBuilder =
-    PlatTabBar Function(BuildContext context, TabGroupSnapshot tabs);
+typedef PlatTabBarBuilder = PlatTabBar Function(
+  BuildContext context,
+  TabGroupSnapshot tabs,
+);
 
 /// Renders a single tab.
 ///
 /// Also used for the dragged-tab placeholder slot
 /// ([PlatTabBar.placeholderBuilder]).
-typedef PlatTabBuilder =
-    Widget Function(BuildContext context, PlatTabDetails tab);
+typedef PlatTabBuilder = Widget Function(
+  BuildContext context,
+  PlatTabDetails tab,
+);
 
 /// Renders the dragged-tab feedback widget that follows the pointer.
 /// Returning `null` falls through to the package default: the source tab
 /// chrome, sized to the rendered chip, with the built-in close button hidden.
-typedef DragFeedbackBuilder =
-    Widget? Function(BuildContext context, PlatTabDetails tab);
+typedef DragFeedbackBuilder = Widget? Function(
+  BuildContext context,
+  PlatTabDetails tab,
+);
 
 /// Tab strip for the surrounding [TabGroupSnapshot] group.
 ///
@@ -155,7 +161,7 @@ final class PlatTabBar extends StatelessWidget {
   /// used.
   final WidgetStateProperty<MouseCursor?>? mouseCursor;
 
-  const PlatTabBar({
+  const new({
     super.key,
     this.leading,
     this.trailing,
@@ -323,7 +329,7 @@ final class _PlatTabBarBinding extends InheritedWidget {
   final List<Widget> chips;
   final ({int at, TabDragPayload payload})? hover;
 
-  const _PlatTabBarBinding({
+  const new({
     super.key,
     required this.tabs,
     required this.chips,

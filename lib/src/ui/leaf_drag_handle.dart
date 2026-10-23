@@ -21,7 +21,7 @@ final class PlatLeafDragHandleHost extends StatefulWidget {
   final PlatController controller;
   final Widget child;
 
-  const PlatLeafDragHandleHost({
+  const new({
     super.key,
     required this.leaf,
     required this.controller,
@@ -130,9 +130,8 @@ final class _PlatLeafDragHandleHostState extends State<PlatLeafDragHandleHost> {
   Widget _dots(BuildContext context, double opacity) {
     return CustomPaint(
       painter: _LeafDragHandleDotsPainter(
-        Theme.of(
-          context,
-        ).colorScheme.onSurfaceVariant.withValues(alpha: opacity),
+        Theme.of(context).colorScheme.onSurfaceVariant
+            .withValues(alpha: opacity),
       ),
       child: SizedBox.fromSize(size: _handleSize),
     );
@@ -142,7 +141,7 @@ final class _PlatLeafDragHandleHostState extends State<PlatLeafDragHandleHost> {
 final class _LeafDragHandleDotsPainter extends CustomPainter {
   final Color color;
 
-  const _LeafDragHandleDotsPainter(this.color);
+  const new(this.color);
 
   @override
   void paint(Canvas canvas, Size size) {

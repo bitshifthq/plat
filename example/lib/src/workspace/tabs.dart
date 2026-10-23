@@ -23,7 +23,7 @@ final class ThemeTabChip extends StatelessWidget {
   final ThemePreset preset;
   final PlatTabDetails tab;
 
-  const ThemeTabChip({super.key, required this.preset, required this.tab});
+  const new({super.key, required this.preset, required this.tab});
 
   bool get _closeable => !tab.snapshot.locked && !tab.snapshot.pinned;
 
@@ -87,7 +87,7 @@ final class _TabCloseButton extends StatelessWidget {
   final ThemePreset preset;
   final bool visible;
 
-  const _TabCloseButton({required this.preset, required this.visible});
+  const new({required this.preset, required this.visible});
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +111,7 @@ final class _TabLeadingIcon extends StatelessWidget {
   final ThemePreset preset;
   final IconData icon;
 
-  const _TabLeadingIcon({required this.preset, required this.icon});
+  const new({required this.preset, required this.icon});
 
   @override
   Widget build(BuildContext context) {

@@ -59,13 +59,19 @@ void main() {
           const PlatRedoIntent(),
         );
         expect(
-          (_binding(activators, .digit3, control: true) as JumpTabIntent)
-              .oneIndex,
+          (_binding(
+            activators,
+            .digit3,
+            control: true,
+          ) as JumpTabIntent).oneIndex,
           3,
         );
         expect(
-          (_binding(activators, .digit9, control: true) as JumpTabIntent)
-              .oneIndex,
+          (_binding(
+            activators,
+            .digit9,
+            control: true,
+          ) as JumpTabIntent).oneIndex,
           9,
         );
       });

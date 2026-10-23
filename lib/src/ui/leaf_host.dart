@@ -9,7 +9,7 @@ final class PlatLeafHost extends StatefulWidget {
   final Widget child;
   final PlatLeafKeyRegistry registry;
 
-  const PlatLeafHost({
+  const new({
     required super.key,
     required this.leafId,
     required this.registry,
